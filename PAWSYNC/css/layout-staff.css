@@ -1,0 +1,85 @@
+/* layout-staff.css - fixed sidebar + top bar. Phones: sidebar becomes a scrolling strip on top. */
+.staff-shell { 
+  min-height: 100vh; 
+}
+.sidebar { 
+  background: var(--color-text); 
+  color: var(--color-white); 
+  padding: var(--space-2); 
+}
+.sidebar__brand { 
+  display: block; 
+  color: var(--color-white); 
+  font-family: var(--font-heading); 
+  font-weight: 600; 
+  font-size: 1.25rem; 
+  text-decoration: none; 
+  margin-bottom: var(--space-2); 
+}
+.sidebar__list { 
+  display: flex; 
+  gap: var(--space-1); 
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+  overflow-x: auto; 
+}
+.sidebar__link { 
+  display: flex; 
+  align-items: center; 
+  min-height: 44px; 
+  padding: 0 var(--space-2); 
+  color: var(--color-white); 
+  text-decoration: none; 
+  border-radius: var(--radius); 
+  white-space: nowrap; 
+  font-size: 0.9375rem; }
+.sidebar__link:hover { 
+  background: rgba(255,255,255,0.12); 
+  color: var(--color-white); 
+}
+.sidebar__link.is-active { 
+  background: var(--color-primary); 
+  font-weight: 600; 
+}
+
+.staff-main { 
+  padding: var(--space-2); 
+}
+.topbar { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: var(--space-2); 
+  align-items: center; 
+  justify-content: space-between; 
+  margin-bottom: var(--space-3); 
+}
+.topbar__search { 
+  flex: 1 1 260px; 
+  max-width: 480px; 
+}
+.topbar__user { 
+  font-weight: 600; 
+  margin: 0; 
+}
+
+.dashboard-grid { display: grid; gap: var(--space-3); }
+@media (min-width: 1024px) { 
+  .dashboard-grid--split { grid-template-columns: 2fr 1fr; align-items: start; } 
+}
+
+@media (min-width: 1024px) {
+  .sidebar { position: fixed; 
+    inset: 0 auto 0 0; 
+    width: var(--sidebar-width); 
+    overflow-y: auto; 
+  }
+  .sidebar__list { 
+    flex-direction: column; 
+    overflow-x: visible; 
+  }
+  .staff-main { 
+    margin-left: var(--sidebar-width); 
+    padding: var(--space-4); 
+  }
+}

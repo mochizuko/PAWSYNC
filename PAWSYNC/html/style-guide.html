@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Style Guide | PawSync</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="container" style="padding-block: 2rem;">
+  <h1>PawSync style guide</h1>
+  <p class="text-muted">Every component in one place. Build and check components here before using them on real pages.</p>
+
+  <section class="stack"><h2>Buttons</h2>
+    <p><a class="btn btn--primary" href="#">Book a Visit</a>
+       <a class="btn btn--secondary" href="#">Register Your Pet</a>
+       <a class="btn btn--outline" href="#">View All Appointments</a>
+       <a class="btn btn--link" href="#">Cancel</a></p>
+  </section>
+
+  <section><h2>Status badges</h2>
+    <p><span class="badge badge--emergency">EMERGENCY</span>
+       <span class="badge badge--priority">PRIORITY</span>
+       <span class="badge badge--reserved">Reserved</span>
+       <span class="badge badge--done">Done</span>
+       <span class="badge badge--cancelled">Cancelled</span></p>
+  </section>
+
+  <section><h2>Alerts</h2>
+    <div class="stack">
+      <div class="alert alert--info"><p class="alert__title">Info</p><p>Clinic hours to be confirmed.</p></div>
+      <div class="alert alert--success"><p class="alert__title">Saved</p><p>Appointment booked.</p></div>
+      <div class="alert alert--warning"><p class="alert__title">Priority</p><p>Priority cases are served first.</p></div>
+      <div class="alert alert--error"><p class="alert__title">Emergency? Call Now!</p><p>Call the clinic before you come in.</p></div>
+    </div>
+  </section>
+
+  <section><h2>Cards</h2>
+    <div class="grid grid--3">
+      <div class="card card--center"><h3 class="card__title">Consultation</h3><p>Card text.</p></div>
+      <div class="card card--surface"><h3 class="card__title">Surface card</h3><p>Highlighted panel.</p></div>
+      <div class="card card--stat"><p class="card__number">9/15</p><p class="card__label">Appointments Today</p></div>
+    </div>
+  </section>
+
+  <section><h2>Form</h2>
+    <form class="form" action="#" method="post">
+      <div class="form-group">
+        <label class="form-group__label" for="pet">Pet name <span class="form-group__required" aria-hidden="true">*</span></label>
+        <input class="form-input" id="pet" type="text" required>
+      </div>
+      <div class="form-group">
+        <label class="form-group__label" for="mobile">Mobile number</label>
+        <input class="form-input form-input--error" id="mobile" type="tel" aria-describedby="mobile-err">
+        <p class="form-group__error" id="mobile-err">Enter a mobile number with 11 digits.</p>
+      </div>
+      <div class="form-group">
+        <label class="form-group__label" for="species">Species</label>
+        <select class="form-select" id="species"><option>Dog</option><option>Cat</option></select>
+      </div>
+      <button class="btn btn--primary" type="button">Register pet</button>
+    </form>
+  </section>
+
+  <section><h2>Table</h2>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th scope="col">Time</th><th scope="col">Pet/Owner</th><th scope="col">Service</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr class="table__row--emergency"><td>Walk-in</td><td>Tabby/R. Dela Cruz</td><td>Consultation</td><td><span class="badge badge--emergency">EMERGENCY</span></td></tr>
+          <tr class="table__row--priority"><td>9:00</td><td>Dagul/T. Pido</td><td>Vaccination</td><td><span class="badge badge--priority">PRIORITY</span></td></tr>
+          <tr><td>9:30</td><td>Luna/J. Santos</td><td>Wellness</td><td><span class="badge badge--reserved">Reserved</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section><h2>Tabs and steps</h2>
+    <div class="tabs"><a class="tabs__tab" href="#">Overview</a><a class="tabs__tab" href="#">Medical History</a><a class="tabs__tab is-active" href="#" aria-current="page">Vital Sign</a><a class="tabs__tab" href="#">Documents</a><a class="tabs__tab" href="#">Bills</a></div>
+    <ol class="steps"><li class="steps__item">1 Pet</li><li class="steps__item">2 Service</li><li class="steps__item is-current" aria-current="step">3 Date</li><li class="steps__item">4 Confirm</li></ol>
+  </section>
+
+  <section><h2>Calendar</h2>
+    <div class="calendar">
+      <h3 class="calendar__title">October 2026</h3>
+      <div class="calendar__grid">
+        <span class="calendar__dow">S</span><span class="calendar__dow">M</span><span class="calendar__dow">T</span><span class="calendar__dow">W</span><span class="calendar__dow">T</span><span class="calendar__dow">F</span><span class="calendar__dow">S</span>
+        <a class="calendar__day" href="#">1</a><a class="calendar__day" href="#">2</a><a class="calendar__day" href="#">3</a><a class="calendar__day" href="#">4</a>
+        <span class="calendar__day is-full" aria-label="5, full">5</span>
+        <a class="calendar__day is-selected" href="#" aria-current="date">9</a>
+        <a class="calendar__day" href="#">10</a>
+      </div>
+      <p class="text-small text-muted">Full days (15-patient limit) are crossed out and disabled. Emergency? Please call the clinic.</p>
+    </div>
+  </section>
+</main>
+</body>
+</html>

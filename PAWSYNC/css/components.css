@@ -1,0 +1,340 @@
+/* components.css - reusable pieces */
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+  min-height: 44px; 
+  min-width: 44px;
+  padding: var(--space-1) var(--space-3);
+  font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+  border: 2px solid transparent; border-radius: var(--radius);
+  text-decoration: none; cursor: pointer; transition: background 0.15s;
+}
+/* ONE primary (coral) per screen. Navy text keeps 4.5:1 contrast. */
+.btn--primary { 
+  background: var(--color-accent); 
+  color: var(--color-text); 
+}
+.btn--primary:hover { 
+  background: var(--color-accent-dark); 
+  color: var(--color-text); 
+}
+.btn--secondary { 
+  background: var(--color-primary); 
+  color: var(--color-white); 
+}
+.btn--secondary:hover { 
+  background: var(--color-primary-dark); 
+  color: var(--color-white); 
+}
+.btn--outline { 
+  background: transparent; 
+  color: var(--color-primary); 
+  border-color: var(--color-primary); 
+}
+.btn--outline:hover { 
+  background: 
+  var(--color-surface); }
+.btn--link { 
+  background: none; 
+  color: var(--color-primary); 
+  text-decoration: underline; 
+  padding-inline: var(--space-1); 
+}
+.btn--small { 
+  min-height: 44px; 
+  padding-inline: var(--space-2); 
+  font-size: 0.875rem; }
+.btn[disabled], 
+.btn--disabled { 
+  opacity: 0.5; 
+  cursor: not-allowed; }
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--color-white); 
+  border: var(--border); 
+  border-radius: var(--radius);
+  padding: var(--space-3);
+}
+.card__title { 
+  margin-bottom: var(--space-1); 
+}
+.card--center { 
+  text-align: center; 
+}
+.card--surface { 
+  background: var(--color-surface); 
+  border-color: #A9D2DA; 
+}
+.card--stat { 
+  text-align: center; 
+}
+.card__number { 
+  font-family: var(--font-heading); 
+  font-size: 1.75rem; 
+  font-weight: 600; 
+  margin: 0; 
+}
+.card__label { 
+  font-size: 0.875rem; 
+  color: var(--color-muted); 
+  margin: 0; 
+}
+
+/* ---------- Forms ---------- */
+.form { 
+  max-width: 560px; 
+}/* one column, labels above fields */
+.form-group { 
+  margin-bottom: 
+  var(--space-3); 
+}
+.form-group__label { 
+  display: block; 
+  font-weight: 600; 
+  margin-bottom: var(--space-1); 
+}
+.form-group__required { 
+  color: var(--color-error); 
+}
+.form-group__help { 
+  font-size: 0.875rem; 
+  color: var(--color-muted); 
+  margin: 4px 0 0; 
+}
+.form-group__error { 
+  font-size: 0.875rem; 
+  color: var(--color-error); 
+  font-weight: 600; 
+  margin: 4px 0 0; }
+.form-input, .form-select, .form-textarea {
+  width: 100%; 
+  min-height: 44px; 
+  padding: var(--space-1) var(--space-2);
+  font-family: var(--font-body); 
+  font-size: 1rem; color: var(--color-text);
+  background: var(--color-white); 
+  border: 1px solid #7C8A96; 
+  border-radius: var(--radius);
+}
+.form-textarea { 
+  min-height: 120px; 
+  resize: vertical; 
+}
+.form-input--error { 
+  border-color: var(--color-error); 
+  border-width: 2px; 
+}
+.form-check { 
+  display: flex; 
+  align-items: center; 
+  gap: var(--space-1); 
+  min-height: 44px; 
+}
+
+/* ---------- Tables ---------- */
+.table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  background: var(--color-white); 
+  font-size: 0.9375rem; 
+}
+.table th, .table td { 
+  padding: var(--space-1) var(--space-2); 
+  text-align: left; 
+  border-bottom: var(--border); 
+}
+.table th { 
+  background: var(--color-surface); 
+  font-weight: 600; 
+}
+.table__num { 
+  text-align: right; 
+}
+.table__row--emergency { 
+  background: var(--color-error-bg); 
+}
+.table__row--priority { 
+  background: var(--color-warning-bg); 
+}
+
+/* ---------- Badges (always include the word, never color alone) ---------- */
+.badge {
+  display: inline-block; 
+  padding: 2px var(--space-1); 
+  border-radius: 4px;
+  font-size: 0.8125rem; 
+  font-weight: 700; 
+  border: 1px solid currentColor;
+}
+.badge--emergency { 
+  background: var(--color-error-bg); 
+  color: var(--color-error); 
+}
+.badge--priority { 
+  background: var(--color-warning-bg); 
+  color: var(--color-warning); 
+}
+.badge--reserved { 
+  background: var(--color-surface); 
+  color: var(--color-primary-dark); 
+}
+.badge--done { 
+  background: var(--color-success-bg); 
+  color: var(--color-success); 
+}
+.badge--cancelled { 
+  background: #E4E7EA; 
+  color: var(--color-muted); 
+}
+
+/* ---------- Alerts / panels ---------- */
+.alert { 
+  padding: var(--space-2) var(--space-3); 
+  border-radius: var(--radius); 
+  border: 2px solid; 
+}
+.alert--info { 
+  background: var(--color-surface); 
+  border-color: var(--color-primary); 
+}
+.alert--success { 
+  background: var(--color-success-bg); 
+  border-color: var(--color-success); 
+}
+.alert--warning { 
+  background: var(--color-warning-bg); 
+  border-color: var(--color-warning); 
+}
+.alert--error { 
+  background: var(--color-error-bg); 
+  border-color: var(--color-error); 
+}
+.alert__title { 
+  font-weight: 700; margin: 0; 
+}
+.alert > p:last-child { 
+  margin-bottom: 0; 
+}
+
+/* Closure notice banner (top of public pages) */
+.notice-banner {
+  background: var(--color-warning-bg); 
+  color: var(--color-text);
+  border-bottom: 2px solid var(--color-warning);
+  padding: var(--space-1) var(--space-2); 
+  text-align: center; 
+  font-size: 0.875rem;
+}
+.notice-banner a { 
+  color: var(--color-text); 
+  font-weight: 600; }
+
+/* ---------- Tabs (static: .is-active marks the visible tab) ---------- */
+.tabs { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: var(--space-1); 
+  margin-bottom: var(--space-3); 
+}
+.tabs__tab {
+  min-height: 44px; 
+  padding: var(--space-1) var(--space-2); 
+  display: inline-flex; 
+  align-items: center;
+  background: var(--color-white); 
+  color: var(--color-text); 
+  border: var(--border);
+  border-radius: var(--radius); 
+  text-decoration: none; 
+  font-weight: 600;
+}
+.tabs__tab.is-active { 
+  background: var(--color-primary); 
+  color: var(--color-white); 
+  border-color: var(--color-primary);
+}
+
+/* ---------- Step progress (Book Appointment) ---------- */
+.steps { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: var(--space-1); 
+  list-style: none; 
+  padding: 0; 
+  margin: 0 0 var(--space-3); 
+}
+.steps__item { 
+  padding: 4px var(--space-2); 
+  border: 1px solid var(--color-primary); 
+  border-radius: var(--radius); 
+  background: var(--color-white); 
+  font-size: 0.875rem; 
+  font-weight: 600; 
+}
+.steps__item.is-current { 
+  background: var(--color-primary); 
+  color: var(--color-white); 
+}
+
+/* ---------- Calendar (static; add .is-full by hand on full days) ---------- */
+.calendar { 
+  width: 100%; 
+  max-width: 420px; 
+  background: var(--color-white); 
+  border: var(--border); 
+  border-radius: var(--radius); 
+  padding: var(--space-2); 
+}
+.calendar__title { 
+  text-align: center; 
+  margin-bottom: var(--space-2); 
+}
+.calendar__grid { 
+  display: grid; 
+  grid-template-columns: repeat(7, 1fr); 
+  gap: 4px; 
+}
+.calendar__dow { 
+  text-align: center; 
+  font-size: 0.8125rem; 
+  color: var(--color-muted); 
+  font-weight: 600; 
+}
+.calendar__day {
+  min-height: 44px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  border: var(--border); 
+  border-radius: 4px; 
+  background: var(--color-white);
+  color: var(--color-text); 
+  text-decoration: none; 
+  font-size: 0.9375rem;
+}
+.calendar__day.is-selected { 
+  background: var(--color-primary); 
+  color: var(--color-white); 
+  border-color: var(--color-primary); 
+  font-weight: 700; 
+}
+.calendar__day.is-full { 
+  background: #E4E7EA; 
+  color: var(--color-muted); 
+  text-decoration: line-through; 
+  cursor: not-allowed; 
+}
+
+/* ---------- Page header ---------- */
+.page-title { 
+  margin-bottom: var(--space-3); 
+}
+.breadcrumb { 
+  font-size: 0.875rem; 
+  color: var(--color-muted); 
+  margin-bottom: var(--space-2); 
+}
