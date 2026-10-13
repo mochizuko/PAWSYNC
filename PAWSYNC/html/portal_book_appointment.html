@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book an Appointment | PawSync</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout-portal.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="portal-header">
+    <div class="container portal-header__inner">
+      <a class="brand" href="portal-dashboard.html"><span class="brand__logo" aria-hidden="true"></span>PawSync</a>
+      <nav aria-label="Client portal">
+        <ul class="portal-nav__list">
+          <li><a class="nav__link" href="portal-dashboard.html">Dashboard</a></li>
+          <li><a class="nav__link" href="portal-my-pets.html">My Pets</a></li>
+          <li><a class="nav__link is-active" href="portal-book-appointment.html" aria-current="page">Book</a></li>
+          <li><a class="nav__link" href="portal-my-appointments.html">Appointments</a></li>
+        </ul>
+      </nav>
+      <p class="portal-header__greeting">Hi, Trishia!</p>
+    </div>
+  </header>
+
+  <main id="main" class="container portal-main">
+    <h1 class="page-title">Book an Appointment</h1>
+
+    <div class="alert alert--error">
+      <p class="alert__title">Emergency?</p>
+      <p>For emergency, please call the clinic right away. For instructions, see the
+        <a href="public.html#emergency-care">Emergency Care</a> section.</p>
+    </div>
+
+    <!-- Step indicator -->
+    <ol class="steps" aria-label="Booking progress">
+      <li class="steps__item" aria-current="step">Pet</li>
+      <li class="steps__item">Service Type</li>
+      <li class="steps__item">Appointment Date</li>
+      <li class="steps__item">Confirmation</li>
+    </ol>
+    <p class="steps__mobile" id="step-label" aria-live="polite">Step 1 of 4</p>
+
+    <form id="booking-form" class="form booking-form" novalidate>
+
+      <!-- Step 1: Pet. For this, only the logged in owner's register pet will be displayed. If account has no or new pet, the checkbox will appear to get the information of the pets.-->
+      <section class="step-panel" id="step-1" aria-labelledby="step-1-title">
+        <h2 id="step-1-title" tabindex="-1">Pet</h2>
+
+        <fieldset class="fieldset" id="pet-choice">
+          <legend class="form-group__label">Select Your Registered Pet <span class="form-group__required" aria-hidden="true">*</span></legend>
+          <div class="choice-list">
+            <!-- Sample pets -->
+            <label class="choice">
+              <input type="radio" name="pet" value="Dagul" required aria-describedby="pet-error">
+              <span class="choice__title">Dagul</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="pet" value="Luna" required aria-describedby="pet-error">
+              <span class="choice__title">Luna</span>
+            </label>
+          </div>
+          <p class="form-group__error" id="pet-error" hidden>Choose a pet, or switch on "Register a new pet".</p>
+        </fieldset>
+
+        <div class="form-group" id="new-pet-row">
+          <label class="switch" for="new-pet-toggle">
+            <input type="checkbox" role="switch" id="new-pet-toggle" aria-controls="pet-info">
+            <span>Register a new pet</span>
+          </label>
+        </div>
+
+        <!-- New pet fields: shown by the toggle, or right away when the owner has no pets -->
+        <div id="pet-info" hidden>
+          <p id="pet-info-note" class="form-section__note">This pet will be registered together with your booking.</p>
+
+          <div class="alert alert--warning" id="same-name-warning" role="alert" hidden>
+            <p class="alert__title">Warning: you already have a pet with this name</p>
+            <p id="same-name-text"></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="info-name">Pet name <span class="form-group__required" aria-hidden="true">*</span></label>
+            <input class="form-input" type="text" id="info-name" name="info_name" autocomplete="off" aria-describedby="info-name-error">
+            <p class="form-group__error" id="info-name-error" hidden></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="info-species">Species <span class="form-group__required" aria-hidden="true">*</span></label>
+            <select class="form-select" id="info-species" name="info_species" aria-describedby="info-species-error">
+              <option value="">Select a species</option>
+              <option>Dog</option>
+              <option>Cat</option>
+              <option>Other</option>
+            </select>
+            <p class="form-group__error" id="info-species-error" hidden></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="info-breed">Breed <span class="form-group__required" aria-hidden="true">*</span></label>
+            <input class="form-input" type="text" id="info-breed" name="info_breed" aria-describedby="info-breed-help info-breed-error">
+            <p class="form-group__help" id="info-breed-help">Not sure? Write Mixed or Unknown.</p>
+            <p class="form-group__error" id="info-breed-error" hidden></p>
+          </div>
+
+          <fieldset class="fieldset form-group" aria-describedby="info-gender-error">
+            <legend class="form-group__label">Gender <span class="form-group__required" aria-hidden="true">*</span></legend>
+            <div class="form-check">
+              <input type="radio" id="info-male" name="info_gender" value="Male">
+              <label for="info-male">Male</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" id="info-female" name="info_gender" value="Female">
+              <label for="info-female">Female</label>
+            </div>
+            <p class="form-group__error" id="info-gender-error" hidden></p>
+          </fieldset>
+
+          <div class="form-group">
+            <label class="form-group__label" for="info-birthday">Birthday <span class="form-group__required" aria-hidden="true">*</span></label>
+            <input class="form-input" type="date" id="info-birthday" name="info_birthday" max="2026-10-13" aria-describedby="info-birthday-help info-birthday-error">
+            <p class="form-group__help" id="info-birthday-help">If not sure, give your best estimate.</p>
+            <p class="form-group__error" id="info-birthday-error" hidden></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="info-color">Color <span class="form-group__required" aria-hidden="true">*</span></label>
+            <input class="form-input" type="text" id="info-color" name="info_color" aria-describedby="info-color-error">
+            <p class="form-group__error" id="info-color-error" hidden></p>
+          </div>
+        </div>
+      </section>
+  
+      <!-- STEP 2: Service Type -->
+      <section class="step-panel" id="step-2" aria-labelledby="step-2-title" hidden>
+        <h2 id="step-2-title" tabindex="-1">Choose a service</h2>
+        <fieldset class="fieldset">
+          <legend class="form-group__label">What does your pet need? <span class="form-group__required" aria-hidden="true">*</span></legend>
+          <div class="choice-list">
+            <label class="choice">
+              <input type="radio" name="service" value="Vaccination" required aria-describedby="service-error">
+              <span class="choice__title">Vaccination</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="service" value="Consultation" required aria-describedby="service-error">
+              <span class="choice__title">Consultation</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="service" value="Pet wellness" required aria-describedby="service-error">
+              <span class="choice__title">Pet wellness</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="service" value="Surgery" required aria-describedby="service-error">
+              <span class="choice__title">Surgery</span>
+            </label>
+          </div>
+          <p class="form-group__error" id="service-error" hidden>Choose a service to continue.</p>
+        </fieldset>
+      </section>
+
+
+       <!-- STEP 3: Date and time -->
+      <section class="step-panel" id="step-3" aria-labelledby="step-3-title" hidden>
+        <h2 id="step-3-title" tabindex="-1">Choose a date and time</h2>
+ 
+        <div class="booking-date">
+          <div class="booking-date__fields">
+            <div class="form-group">
+              <label class="form-group__label" for="appt-date">Appointment date <span class="form-group__required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="date" id="appt-date" name="date" min="2026-10-13" max="2026-10-31" required aria-describedby="date-help date-error">
+              <p class="form-group__help" id="date-help">Pick a day on the calendar or type the date here.</p>
+              <p class="form-group__error" id="date-error" hidden>Choose an available date.</p>
+            </div>
+ 
+            <div class="alert alert--warning" id="full-alert" role="status" hidden>
+              <p class="alert__title">That day is full</p>
+              <p id="full-message"></p>
+              <button type="button" class="btn btn--secondary btn--small" id="use-next-date"></button>
+            </div>
+ 
+            <div class="form-group">
+              <label class="form-group__label" for="appt-time">Time slot <span class="form-group__required" aria-hidden="true">*</span></label>
+              <!-- Placeholder slots until the clinic confirms its hours. -->
+              <select class="form-select" id="appt-time" name="time" required aria-describedby="time-error">
+                <option value="">Select a time</option>
+                <option>9:00 AM</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>1:00 PM</option>
+                <option>2:00 PM</option>
+                <option>3:00 PM</option>
+                <option>4:00 PM</option>
+              </select>
+              <p class="form-group__error" id="time-error" hidden>Choose a time slot.</p>
+            </div>
+          </div>
+ 
+          <!-- Month calendar. -->
+          <div class="booking-date__calendar">
+            <div class="calendar" role="group" aria-labelledby="cal-title">
+              <h3 class="calendar__title" id="cal-title">October 2026</h3>
+              <div class="calendar__grid">
+                <span class="calendar__dow"><abbr title="Sunday">Sun</abbr></span>
+                <span class="calendar__dow"><abbr title="Monday">Mon</abbr></span>
+                <span class="calendar__dow"><abbr title="Tuesday">Tue</abbr></span>
+                <span class="calendar__dow"><abbr title="Wednesday">Wed</abbr></span>
+                <span class="calendar__dow"><abbr title="Thursday">Thu</abbr></span>
+                <span class="calendar__dow"><abbr title="Friday">Fri</abbr></span>
+                <span class="calendar__dow"><abbr title="Saturday">Sat</abbr></span>
+ 
+                <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+ 
+                <!-- Past days -->
+                <button type="button" class="calendar__day is-past" data-date="2026-10-01" aria-disabled="true" aria-label="October 1, 2026, past"><span class="calendar__num">1</span></button>
+                <button type="button" class="calendar__day is-past" data-date="2026-10-02" aria-disabled="true" aria-label="October 2, 2026, past"><span class="calendar__num">2</span></button>
+                <button type="button" class="calendar__day is-past" data-date="2026-10-03" aria-disabled="true" aria-label="October 3, 2026, past"><span class="calendar__num">3</span></button>
+                <button type="button" class="calendar__day is-past" data-date="2026-10-04" aria-disabled="true" aria-label="October 4, 2026, past"><span class="calendar__num">4</span></button>
+                <button type="button" class="calendar__day is-past" data-date="2026-10-05" aria-disabled="true" aria-label="October 5, 2026, past"><span class="calendar__num">5</span></button>
+                <button type="button" class="calendar__day is-past" data-date="2026-10-06" aria-disabled="true" aria-label="October 6, 2026, past"><span class="calendar__num">6</span></button>
+                <button type="button" class="calendar__day is-past" data-date="2026-10-07" aria-disabled="true" aria-label="October 7, 2026, past"><span class="calendar__num">7</span></button>
+                <button type="button" class="calendar__day is-past" data-date="2026-10-08" aria-disabled="true" aria-label="October 8, 2026, past"><span class="calendar__num">8</span></button>
+                <button type="button" class="calendar__day is-past" data-date="2026-10-09" aria-disabled="true" aria-label="October 9, 2026, past"><span class="calendar__num">9</span></button>
+                <button type="button" class="calendar__day is-past" data-date="2026-10-10" aria-disabled="true" aria-label="October 10, 2026, past"><span class="calendar__num">10</span></button>
+                <button type="button" class="calendar__day is-past" data-date="2026-10-11" aria-disabled="true" aria-label="October 11, 2026, past"><span class="calendar__num">11</span></button>
+                <button type="button" class="calendar__day is-past" data-date="2026-10-12" aria-disabled="true" aria-label="October 12, 2026, past"><span class="calendar__num">12</span></button>
+ 
+                <!-- Open and full days. Full days: .is-full, aria-disabled="true" and the visible word "Full". -->
+                <button type="button" class="calendar__day" data-date="2026-10-13" aria-pressed="false" aria-label="October 13, 2026"><span class="calendar__num">13</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-14" aria-pressed="false" aria-label="October 14, 2026"><span class="calendar__num">14</span></button>
+                <button type="button" class="calendar__day is-full" data-date="2026-10-15" aria-disabled="true" aria-label="October 15, 2026, full"><span class="calendar__num">15</span><span class="calendar__flag">Full</span></button>
+                <button type="button" class="calendar__day is-full" data-date="2026-10-16" aria-disabled="true" aria-label="October 16, 2026, full"><span class="calendar__num">16</span><span class="calendar__flag">Full</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-17" aria-pressed="false" aria-label="October 17, 2026"><span class="calendar__num">17</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-18" aria-pressed="false" aria-label="October 18, 2026"><span class="calendar__num">18</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-19" aria-pressed="false" aria-label="October 19, 2026"><span class="calendar__num">19</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-20" aria-pressed="false" aria-label="October 20, 2026"><span class="calendar__num">20</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-21" aria-pressed="false" aria-label="October 21, 2026"><span class="calendar__num">21</span></button>
+                <button type="button" class="calendar__day is-full" data-date="2026-10-22" aria-disabled="true" aria-label="October 22, 2026, full"><span class="calendar__num">22</span><span class="calendar__flag">Full</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-23" aria-pressed="false" aria-label="October 23, 2026"><span class="calendar__num">23</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-24" aria-pressed="false" aria-label="October 24, 2026"><span class="calendar__num">24</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-25" aria-pressed="false" aria-label="October 25, 2026"><span class="calendar__num">25</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-26" aria-pressed="false" aria-label="October 26, 2026"><span class="calendar__num">26</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-27" aria-pressed="false" aria-label="October 27, 2026"><span class="calendar__num">27</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-28" aria-pressed="false" aria-label="October 28, 2026"><span class="calendar__num">28</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-29" aria-pressed="false" aria-label="October 29, 2026"><span class="calendar__num">29</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-30" aria-pressed="false" aria-label="October 30, 2026"><span class="calendar__num">30</span></button>
+                <button type="button" class="calendar__day" data-date="2026-10-31" aria-pressed="false" aria-label="October 31, 2026"><span class="calendar__num">31</span></button>
+              </div>
+ 
+              <ul class="calendar__legend">
+                <li><span class="calendar__swatch" aria-hidden="true"></span>Available</li>
+                <li><span class="calendar__swatch calendar__swatch--selected" aria-hidden="true"></span>Selected</li>
+                <li><span class="calendar__swatch calendar__swatch--full" aria-hidden="true"></span>Full</li>
+              </ul>
+              <p class="calendar__caption">Full days (15-patient limit) are crossed out and disabled. Emergency? Call the clinig right away.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+ 
+      <!-- STEP 4: Confirmation -->
+      <section class="step-panel" id="step-4" aria-labelledby="step-4-title" hidden>
+        <h2 id="step-4-title" tabindex="-1">Check your booking</h2>
+        <div class="card card--surface">
+          <h3 class="card__title">Booking summary</h3>
+          <dl class="summary-list">
+            <dt>Pet:</dt><dd id="sum-pet"></dd>
+            <dt>Service Type:</dt><dd id="sum-service"></dd>
+            <dt>Appointment Date:</dt><dd id="sum-date"></dd>
+            <dt>Time:</dt><dd id="sum-time"></dd>
+          </dl>
+        </div>
+        <p>Use Back if something is wrong. Appointment reminders will be displayed in your portal.</p>
+      </section>
+ 
+      <div class="alert alert--success" id="booking-success" role="status" hidden>
+        <p class="alert__title">Booking confirmed</p>
+        <p>Your appointment is reserved. You can confirm, cancel, or reschedule it on the
+          <a href="portal-my-appointments.html">Appointments</a> page.</p>
+      </div>
+ 
+      <div class="form-actions" id="booking-actions">
+        <button type="button" class="btn btn--outline" id="back-btn" hidden>Back</button>
+        <button type="submit" class="btn btn--primary" id="next-btn">Next</button>
+      </div>
+    </form>
+  </main>
+ 
+  <script>
+    /* Prototype script*/
+    (function () {
+      var TOTAL = 4;
+      var TODAY = '2026-10-13';
+      var LAST = '2026-10-31';
+      var FULL = ['2026-10-15', '2026-10-16', '2026-10-22'];
+      var step = 1;
+      var selectedDate = null;
+ 
+      var panels = document.querySelectorAll('.step-panel');
+      var items = document.querySelectorAll('.steps__item');
+      var stepLabel = document.getElementById('step-label');
+      var form = document.getElementById('booking-form');
+      var backBtn = document.getElementById('back-btn');
+      var nextBtn = document.getElementById('next-btn');
+      var dateInput = document.getElementById('appt-date');
+      var timeSelect = document.getElementById('appt-time');
+      var days = document.querySelectorAll('.calendar__day');
+      var fullAlert = document.getElementById('full-alert');
+      var fullMessage = document.getElementById('full-message');
+      var useNextBtn = document.getElementById('use-next-date');
+ 
+      function longDate(iso) {
+        return new Date(iso + 'T00:00:00').toLocaleDateString('en-PH',
+          { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      }
+      function shortDate(iso) {
+        return new Date(iso + 'T00:00:00').toLocaleDateString('en-PH', { month: 'long', day: 'numeric' });
+      }
+      function bookable(iso) {
+        return iso >= TODAY && iso <= LAST && FULL.indexOf(iso) === -1;
+      }
+      function nextAvailable(iso) {
+        var d = new Date(iso + 'T00:00:00');
+        for (var i = 0; i < 40; i++) {
+          d.setDate(d.getDate() + 1);
+          var next = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+          if (next > LAST) return null;
+          if (bookable(next)) return next;
+        }
+        return null;
+      }
+ 
+      function showError(id, show) { document.getElementById(id).hidden = !show; }
+ 
+      function showStep(n, moveFocus) {
+        step = n;
+        panels.forEach(function (p, i) { p.hidden = (i + 1) !== n; });
+        items.forEach(function (li, i) {
+          li.classList.toggle('is-done', (i + 1) < n);
+          if ((i + 1) === n) { li.setAttribute('aria-current', 'step'); } else { li.removeAttribute('aria-current'); }
+        });
+        stepLabel.textContent = 'Step ' + n + ' of ' + TOTAL;
+        backBtn.hidden = (n === 1);
+        nextBtn.textContent = (n === TOTAL) ? 'Confirm booking' : 'Next';
+        if (n === TOTAL) { fillSummary(); }
+        if (moveFocus) { panels[n - 1].querySelector('h2').focus(); }
+      }
+ 
+      function fillSummary() {
+        var pet = form.querySelector('input[name="pet"]:checked');
+        var service = form.querySelector('input[name="service"]:checked');
+        document.getElementById('sum-pet').textContent = pet ? pet.value : '';
+        document.getElementById('sum-service').textContent = service ? service.value : '';
+        document.getElementById('sum-date').textContent = selectedDate ? longDate(selectedDate) : '';
+        document.getElementById('sum-time').textContent = timeSelect.value;
+      }
+ 
+      function setSelected(iso) {
+        selectedDate = iso;
+        days.forEach(function (btn) {
+          var on = iso && btn.getAttribute('data-date') === iso;
+          btn.classList.toggle('is-selected', !!on);
+          if (btn.hasAttribute('aria-pressed')) { btn.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+        });
+        if (iso) { dateInput.value = iso; }
+      }
+ 
+      function offerNext(iso) {
+        var next = nextAvailable(iso);
+        fullMessage.textContent = longDate(iso) + ' has reached the 15-patient limit.' +
+          (next ? ' The next available date is ' + longDate(next) + '.' : ' No other dates are open this month. Please call the clinic.');
+        useNextBtn.hidden = !next;
+        if (next) {
+          useNextBtn.textContent = 'Choose ' + shortDate(next);
+          useNextBtn.setAttribute('data-date', next);
+        }
+        fullAlert.hidden = false;
+      }
+ 
+      function handleDate(iso) {
+        fullAlert.hidden = true;
+        showError('date-error', false);
+        if (!iso) { setSelected(null); return; }
+        if (iso < TODAY || iso > LAST) {
+          setSelected(null);
+          document.getElementById('date-error').textContent = 'Choose a date between October 13 and October 31, 2026.';
+          showError('date-error', true);
+          return;
+        }
+        if (FULL.indexOf(iso) !== -1) { setSelected(null); offerNext(iso); return; }
+        setSelected(iso);
+      }
+ 
+      days.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (btn.classList.contains('is-past')) { return; }
+          handleDate(btn.getAttribute('data-date'));
+        });
+      });
+      dateInput.addEventListener('change', function () { handleDate(dateInput.value); });
+      useNextBtn.addEventListener('click', function () { handleDate(useNextBtn.getAttribute('data-date')); });
+ 
+      function validate(n) {
+        var ok = true;
+        if (n === 1) {
+          ok = !!form.querySelector('input[name="pet"]:checked');
+          showError('pet-error', !ok);
+          if (!ok) { form.querySelector('input[name="pet"]').focus(); }
+        } else if (n === 2) {
+          ok = !!form.querySelector('input[name="service"]:checked');
+          showError('service-error', !ok);
+          if (!ok) { form.querySelector('input[name="service"]').focus(); }
+        } else if (n === 3) {
+          var dateOk = !!selectedDate;
+          var timeOk = timeSelect.value !== '';
+          if (!dateOk && fullAlert.hidden) {
+            document.getElementById('date-error').textContent = 'Choose an available date.';
+          }
+          showError('date-error', !dateOk && fullAlert.hidden);
+          dateInput.setAttribute('aria-invalid', (!dateOk).toString());
+          showError('time-error', !timeOk);
+          timeSelect.setAttribute('aria-invalid', (!timeOk).toString());
+          ok = dateOk && timeOk;
+          if (!dateOk) { dateInput.focus(); } else if (!timeOk) { timeSelect.focus(); }
+        }
+        return ok;
+      }
+ 
+      backBtn.addEventListener('click', function () { if (step > 1) { showStep(step - 1, true); } });
+ 
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!validate(step)) { return; }
+        if (step < TOTAL) { showStep(step + 1, true); return; }
+        /* Step 4: confirmation */
+        document.getElementById('booking-actions').hidden = true;
+        items.forEach(function (li) { li.classList.add('is-done'); li.removeAttribute('aria-current'); });
+        var success = document.getElementById('booking-success');
+        success.hidden = false;
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+ 
+      showStep(1, false);
+    })();
+  </script>
+</body>
+</html>
