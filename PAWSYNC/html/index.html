@@ -1,1 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home | PawSync</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout-public.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
+  <!-- Global Header with Anchor Links -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="#main"><span class="brand__logo" aria-hidden="true"></span>PawSync</a>
+      <nav aria-label="Main">
+        <ul class="nav__list">
+          <li><a class="nav__link is-active" href="#main">Home</a></li>
+          <li><a class="nav__link" href="#about">About</a></li>
+          <li><a class="nav__link" href="#services">Services</a></li>
+          <li><a class="nav__link" href="#emergency-care">Emergency Care</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+          <li><a class="btn btn--secondary btn--small" href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- 1. HERO / HOME SECTION -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div>
+          <h1>Compassionate Veterinary Care for Your Best Friends</h1>
+          <p>At PawSync, we combine advanced medical technology with gentle, individualized attention to keep your pets happy, healthy, and thriving throughout every stage of life.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="contact.html">Book an Appointment</a>
+            <a class="btn btn--outline" href="#services">Our Services</a>
+          </div>
+        </div>
+        <div class="hero__photo">
+          <span>Clinic Preview Photo</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. WHY CHOOSE US -->
+    <section class="section section--white">
+      <div class="container">
+        <h2 class="section__title">Why Choose PawSync?</h2>
+        <div class="grid grid--3">
+          <div class="card">
+            <h3 class="card__title">Comprehensive Health</h3>
+            <p>From routine wellness checkups to urgent care management, we cover all aspects of your pet’s physical health.</p>
+          </div>
+          <div class="card">
+            <h3 class="card__title">Experienced Team</h3>
+            <p>Our licensed veterinarians and certified technicians treat every animal like family with compassionate care.</p>
+          </div>
+          <div class="card">
+            <h3 class="card__title">24/7 Emergency Support</h3>
+            <p>Accidents can happen anytime. We are equipped with immediate triage guidance and emergency pathways.</p>
+            <p><a href="#emergency-care">View emergency guidelines &rarr;</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ABOUT SECTION -->
+    <section id="about" class="section">
+      <div class="container">
+        <!-- Centered Header & Intro -->
+        <div class="text-center">
+          <h2 class="page-title">About PawSync</h2>
+          <p class="container">
+            Dedicated to elevating veterinary wellness standards and strengthening the lifelong bond between pets and their families.
+          </p>
+        </div>
+
+        <!-- Mission (Left) and Vision (Right) -->
+        <div class="grid grid--2 section">
+          <div>
+            <h2>Our Mission</h2>
+            <p>
+              PawSync was founded with a clear goal: to make veterinary care accessible, transparent, and seamless. We pair state-of-the-art medical technology with high empathy to deliver dependable medical treatments tailored to every individual pet.
+            </p>
+          </div>
+          <div>
+            <h2>Our Vision</h2>
+            <p>
+              To lead the future of compassionate veterinary medicine by creating a connected community where every pet receives proactive, world-class healthcare, empowering owners to give their companions longer, happier, and healthier lives.
+            </p>
+          </div>
+        </div>
+
+        <!-- Meet Our Veterinary Team -->
+        <section class="section">
+          <h2>Meet Our Veterinary Team</h2>
+          <div class="grid grid--2">
+            <div class="card">
+              <h3 class="card__title">Dr. Sarah Jenkins, DVM</h3>
+              <p class="text-muted">Lead Veterinarian &amp; Founder</p>
+              <p>With over 12 years in small animal medicine, Dr. Jenkins specializes in preventative wellness, internal medicine, and soft-tissue surgery.</p>
+            </div>
+            <div class="card">
+              <h3 class="card__title">Dr. Marcus Vance, DVM</h3>
+              <p class="text-muted">Emergency Care Specialist</p>
+              <p>Dr. Vance brings extensive expertise in critical care management and rapid diagnostic triage when seconds count.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- 4. SERVICES SECTION (5-Card Layout) -->
+    <section id="services" class="section section--white">
+      <div class="container">
+        <h2 class="page-title text-center">Our Services</h2>
+
+        <div class="grid grid--5">
+          <!-- 1. Consultation -->
+          <div class="card card--center">
+            <div class="card__number" aria-hidden="true">🩺</div>
+            <h3 class="card__title">Consultation</h3>
+          </div>
+
+          <!-- 2. Pet Wellness -->
+          <div class="card card--center">
+            <div class="card__number" aria-hidden="true">🐾</div>
+            <h3 class="card__title">Pet Wellness</h3>
+          </div>
+
+          <!-- 3. Vaccination -->
+          <div class="card card--center">
+            <div class="card__number" aria-hidden="true">🛡️</div>
+            <h3 class="card__title">Vaccination</h3>
+          </div>
+
+          <!-- 4. Surgery -->
+          <div class="card card--center">
+            <div class="card__number" aria-hidden="true">➕</div>
+            <h3 class="card__title">Surgery</h3>
+          </div>
+
+          <!-- 5. Confinement Care -->
+          <div class="card card--center">
+            <div class="card__number" aria-hidden="true">🏠</div>
+            <h3 class="card__title">Confinement Care</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. EMERGENCY CARE SECTION -->
+    <section id="emergency-care" class="section">
+      <!-- 1. Hero Block Header -->
+      <div class="container hero__inner">
+        <div>
+          <span class="badge badge--emergency">24/7 Urgent Care Available</span>
+          <h1>Fast response, lifesaving care.</h1>
+          <p>Available 24/7, our veterinary trauma team is dedicated to delivering immediate lifesaving assistance whenever your pet needs it most.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="tel:5559117387">📞 Call (555) 911-PETS</a>
+            <a class="btn btn--outline" href="#emergency-protocol">How We Respond &rsaquo;</a>
+          </div>
+        </div>
+        <div class="hero__photo">
+          <span>[Emergency Response Team Photo]</span>
+        </div>
+      </div>
+
+      <!-- 2. Emergency Highlights Grid -->
+      <div class="section section--white">
+        <div class="container">
+          <div class="grid grid--3">
+            <div class="card card--surface">
+              <h3 class="card__title">24/7 Emergency Care</h3>
+              <p>Our team is on standby, ready to respond to medical emergencies anytime.</p>
+            </div>
+            <div class="card card--surface">
+              <h3 class="card__title">Fast &amp; Reliable Response</h3>
+              <p><strong>Please call first!</strong> Rapid prep time before you arrive saves seconds.</p>
+            </div>
+            <div class="card card--surface">
+              <h3 class="card__title">Expert Medical Team</h3>
+              <p>Veterinary specialists deliver critical care with precision and speed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Protocol & Priority Triage (Image Left, Content Right) -->
+      <div id="emergency-protocol" class="container section">
+        <div class="grid grid--2">
+          <!-- Image Left -->
+          <div>
+            <p class="text-muted"><strong>+ Emergency Triage Protocol</strong></p>
+            <div class="hero__photo">
+              <span>[Clinic Emergency Intake Photo]</span>
+            </div>
+          </div>
+
+          <!-- Content Right -->
+          <div>
+            <h2>We are committed to providing swift, professional, and compassionate emergency care.</h2>
+            <p class="text-muted">
+              To ensure every patient receives safe attention, our clinic follows a strict priority triage policy:
+            </p>
+
+            <div class="stack">
+              <div class="card">
+                <span class="badge badge--emergency">01. Critical Emergencies First</span>
+                <p>Life-threatening issues served immediately upon arrival.</p>
+              </div>
+
+              <div class="card">
+                <span class="badge badge--priority">02. Senior &amp; Pregnant Clients</span>
+                <p>Served next to minimize physical strain and stress.</p>
+              </div>
+
+              <div class="card">
+                <span class="badge badge--reserved">03. Anxious / Frightened Pets</span>
+                <p>Expedited into private holding areas away from other animals.</p>
+              </div>
+
+              <div class="card">
+                <span class="badge badge--done">04. Direct Arrival Protocol</span>
+                <p>Phone (555) 911-PETS so our staff can prepare emergency equipment.</p>
+              </div>
+            </div>
+
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="tel:5559117387">Call Emergency Line &rsaquo;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CONTACT SECTION -->
+    <section id="contact" class="section section--white">
+      <div class="container">
+        <h2 class="page-title text-center">Contact Us</h2>
+        <p class="text-center">
+          Have questions or need to schedule an appointment? Get in touch with our team or visit us.
+        </p>
+
+        <div class="grid grid--2">
+          <!-- Details & Hours -->
+          <div class="stack">
+            <div class="card">
+              <h3 class="card__title">Get in Touch</h3>
+              <p><strong>Address:</strong> 123 Pet Care Lane, Suite A, Metropolis, NY 10001</p>
+              <p><strong>Phone:</strong> <a href="tel:5551234567">(555) 123-4567</a></p>
+              <p><strong>Emergency Line:</strong> <a href="tel:5559117387">(555) 911-PETS</a></p>
+              <p><strong>Email:</strong> <a href="mailto:info@pawsync.com">info@pawsync.com</a></p>
+            </div>
+
+            <div class="card">
+              <h3 class="card__title">Clinic Hours</h3>
+              <ul>
+                <li><strong>Monday – Friday:</strong> 8:00 AM – 6:00 PM</li>
+                <li><strong>Saturday:</strong> 9:00 AM – 3:00 PM</li>
+                <li><strong>Sunday:</strong> Closed (Emergency Triage Line Active)</li>
+              </ul>
+            </div>
+
+            <div class="card card--surface">
+              <h3 class="card__title">Follow &amp; Review Us</h3>
+              <p>Stay updated or share your experience:</p>
+              <ul>
+                <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                <li><a href="https://google.com" target="_blank" rel="noopener noreferrer">Google Reviews</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Contact Form & Map -->
+          <div class="stack">
+            <div class="card">
+              <h3 class="card__title">Send Us a Message</h3>
+              <form class="form">
+                <div class="form-group">
+                  <label class="form-group__label" for="name">Your Name <span class="form-group__required">*</span></label>
+                  <input class="form-input" type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-group__label" for="email">Email Address <span class="form-group__required">*</span></label>
+                  <input class="form-input" type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-group__label" for="message">Message <span class="form-group__required">*</span></label>
+                  <textarea class="form-textarea" id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary">Send Message</button>
+              </form>
+            </div>
+
+            <div class="card">
+              <h3 class="card__title">Clinic Location Map</h3>
+              <div class="table-wrap">
+                <iframe 
+                  title="PawSync Clinic Location Map"
+                  src="https://maps.google.com/maps?q=123+Pet+Care+Lane+Metropolis+NY&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                  width="100%" 
+                  height="200" 
+                  allowfullscreen="" 
+                  loading="lazy">
+                </iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer with Anchor Links -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div>
+        <h2 class="site-footer__title">PawSync Veterinary Clinic</h2>
+        <p>123 Pet Care Lane, Suite A<br>Metropolis, NY 10001</p>
+      </div>
+      <nav aria-label="Quick links">
+        <h2 class="site-footer__title">Quick links</h2>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#emergency-care">Emergency Care</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="site-footer__title">Follow us</h2>
+        <ul>
+          <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://google.com" target="_blank" rel="noopener noreferrer">Google reviews</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
