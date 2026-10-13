@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inventory | PawSync Staff</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout-staff.css">
+  <script src="../java%20script/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="staff-shell">
+    <aside class="sidebar">
+      <a class="sidebar__brand" href="staff.html">PawSync</a>
+      <nav aria-label="Staff">
+        <ul class="sidebar__list">
+          <li><a class="sidebar__link" href="staff.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="staff-patient-records.html">Patient Records &amp; Vital Signs</a></li>
+          <li><a class="sidebar__link" href="staff-clients.html">Clients</a></li>
+          <li><a class="sidebar__link" href="staff-appointments.html">Appointments</a></li>
+          <li><a class="sidebar__link" href="staff-confined-pets.html">Confined Pets</a></li>
+          <li><a class="sidebar__link is-active" href="staff-inventory.html" aria-current="page">Inventory</a></li>
+          <li><a class="sidebar__link" href="staff-billing.html">Billing &amp; Sales</a></li>
+          <li><a class="sidebar__link" href="staff-reports.html">Reports</a></li>
+          <li><a class="sidebar__link" href="staff-users.html">Users &amp; Staff</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="staff-main">
+      <div class="topbar">
+        <div class="topbar__search">
+          <label class="sr-only" for="search">Search inventory</label>
+          <input class="form-input" id="search" type="search" placeholder="Search item or category..." data-table-search data-search-target="inventory-list">
+        </div>
+        <p class="topbar__user">Dr. Maralit (Veterinarian)</p>
+      </div>
+      <main id="main">
+        <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Inventory</p>
+        <h1 class="page-title">Inventory</h1>
+        <p class="text-muted">Monitor clinic supplies and identify items that need restocking. Entries are saved in this browser only and are not sent to a clinic database.</p>
+        <details class="card">
+          <summary><strong>Add an inventory item</strong></summary>
+          <form class="form stack" data-create-form data-storage-key="pawsync-inventory" data-list-id="inventory-list">
+            <div class="form-group"><label class="form-group__label" for="item-id">Item ID</label><input class="form-input" id="item-id" name="Item ID" required></div>
+            <div class="form-group"><label class="form-group__label" for="item-name">Item name</label><input class="form-input" id="item-name" name="Item" required></div>
+            <div class="form-group"><label class="form-group__label" for="item-category">Category</label><input class="form-input" id="item-category" name="Category" required></div>
+            <div class="form-group"><label class="form-group__label" for="item-count">On hand</label><input class="form-input" id="item-count" name="On hand" type="number" min="0" step="1" required></div>
+            <div class="form-group"><label class="form-group__label" for="item-reorder">Reorder at</label><input class="form-input" id="item-reorder" name="Reorder at" type="number" min="0" step="1" required></div>
+            <button class="btn btn--primary" type="submit">Save inventory item</button>
+            <p class="form-group__help" data-form-status role="status" aria-live="polite"></p>
+          </form>
+        </details>
+        <section class="stack" aria-labelledby="stock-heading">
+          <h2 id="stock-heading">Stock on hand</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th scope="col">Item ID</th><th scope="col">Item</th><th scope="col">Category</th><th scope="col">On hand</th><th scope="col">Reorder at</th></tr></thead>
+              <tbody id="inventory-list">
+                <tr><td>I-302</td><td>Examination gloves</td><td>Medical supplies</td><td>24</td><td>20</td></tr>
+                <tr><td>I-211</td><td>Canine vaccine</td><td>Vaccines</td><td>8</td><td>10</td></tr>
+                <tr><td>I-148</td><td>Pet bandage roll</td><td>First aid</td><td>6</td><td>12</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <button class="btn btn--outline" type="button" data-print>Print inventory</button>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

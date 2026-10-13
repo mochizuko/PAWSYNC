@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Patient Records &amp; Vital Signs | PawSync Staff</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout-staff.css">
+  <script src="../java%20script/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="staff-shell">
+    <aside class="sidebar">
+      <a class="sidebar__brand" href="staff.html">PawSync</a>
+      <nav aria-label="Staff">
+        <ul class="sidebar__list">
+          <li><a class="sidebar__link" href="staff.html">Dashboard</a></li>
+          <li><a class="sidebar__link is-active" href="staff-patient-records.html" aria-current="page">Patient Records &amp; Vital Signs</a></li>
+          <li><a class="sidebar__link" href="staff-clients.html">Clients</a></li>
+          <li><a class="sidebar__link" href="staff-appointments.html">Appointments</a></li>
+          <li><a class="sidebar__link" href="staff-confined-pets.html">Confined Pets</a></li>
+          <li><a class="sidebar__link" href="staff-inventory.html">Inventory</a></li>
+          <li><a class="sidebar__link" href="staff-billing.html">Billing &amp; Sales</a></li>
+          <li><a class="sidebar__link" href="staff-reports.html">Reports</a></li>
+          <li><a class="sidebar__link" href="staff-users.html">Users &amp; Staff</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="staff-main">
+      <div class="topbar">
+        <div class="topbar__search">
+          <label class="sr-only" for="search">Search patient records</label>
+          <input class="form-input" id="search" type="search" placeholder="Search patient, client, or species..." data-table-search data-search-target="patient-record-list">
+        </div>
+        <p class="topbar__user">Dr. Maralit (Veterinarian)</p>
+      </div>
+      <main id="main">
+        <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Patient Records</p>
+        <h1 class="page-title">Patient Records &amp; Vital Signs</h1>
+        <p class="text-muted">Review patient history and record the latest visit for each pet. Entries are saved in this browser only and are not sent to a clinic database.</p>
+        <details class="card">
+          <summary><strong>Add a patient record</strong></summary>
+          <form class="form stack" data-create-form data-storage-key="pawsync-patient-records" data-list-id="patient-record-list">
+            <div class="form-group"><label class="form-group__label" for="patient-id">Patient ID</label><input class="form-input" id="patient-id" name="Patient ID" required></div>
+            <div class="form-group"><label class="form-group__label" for="patient-name">Patient name</label><input class="form-input" id="patient-name" name="Patient" required></div>
+            <div class="form-group"><label class="form-group__label" for="patient-client">Client</label><input class="form-input" id="patient-client" name="Client" required></div>
+            <div class="form-group"><label class="form-group__label" for="patient-species">Species</label><input class="form-input" id="patient-species" name="Species" required></div>
+            <div class="form-group"><label class="form-group__label" for="patient-visit">Last visit</label><input class="form-input" id="patient-visit" name="Last visit" type="date" required></div>
+            <button class="btn btn--primary" type="submit">Save patient record</button>
+            <p class="form-group__help" data-form-status role="status" aria-live="polite"></p>
+          </form>
+        </details>
+        <section class="stack" aria-labelledby="records-heading">
+          <h2 id="records-heading">Patient directory</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th scope="col">Patient ID</th><th scope="col">Patient</th><th scope="col">Client</th><th scope="col">Species</th><th scope="col">Last visit</th></tr></thead>
+              <tbody id="patient-record-list">
+                <tr><td>P-1042</td><td>Milo</td><td>Alex Santos</td><td>Dog</td><td>2026-10-12</td></tr>
+                <tr><td>P-1038</td><td>Luna</td><td>Jamie Reyes</td><td>Cat</td><td>2026-10-11</td></tr>
+                <tr><td>P-1019</td><td>Buddy</td><td>Sam Cruz</td><td>Dog</td><td>2026-10-08</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <button class="btn btn--outline" type="button" data-print>Print patient records</button>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

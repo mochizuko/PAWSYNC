@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Users &amp; Staff | PawSync Staff</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout-staff.css">
+  <script src="../java%20script/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="staff-shell">
+    <aside class="sidebar">
+      <a class="sidebar__brand" href="staff.html">PawSync</a>
+      <nav aria-label="Staff">
+        <ul class="sidebar__list">
+          <li><a class="sidebar__link" href="staff.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="staff-patient-records.html">Patient Records &amp; Vital Signs</a></li>
+          <li><a class="sidebar__link" href="staff-clients.html">Clients</a></li>
+          <li><a class="sidebar__link" href="staff-appointments.html">Appointments</a></li>
+          <li><a class="sidebar__link" href="staff-confined-pets.html">Confined Pets</a></li>
+          <li><a class="sidebar__link" href="staff-inventory.html">Inventory</a></li>
+          <li><a class="sidebar__link" href="staff-billing.html">Billing &amp; Sales</a></li>
+          <li><a class="sidebar__link" href="staff-reports.html">Reports</a></li>
+          <li><a class="sidebar__link is-active" href="staff-users.html" aria-current="page">Users &amp; Staff</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="staff-main">
+      <div class="topbar">
+        <div class="topbar__search">
+          <label class="sr-only" for="search">Search users and staff</label>
+          <input class="form-input" id="search" type="search" placeholder="Search staff member, role, or email..." data-table-search data-search-target="staff-user-list">
+        </div>
+        <p class="topbar__user">Dr. Maralit (Veterinarian)</p>
+      </div>
+      <main id="main">
+        <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Users &amp; Staff</p>
+        <h1 class="page-title">Users &amp; Staff</h1>
+        <p class="text-muted">Maintain the clinic staff directory and account status. Do not enter passwords on this demo page. Entries are saved in this browser only and are not sent to a clinic database.</p>
+        <details class="card">
+          <summary><strong>Add a staff directory entry</strong></summary>
+          <form class="form stack" data-create-form data-storage-key="pawsync-staff-users" data-list-id="staff-user-list">
+            <div class="form-group"><label class="form-group__label" for="staff-id">User ID</label><input class="form-input" id="staff-id" name="User ID" required></div>
+            <div class="form-group"><label class="form-group__label" for="staff-name">Staff member</label><input class="form-input" id="staff-name" name="Staff member" required></div>
+            <div class="form-group"><label class="form-group__label" for="staff-role">Role</label><select class="form-select" id="staff-role" name="Role" required><option>Veterinarian</option><option>Veterinary nurse</option><option>Receptionist</option><option>Administrator</option></select></div>
+            <div class="form-group"><label class="form-group__label" for="staff-email">Email</label><input class="form-input" id="staff-email" name="Email" type="email" required></div>
+            <div class="form-group"><label class="form-group__label" for="staff-status">Status</label><select class="form-select" id="staff-status" name="Status" required><option>Active</option><option>Inactive</option></select></div>
+            <button class="btn btn--primary" type="submit">Save staff entry</button>
+            <p class="form-group__help" data-form-status role="status" aria-live="polite"></p>
+          </form>
+        </details>
+        <section class="stack" aria-labelledby="staff-heading">
+          <h2 id="staff-heading">Staff directory</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th scope="col">User ID</th><th scope="col">Staff member</th><th scope="col">Role</th><th scope="col">Email</th><th scope="col">Status</th></tr></thead>
+              <tbody id="staff-user-list">
+                <tr><td>U-001</td><td>Dr. Trishia Maralit</td><td>Veterinarian</td><td>trishia.maralit@example.com</td><td>Active</td></tr>
+                <tr><td>U-002</td><td>Kaye Nieves</td><td>Receptionist</td><td>kaye.nieves@example.com</td><td>Active</td></tr>
+                <tr><td>U-003</td><td>Lysa Pido</td><td>Veterinary nurse</td><td>lysa.pido@example.com</td><td>Active</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <button class="btn btn--outline" type="button" data-print>Print staff directory</button>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

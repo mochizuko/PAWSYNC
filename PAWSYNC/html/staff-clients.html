@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clients | PawSync Staff</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout-staff.css">
+  <script src="../java%20script/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="staff-shell">
+    <aside class="sidebar">
+      <a class="sidebar__brand" href="staff.html">PawSync</a>
+      <nav aria-label="Staff">
+        <ul class="sidebar__list">
+          <li><a class="sidebar__link" href="staff.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="staff-patient-records.html">Patient Records &amp; Vital Signs</a></li>
+          <li><a class="sidebar__link is-active" href="staff-clients.html" aria-current="page">Clients</a></li>
+          <li><a class="sidebar__link" href="staff-appointments.html">Appointments</a></li>
+          <li><a class="sidebar__link" href="staff-confined-pets.html">Confined Pets</a></li>
+          <li><a class="sidebar__link" href="staff-inventory.html">Inventory</a></li>
+          <li><a class="sidebar__link" href="staff-billing.html">Billing &amp; Sales</a></li>
+          <li><a class="sidebar__link" href="staff-reports.html">Reports</a></li>
+          <li><a class="sidebar__link" href="staff-users.html">Users &amp; Staff</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="staff-main">
+      <div class="topbar">
+        <div class="topbar__search">
+          <label class="sr-only" for="search">Search clients</label>
+          <input class="form-input" id="search" type="search" placeholder="Search client name, phone, or email..." data-table-search data-search-target="client-list">
+        </div>
+        <p class="topbar__user">Dr. Maralit (Veterinarian)</p>
+      </div>
+      <main id="main">
+        <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Clients</p>
+        <h1 class="page-title">Clients</h1>
+        <p class="text-muted">Maintain contact details and the pets registered to each client. Entries are saved in this browser only and are not sent to a clinic database.</p>
+        <details class="card">
+          <summary><strong>Add a client</strong></summary>
+          <form class="form stack" data-create-form data-storage-key="pawsync-clients" data-list-id="client-list">
+            <div class="form-group"><label class="form-group__label" for="client-id">Client ID</label><input class="form-input" id="client-id" name="Client ID" required></div>
+            <div class="form-group"><label class="form-group__label" for="client-name">Client name</label><input class="form-input" id="client-name" name="Client" required></div>
+            <div class="form-group"><label class="form-group__label" for="client-phone">Phone</label><input class="form-input" id="client-phone" name="Phone" type="tel" required></div>
+            <div class="form-group"><label class="form-group__label" for="client-email">Email</label><input class="form-input" id="client-email" name="Email" type="email" required></div>
+            <div class="form-group"><label class="form-group__label" for="client-pets">Pets</label><input class="form-input" id="client-pets" name="Pets" placeholder="e.g. Milo, Luna" required></div>
+            <button class="btn btn--primary" type="submit">Save client</button>
+            <p class="form-group__help" data-form-status role="status" aria-live="polite"></p>
+          </form>
+        </details>
+        <section class="stack" aria-labelledby="clients-heading">
+          <h2 id="clients-heading">Client directory</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th scope="col">Client ID</th><th scope="col">Client</th><th scope="col">Phone</th><th scope="col">Email</th><th scope="col">Pets</th></tr></thead>
+              <tbody id="client-list">
+                <tr><td>C-2031</td><td>Alex Santos</td><td>0917 555 0131</td><td>alex.santos@example.com</td><td>Milo</td></tr>
+                <tr><td>C-2026</td><td>Jamie Reyes</td><td>0918 555 0142</td><td>jamie.reyes@example.com</td><td>Luna, Pepper</td></tr>
+                <tr><td>C-2014</td><td>Sam Cruz</td><td>0920 555 0164</td><td>sam.cruz@example.com</td><td>Buddy</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <button class="btn btn--outline" type="button" data-print>Print client directory</button>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

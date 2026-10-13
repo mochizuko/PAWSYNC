@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Billing &amp; Sales | PawSync Staff</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout-staff.css">
+  <script src="../java%20script/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="staff-shell">
+    <aside class="sidebar">
+      <a class="sidebar__brand" href="staff.html">PawSync</a>
+      <nav aria-label="Staff">
+        <ul class="sidebar__list">
+          <li><a class="sidebar__link" href="staff.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="staff-patient-records.html">Patient Records &amp; Vital Signs</a></li>
+          <li><a class="sidebar__link" href="staff-clients.html">Clients</a></li>
+          <li><a class="sidebar__link" href="staff-appointments.html">Appointments</a></li>
+          <li><a class="sidebar__link" href="staff-confined-pets.html">Confined Pets</a></li>
+          <li><a class="sidebar__link" href="staff-inventory.html">Inventory</a></li>
+          <li><a class="sidebar__link is-active" href="staff-billing.html" aria-current="page">Billing &amp; Sales</a></li>
+          <li><a class="sidebar__link" href="staff-reports.html">Reports</a></li>
+          <li><a class="sidebar__link" href="staff-users.html">Users &amp; Staff</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="staff-main">
+      <div class="topbar">
+        <div class="topbar__search">
+          <label class="sr-only" for="search">Search invoices</label>
+          <input class="form-input" id="search" type="search" placeholder="Search invoice, client, or status..." data-table-search data-search-target="invoice-list">
+        </div>
+        <p class="topbar__user">Dr. Maralit (Veterinarian)</p>
+      </div>
+      <main id="main">
+        <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Billing &amp; Sales</p>
+        <h1 class="page-title">Billing &amp; Sales</h1>
+        <p class="text-muted">Track invoices and payment status. Amounts are shown in Philippine pesos (PHP). Entries are saved in this browser only and are not sent to a clinic database.</p>
+        <details class="card">
+          <summary><strong>Record an invoice</strong></summary>
+          <form class="form stack" data-create-form data-storage-key="pawsync-invoices" data-list-id="invoice-list">
+            <div class="form-group"><label class="form-group__label" for="invoice-id">Invoice ID</label><input class="form-input" id="invoice-id" name="Invoice" required></div>
+            <div class="form-group"><label class="form-group__label" for="invoice-customer">Client / patient</label><input class="form-input" id="invoice-customer" name="Client / patient" required></div>
+            <div class="form-group"><label class="form-group__label" for="invoice-date">Date</label><input class="form-input" id="invoice-date" name="Date" type="date" required></div>
+            <div class="form-group"><label class="form-group__label" for="invoice-total">Total (PHP)</label><input class="form-input" id="invoice-total" name="Total (PHP)" type="number" min="0" step="0.01" required></div>
+            <div class="form-group"><label class="form-group__label" for="invoice-status">Status</label><select class="form-select" id="invoice-status" name="Status" required><option>Unpaid</option><option>Paid</option><option>Partially paid</option><option>Voided</option></select></div>
+            <button class="btn btn--primary" type="submit">Save invoice</button>
+            <p class="form-group__help" data-form-status role="status" aria-live="polite"></p>
+          </form>
+        </details>
+        <section class="stack" aria-labelledby="invoices-heading">
+          <h2 id="invoices-heading">Recent invoices</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th scope="col">Invoice</th><th scope="col">Client / patient</th><th scope="col">Date</th><th scope="col">Total (PHP)</th><th scope="col">Status</th></tr></thead>
+              <tbody id="invoice-list">
+                <tr><td>INV-8041</td><td>Alex Santos / Milo</td><td>2026-10-13</td><td>1,250.00</td><td>Paid</td></tr>
+                <tr><td>INV-8040</td><td>Jamie Reyes / Luna</td><td>2026-10-13</td><td>850.00</td><td>Unpaid</td></tr>
+                <tr><td>INV-8039</td><td>Sam Cruz / Buddy</td><td>2026-10-12</td><td>2,100.00</td><td>Partially paid</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <button class="btn btn--outline" type="button" data-print>Print billing summary</button>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PAGE TITLE | PawSync Staff</title>
-  <link rel="stylesheet" href="PAWSYNCC/css/base.css">
-  <link rel="stylesheet" href="PAWSYNCC/css/components.css">
-  <link rel="stylesheet" href="PAWSYNCC/css/layout-staff.css">
+  <title>Staff Dashboard | PawSync</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout-staff.css">
+  <script src="../java%20script/script.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
   <div class="staff-shell">
     <aside class="sidebar">
-      <a class="sidebar__brand" href="staff-dashboard.html">PawSync</a>
+      <a class="sidebar__brand" href="staff.html">PawSync</a>
       <nav aria-label="Staff">
         <ul class="sidebar__list">
-          <li><a class="sidebar__link is-active" href="staff-dashboard.html" aria-current="page">Dashboard</a></li>
+          <li><a class="sidebar__link is-active" href="staff.html" aria-current="page">Dashboard</a></li>
           <li><a class="sidebar__link" href="staff-patient-records.html">Patient Records &amp; Vital Signs</a></li>
           <li><a class="sidebar__link" href="staff-clients.html">Clients</a></li>
           <li><a class="sidebar__link" href="staff-appointments.html">Appointments</a></li>
@@ -31,14 +32,51 @@
     <div class="staff-main">
       <div class="topbar">
         <div class="topbar__search">
-          <label class="sr-only" for="search">Search pet or owner</label>
-          <input class="form-input" id="search" type="search" placeholder="Search the pet name and the owner...">
+          <label class="sr-only" for="search">Search today's appointments</label>
+          <input class="form-input" id="search" type="search" placeholder="Search today's appointments..." data-table-search data-search-target="today-appointments">
         </div>
         <p class="topbar__user">Dr. Maralit (Veterinarian)</p>
       </div>
       <main id="main">
-        <h1 class="page-title">PAGE TITLE</h1>
-        <p>Content goes here.</p>
+        <h1 class="page-title">Staff Dashboard</h1>
+        <p class="text-muted">Clinic overview and quick access to daily staff tasks.</p>
+
+        <section class="grid grid--3" aria-label="Clinic overview">
+          <article class="card card--stat">
+            <p class="card__number">8</p>
+            <p class="card__label">Appointments today</p>
+          </article>
+          <article class="card card--stat">
+            <p class="card__number">3</p>
+            <p class="card__label">Pets in care</p>
+          </article>
+          <article class="card card--stat">
+            <p class="card__number">5</p>
+            <p class="card__label">Items to reorder</p>
+          </article>
+        </section>
+
+        <section class="stack" aria-labelledby="appointments-heading">
+          <h2 id="appointments-heading">Today's appointments</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr><th scope="col">Time</th><th scope="col">Patient</th><th scope="col">Client</th><th scope="col">Service</th><th scope="col">Status</th></tr>
+              </thead>
+              <tbody id="today-appointments">
+                <tr><td>9:00 AM</td><td>Milo</td><td>Alex Santos</td><td>Wellness exam</td><td><span class="badge badge--reserved">Confirmed</span></td></tr>
+                <tr><td>10:30 AM</td><td>Luna</td><td>Jamie Reyes</td><td>Vaccination</td><td><span class="badge badge--priority">Waiting</span></td></tr>
+                <tr><td>1:00 PM</td><td>Buddy</td><td>Sam Cruz</td><td>Dental check</td><td><span class="badge badge--reserved">Confirmed</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="stack" aria-labelledby="quick-links-heading">
+          <h2 id="quick-links-heading">Staff workspaces</h2>
+          <p>Use the navigation to open patient records, manage clients and appointments, review inventory and billing, or access reports and staff accounts.</p>
+        </section>
+        <button class="btn btn--outline" type="button" data-print>Print dashboard</button>
       </main>
     </div>
   </div>
