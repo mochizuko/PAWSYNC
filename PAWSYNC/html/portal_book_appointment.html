@@ -46,7 +46,7 @@
 
     <form id="booking-form" class="form booking-form" novalidate>
 
-      <!-- Step 1: Pet. For this, only the logged in owner's register pet will be displayed. If account has no or new pet, the checkbox will appear to get the information of the pets.-->
+      <!-- Step 1: Pet. For this, only the logged in owner's register pet will be displayed.-->
       <section class="step-panel" id="step-1" aria-labelledby="step-1-title">
         <h2 id="step-1-title" tabindex="-1">Pet</h2>
 
@@ -66,71 +66,12 @@
           <p class="form-group__error" id="pet-error" hidden>Choose a pet, or switch on "Register a new pet".</p>
         </fieldset>
 
-        <div class="form-group" id="new-pet-row">
-          <label class="switch" for="new-pet-toggle">
-            <input type="checkbox" role="switch" id="new-pet-toggle" aria-controls="pet-info">
-            <span>Register a new pet</span>
-          </label>
-        </div>
-
-        <!-- New pet fields: shown by the toggle, or right away when the owner has no pets -->
-        <div id="pet-info" hidden>
-          <p id="pet-info-note" class="form-section__note">This pet will be registered together with your booking.</p>
-
-          <div class="alert alert--warning" id="same-name-warning" role="alert" hidden>
-            <p class="alert__title">Warning: you already have a pet with this name</p>
-            <p id="same-name-text"></p>
-          </div>
-
-          <div class="form-group">
-            <label class="form-group__label" for="info-name">Pet name <span class="form-group__required" aria-hidden="true">*</span></label>
-            <input class="form-input" type="text" id="info-name" name="info_name" autocomplete="off" aria-describedby="info-name-error">
-            <p class="form-group__error" id="info-name-error" hidden></p>
-          </div>
-
-          <div class="form-group">
-            <label class="form-group__label" for="info-species">Species <span class="form-group__required" aria-hidden="true">*</span></label>
-            <select class="form-select" id="info-species" name="info_species" aria-describedby="info-species-error">
-              <option value="">Select a species</option>
-              <option>Dog</option>
-              <option>Cat</option>
-              <option>Other</option>
-            </select>
-            <p class="form-group__error" id="info-species-error" hidden></p>
-          </div>
-
-          <div class="form-group">
-            <label class="form-group__label" for="info-breed">Breed <span class="form-group__required" aria-hidden="true">*</span></label>
-            <input class="form-input" type="text" id="info-breed" name="info_breed" aria-describedby="info-breed-help info-breed-error">
-            <p class="form-group__help" id="info-breed-help">Not sure? Write Mixed or Unknown.</p>
-            <p class="form-group__error" id="info-breed-error" hidden></p>
-          </div>
-
-          <fieldset class="fieldset form-group" aria-describedby="info-gender-error">
-            <legend class="form-group__label">Gender <span class="form-group__required" aria-hidden="true">*</span></legend>
-            <div class="form-check">
-              <input type="radio" id="info-male" name="info_gender" value="Male">
-              <label for="info-male">Male</label>
-            </div>
-            <div class="form-check">
-              <input type="radio" id="info-female" name="info_gender" value="Female">
-              <label for="info-female">Female</label>
-            </div>
-            <p class="form-group__error" id="info-gender-error" hidden></p>
-          </fieldset>
-
-          <div class="form-group">
-            <label class="form-group__label" for="info-birthday">Birthday <span class="form-group__required" aria-hidden="true">*</span></label>
-            <input class="form-input" type="date" id="info-birthday" name="info_birthday" max="2026-10-13" aria-describedby="info-birthday-help info-birthday-error">
-            <p class="form-group__help" id="info-birthday-help">If not sure, give your best estimate.</p>
-            <p class="form-group__error" id="info-birthday-error" hidden></p>
-          </div>
-
-          <div class="form-group">
-            <label class="form-group__label" for="info-color">Color <span class="form-group__required" aria-hidden="true">*</span></label>
-            <input class="form-input" type="text" id="info-color" name="info_color" aria-describedby="info-color-error">
-            <p class="form-group__error" id="info-color-error" hidden></p>
-          </div>
+        <p id="pet-missing">Your pet is not listed? <a href="portal-register-pet.html">Register a Pet</a> first, then come back to book.</p>
+        <!--Displayed if there are no registered pet in the logged-in account.-->
+        <div class="alert alert--info" id="no-pets" hidden>
+          <p class="alert__title">No registered pets yet</p>
+          <p>Register your pet first. It only takes a minute, then you can book.</p>
+          <a class="btn btn--secondary" href="portal_register_pet.html">Register a pet</a>
         </div>
       </section>
   
