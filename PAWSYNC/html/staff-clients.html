@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/layout-staff.css">
-  <script src="../java%20script/script.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -30,27 +29,23 @@
     </aside>
     <div class="staff-main">
       <div class="topbar">
-        <div class="topbar__search">
-          <label class="sr-only" for="search">Search clients</label>
-          <input class="form-input" id="search" type="search" placeholder="Search client name, phone, or email..." data-table-search data-search-target="client-list">
-        </div>
         <p class="topbar__user">Dr. Maralit (Veterinarian)</p>
       </div>
       <main id="main">
         <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Clients</p>
         <h1 class="page-title">Clients</h1>
-        <p class="text-muted">Maintain contact details and the pets registered to each client. Entries are saved in this browser only and are not sent to a clinic database.</p>
+        <p class="text-muted">Maintain contact details and the pets registered to each client. This static demo does not submit or save entered values. Use your browser's print command to print this page.</p>
         <details class="card">
           <summary><strong>Add a client</strong></summary>
-          <form class="form stack" data-create-form data-storage-key="pawsync-clients" data-list-id="client-list">
+          <fieldset class="form stack staff-entry">
+            <legend class="form-group__label">Entry details</legend>
             <div class="form-group"><label class="form-group__label" for="client-id">Client ID</label><input class="form-input" id="client-id" name="Client ID" required></div>
             <div class="form-group"><label class="form-group__label" for="client-name">Client name</label><input class="form-input" id="client-name" name="Client" required></div>
             <div class="form-group"><label class="form-group__label" for="client-phone">Phone</label><input class="form-input" id="client-phone" name="Phone" type="tel" required></div>
             <div class="form-group"><label class="form-group__label" for="client-email">Email</label><input class="form-input" id="client-email" name="Email" type="email" required></div>
             <div class="form-group"><label class="form-group__label" for="client-pets">Pets</label><input class="form-input" id="client-pets" name="Pets" placeholder="e.g. Milo, Luna" required></div>
-            <button class="btn btn--primary" type="submit">Save client</button>
-            <p class="form-group__help" data-form-status role="status" aria-live="polite"></p>
-          </form>
+            <p class="form-group__help">Values entered here are not submitted or saved.</p>
+          </fieldset>
         </details>
         <section class="stack" aria-labelledby="clients-heading">
           <h2 id="clients-heading">Client directory</h2>
@@ -65,7 +60,6 @@
             </table>
           </div>
         </section>
-        <button class="btn btn--outline" type="button" data-print>Print client directory</button>
       </main>
     </div>
   </div>

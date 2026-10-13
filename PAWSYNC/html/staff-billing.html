@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/layout-staff.css">
-  <script src="../java%20script/script.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -30,27 +29,23 @@
     </aside>
     <div class="staff-main">
       <div class="topbar">
-        <div class="topbar__search">
-          <label class="sr-only" for="search">Search invoices</label>
-          <input class="form-input" id="search" type="search" placeholder="Search invoice, client, or status..." data-table-search data-search-target="invoice-list">
-        </div>
         <p class="topbar__user">Dr. Maralit (Veterinarian)</p>
       </div>
       <main id="main">
         <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Billing &amp; Sales</p>
         <h1 class="page-title">Billing &amp; Sales</h1>
-        <p class="text-muted">Track invoices and payment status. Amounts are shown in Philippine pesos (PHP). Entries are saved in this browser only and are not sent to a clinic database.</p>
+        <p class="text-muted">Track invoices and payment status. Amounts are shown in Philippine pesos (PHP). This static demo does not submit or save entered values. Use your browser's print command to print this page.</p>
         <details class="card">
           <summary><strong>Record an invoice</strong></summary>
-          <form class="form stack" data-create-form data-storage-key="pawsync-invoices" data-list-id="invoice-list">
+          <fieldset class="form stack staff-entry">
+            <legend class="form-group__label">Entry details</legend>
             <div class="form-group"><label class="form-group__label" for="invoice-id">Invoice ID</label><input class="form-input" id="invoice-id" name="Invoice" required></div>
             <div class="form-group"><label class="form-group__label" for="invoice-customer">Client / patient</label><input class="form-input" id="invoice-customer" name="Client / patient" required></div>
             <div class="form-group"><label class="form-group__label" for="invoice-date">Date</label><input class="form-input" id="invoice-date" name="Date" type="date" required></div>
             <div class="form-group"><label class="form-group__label" for="invoice-total">Total (PHP)</label><input class="form-input" id="invoice-total" name="Total (PHP)" type="number" min="0" step="0.01" required></div>
             <div class="form-group"><label class="form-group__label" for="invoice-status">Status</label><select class="form-select" id="invoice-status" name="Status" required><option>Unpaid</option><option>Paid</option><option>Partially paid</option><option>Voided</option></select></div>
-            <button class="btn btn--primary" type="submit">Save invoice</button>
-            <p class="form-group__help" data-form-status role="status" aria-live="polite"></p>
-          </form>
+            <p class="form-group__help">Values entered here are not submitted or saved.</p>
+          </fieldset>
         </details>
         <section class="stack" aria-labelledby="invoices-heading">
           <h2 id="invoices-heading">Recent invoices</h2>
@@ -65,7 +60,6 @@
             </table>
           </div>
         </section>
-        <button class="btn btn--outline" type="button" data-print>Print billing summary</button>
       </main>
     </div>
   </div>

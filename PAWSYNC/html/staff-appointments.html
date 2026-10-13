@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/layout-staff.css">
-  <script src="../java%20script/script.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -30,28 +29,24 @@
     </aside>
     <div class="staff-main">
       <div class="topbar">
-        <div class="topbar__search">
-          <label class="sr-only" for="search">Search appointments</label>
-          <input class="form-input" id="search" type="search" placeholder="Search patient, client, or service..." data-table-search data-search-target="appointment-list">
-        </div>
         <p class="topbar__user">Dr. Maralit (Veterinarian)</p>
       </div>
       <main id="main">
         <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Appointments</p>
         <h1 class="page-title">Appointments</h1>
-        <p class="text-muted">Schedule and review clinic visits. Dates and times use your local timezone. Entries are saved in this browser only and are not sent to a clinic database.</p>
+        <p class="text-muted">Schedule and review clinic visits. Dates and times use your local timezone. This static demo does not submit or save entered values. Use your browser's print command to print this page.</p>
         <details class="card">
           <summary><strong>Schedule an appointment</strong></summary>
-          <form class="form stack" data-create-form data-storage-key="pawsync-appointments" data-list-id="appointment-list">
+          <fieldset class="form stack staff-entry">
+            <legend class="form-group__label">Entry details</legend>
             <div class="form-group"><label class="form-group__label" for="appointment-id">Appointment ID</label><input class="form-input" id="appointment-id" name="Appointment ID" required></div>
             <div class="form-group"><label class="form-group__label" for="appointment-time">Date &amp; time</label><input class="form-input" id="appointment-time" name="Date &amp; time" type="datetime-local" required></div>
             <div class="form-group"><label class="form-group__label" for="appointment-patient">Patient</label><input class="form-input" id="appointment-patient" name="Patient" required></div>
             <div class="form-group"><label class="form-group__label" for="appointment-client">Client</label><input class="form-input" id="appointment-client" name="Client" required></div>
             <div class="form-group"><label class="form-group__label" for="appointment-service">Service</label><input class="form-input" id="appointment-service" name="Service" required></div>
             <div class="form-group"><label class="form-group__label" for="appointment-status">Status</label><select class="form-select" id="appointment-status" name="Status" required><option>Confirmed</option><option>Waiting</option><option>Completed</option><option>Cancelled</option></select></div>
-            <button class="btn btn--primary" type="submit">Save appointment</button>
-            <p class="form-group__help" data-form-status role="status" aria-live="polite"></p>
-          </form>
+            <p class="form-group__help">Values entered here are not submitted or saved.</p>
+          </fieldset>
         </details>
         <section class="stack" aria-labelledby="schedule-heading">
           <h2 id="schedule-heading">Appointment schedule</h2>
@@ -66,7 +61,6 @@
             </table>
           </div>
         </section>
-        <button class="btn btn--outline" type="button" data-print>Print appointment schedule</button>
       </main>
     </div>
   </div>
