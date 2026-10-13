@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confined Pets | PawSync Staff</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout-staff.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="staff-shell">
+    <aside class="sidebar">
+      <a class="sidebar__brand" href="staff.html">PawSync</a>
+      <nav aria-label="Staff">
+        <ul class="sidebar__list">
+          <li><a class="sidebar__link" href="staff.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="staff-patient-records.html">Patient Records &amp; Vital Signs</a></li>
+          <li><a class="sidebar__link" href="staff-clients.html">Clients</a></li>
+          <li><a class="sidebar__link" href="staff-appointments.html">Appointments</a></li>
+          <li><a class="sidebar__link is-active" href="staff-confined-pets.html" aria-current="page">Confined Pets</a></li>
+          <li><a class="sidebar__link" href="staff-inventory.html">Inventory</a></li>
+          <li><a class="sidebar__link" href="staff-billing.html">Billing &amp; Sales</a></li>
+          <li><a class="sidebar__link" href="staff-reports.html">Reports</a></li>
+          <li><a class="sidebar__link" href="staff-users.html">Users &amp; Staff</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="staff-main">
+      <div class="topbar">
+        <p class="topbar__user">Dr. Maralit (Veterinarian)</p>
+      </div>
+      <main id="main">
+        <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Confined Pets</p>
+        <h1 class="page-title">Confined Pets</h1>
+        <p class="text-muted">Track in-patient stays and current care status. Follow clinic protocols for treatment and discharge. This static demo does not submit or save entered values. Use your browser's print command to print this page.</p>
+        <details class="card">
+          <summary><strong>Register a confined pet</strong></summary>
+          <fieldset class="form stack staff-entry">
+            <legend class="form-group__label">Entry details</legend>
+            <div class="form-group"><label class="form-group__label" for="ward-id">Ward ID</label><input class="form-input" id="ward-id" name="Ward ID" required></div>
+            <div class="form-group"><label class="form-group__label" for="confined-patient">Patient</label><input class="form-input" id="confined-patient" name="Patient" required></div>
+            <div class="form-group"><label class="form-group__label" for="confined-client">Client</label><input class="form-input" id="confined-client" name="Client" required></div>
+            <div class="form-group"><label class="form-group__label" for="check-in">Check-in</label><input class="form-input" id="check-in" name="Check-in" type="date" required></div>
+            <div class="form-group"><label class="form-group__label" for="care-status">Care status</label><select class="form-select" id="care-status" name="Care status" required><option>Under observation</option><option>Stable</option><option>Needs attention</option><option>Ready for discharge</option></select></div>
+            <p class="form-group__help">Values entered here are not submitted or saved.</p>
+          </fieldset>
+        </details>
+        <section class="stack" aria-labelledby="inpatient-heading">
+          <h2 id="inpatient-heading">Current in-patients</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th scope="col">Ward ID</th><th scope="col">Patient</th><th scope="col">Client</th><th scope="col">Check-in</th><th scope="col">Care status</th></tr></thead>
+              <tbody id="confined-pet-list">
+                <tr><td>W-014</td><td>Max</td><td>Taylor Lim</td><td>2026-10-12</td><td><span class="badge badge--priority">Under observation</span></td></tr>
+                <tr><td>W-011</td><td>Oreo</td><td>Casey Tan</td><td>2026-10-13</td><td><span class="badge badge--reserved">Stable</span></td></tr>
+                <tr><td>W-009</td><td>Ginger</td><td>Robin Lee</td><td>2026-10-13</td><td><span class="badge badge--emergency">Needs attention</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

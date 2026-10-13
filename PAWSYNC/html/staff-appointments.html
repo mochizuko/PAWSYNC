@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Appointments | PawSync Staff</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout-staff.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="staff-shell">
+    <aside class="sidebar">
+      <a class="sidebar__brand" href="staff.html">PawSync</a>
+      <nav aria-label="Staff">
+        <ul class="sidebar__list">
+          <li><a class="sidebar__link" href="staff.html">Dashboard</a></li>
+          <li><a class="sidebar__link" href="staff-patient-records.html">Patient Records &amp; Vital Signs</a></li>
+          <li><a class="sidebar__link" href="staff-clients.html">Clients</a></li>
+          <li><a class="sidebar__link is-active" href="staff-appointments.html" aria-current="page">Appointments</a></li>
+          <li><a class="sidebar__link" href="staff-confined-pets.html">Confined Pets</a></li>
+          <li><a class="sidebar__link" href="staff-inventory.html">Inventory</a></li>
+          <li><a class="sidebar__link" href="staff-billing.html">Billing &amp; Sales</a></li>
+          <li><a class="sidebar__link" href="staff-reports.html">Reports</a></li>
+          <li><a class="sidebar__link" href="staff-users.html">Users &amp; Staff</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="staff-main">
+      <div class="topbar">
+        <p class="topbar__user">Dr. Maralit (Veterinarian)</p>
+      </div>
+      <main id="main">
+        <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Appointments</p>
+        <h1 class="page-title">Appointments</h1>
+        <p class="text-muted">Schedule and review clinic visits. Dates and times use your local timezone. This static demo does not submit or save entered values. Use your browser's print command to print this page.</p>
+        <details class="card">
+          <summary><strong>Schedule an appointment</strong></summary>
+          <fieldset class="form stack staff-entry">
+            <legend class="form-group__label">Entry details</legend>
+            <div class="form-group"><label class="form-group__label" for="appointment-id">Appointment ID</label><input class="form-input" id="appointment-id" name="Appointment ID" required></div>
+            <div class="form-group"><label class="form-group__label" for="appointment-time">Date &amp; time</label><input class="form-input" id="appointment-time" name="Date &amp; time" type="datetime-local" required></div>
+            <div class="form-group"><label class="form-group__label" for="appointment-patient">Patient</label><input class="form-input" id="appointment-patient" name="Patient" required></div>
+            <div class="form-group"><label class="form-group__label" for="appointment-client">Client</label><input class="form-input" id="appointment-client" name="Client" required></div>
+            <div class="form-group"><label class="form-group__label" for="appointment-service">Service</label><input class="form-input" id="appointment-service" name="Service" required></div>
+            <div class="form-group"><label class="form-group__label" for="appointment-status">Status</label><select class="form-select" id="appointment-status" name="Status" required><option>Confirmed</option><option>Waiting</option><option>Completed</option><option>Cancelled</option></select></div>
+            <p class="form-group__help">Values entered here are not submitted or saved.</p>
+          </fieldset>
+        </details>
+        <section class="stack" aria-labelledby="schedule-heading">
+          <h2 id="schedule-heading">Appointment schedule</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th scope="col">Appointment ID</th><th scope="col">Date &amp; time</th><th scope="col">Patient</th><th scope="col">Client</th><th scope="col">Service</th><th scope="col">Status</th></tr></thead>
+              <tbody id="appointment-list">
+                <tr><td>A-5082</td><td>2026-10-13 09:00</td><td>Milo</td><td>Alex Santos</td><td>Wellness exam</td><td>Confirmed</td></tr>
+                <tr><td>A-5083</td><td>2026-10-13 10:30</td><td>Luna</td><td>Jamie Reyes</td><td>Vaccination</td><td>Waiting</td></tr>
+                <tr><td>A-5084</td><td>2026-10-13 13:00</td><td>Buddy</td><td>Sam Cruz</td><td>Dental check</td><td>Confirmed</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
