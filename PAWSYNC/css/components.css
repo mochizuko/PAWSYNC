@@ -43,6 +43,10 @@
   text-decoration: underline; 
   padding-inline: var(--space-1); 
 }
+
+.btn--link:hover { 
+  text-decoration: none; }
+
 .btn--small { 
   min-height: 44px; 
   padding-inline: var(--space-2); 
@@ -51,6 +55,17 @@
 .btn--disabled { 
   opacity: 0.5; 
   cursor: not-allowed; }
+
+ /* Row of buttons at the bottom of a form */
+  .form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+.form-actions .btn--primary { margin-inline-start: auto; }
 
 /* ---------- Cards ---------- */
 .card {
@@ -96,6 +111,7 @@
   display: block; 
   font-weight: 600; 
   margin-bottom: var(--space-1); 
+  padding: 0;
 }
 .form-group__required { 
   color: var(--color-error); 
@@ -135,7 +151,84 @@
   min-height: 44px; 
 }
 
+.form-check input { 
+  width: 1.25rem; 
+  height: 1.25rem; 
+  accent-color: var(--color-primary);
+  flex: none; }
+
+
+/* ---------- fieldset reser for radio ---------- */
+fieldset { 
+  border: 0; 
+  padding: 0; 
+  margin: 0 0 var(--space-3); 
+  min-width: 0; }
+
+
+/* ---------- Titled section inside a long form ---------- */
+.form-section {
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--color-white);
+  padding: var(--space-3);
+  margin: 0 0 var(--space-3);
+  min-width: 0;
+}
+.form-section__title {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 600;
+  padding: 0 var(--space-1);
+}
+.form-section__note { 
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  margin-top: 0; }
+
+/* Big selectable option (pick a pet, pick a service) */
+.choice-list { 
+  display: grid; 
+  gap: var(--space-1); }
+.choice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-white);
+  border: 1px solid #7C8A96;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.choice:hover { 
+  background: var(--color-surface); }
+.choice input { 
+  width: 1.25rem; 
+  height: 1.25rem; 
+  accent-color: var(--color-primary); 
+  flex: none; }
+.choice__title { 
+  font-weight: 600; 
+  display: block; }
+.choice__meta { 
+  font-size: 0.875rem; 
+  color: var(--color-muted); 
+  display: block; }
+.choice:has(input:checked) {
+  background: var(--color-surface);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
+}
+
+
 /* ---------- Tables ---------- */
+
+.table-wrap { 
+  overflow-x: auto; 
+  max-width: 100%; }
+.table-wrap > .table { 
+  min-width: 600px; }
 .table { 
   width: 100%; 
   border-collapse: collapse; 
@@ -195,7 +288,8 @@
 .alert { 
   padding: var(--space-2) var(--space-3); 
   border-radius: var(--radius); 
-  border: 2px solid; 
+  border: 2px solid;
+  margin-bottom: var(--space-3); 
 }
 .alert--info { 
   background: var(--color-surface); 
@@ -214,9 +308,13 @@
   border-color: var(--color-error); 
 }
 .alert__title { 
-  font-weight: 700; margin: 0; 
+ font-weight: 700; 
+ margin: 0 0 4px;  
 }
-.alert > p:last-child { 
+.alert p { 
+  margin-top: 0; 
+}
+.alert > :last-child { 
   margin-bottom: 0; 
 }
 
@@ -252,9 +350,11 @@
   text-decoration: none; 
   font-weight: 600;
 }
-.tabs__tab.is-active { 
-  background: var(--color-primary); 
-  color: var(--color-white); 
+
+.tabs__tab.is-active,
+.tabs__tab[aria-current="page"] {
+  background: var(--color-primary);
+  color: var(--color-white);
   border-color: var(--color-primary);
 }
 
@@ -275,9 +375,22 @@
   font-size: 0.875rem; 
   font-weight: 600; 
 }
-.steps__item.is-current { 
-  background: var(--color-primary); 
-  color: var(--color-white); 
+.steps__item.is-done { 
+  background: var(--color-surface); 
+}
+.steps__item.is-done::after { 
+  content: " \2713"; 
+}
+.steps__item[aria-current="step"],
+.steps__item.is-current {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+.steps__mobile { display: none; font-weight: 600; margin: 0 0 var(--space-3); }
+
+@media (max-width: 639px) {
+  .steps { display: none; }
+  .steps__mobile { display: block; }
 }
 
 /* ---------- Calendar (static; add .is-full by hand on full days) ---------- */
@@ -305,28 +418,112 @@
   font-weight: 600; 
 }
 .calendar__day {
-  min-height: 44px; 
-  display: flex; 
-  align-items: center; 
+  min-height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  border: var(--border); 
-  border-radius: 4px; 
-  background: var(--color-white);
-  color: var(--color-text); 
-  text-decoration: none; 
+  line-height: 1.1;
+  padding: 2px;
+  font-family: var(--font-body);
   font-size: 0.9375rem;
+  border: var(--border);
+  border-radius: 4px;
+  background: var(--color-white);
+  color: var(--color-text);
+  text-decoration: none;
+  cursor: pointer;
 }
-.calendar__day.is-selected { 
-  background: var(--color-primary); 
-  color: var(--color-white); 
-  border-color: var(--color-primary); 
-  font-weight: 700; 
+.calendar__day:hover { background: var(--color-surface); }
+.calendar__flag { font-size: 0.75rem; font-weight: 700; }
+ 
+.calendar__day.is-past {
+  background: transparent;
+  color: var(--color-muted);
+  border-style: dashed;
+  cursor: not-allowed;
 }
-.calendar__day.is-full { 
-  background: #E4E7EA; 
-  color: var(--color-muted); 
+.calendar__day.is-full {
+  background: #E4E7EA;
+  color: var(--color-muted);
+  cursor: not-allowed;
+}
+.calendar__day.is-full .calendar__num { 
   text-decoration: line-through; 
-  cursor: not-allowed; 
+}
+.calendar__day.is-full:hover,
+.calendar__day.is-past:hover { 
+  background: #E4E7EA; 
+}
+.calendar__day.is-past:hover { 
+  background: transparent; 
+}
+ 
+.calendar__day.is-selected {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  font-weight: 700;
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
+}
+
+.calendar__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: var(--space-2) 0 0;
+  font-size: 0.875rem;
+}
+.calendar__legend li { display: flex; align-items: center; gap: var(--space-1); }
+.calendar__swatch {
+  width: 16px; height: 16px;
+  border: var(--border);
+  border-radius: 3px;
+  background: var(--color-white);
+}
+.calendar__swatch--selected { 
+  background: var(--color-primary); 
+  border-color: var(--color-primary); 
+}
+.calendar__swatch--full { 
+  background: #E4E7EA; 
+}
+.calendar__caption { 
+  font-size: 0.875rem; 
+  color: var(--color-muted); 
+  margin: var(--space-1) 0 0; 
+}
+
+/* ---------- Modal / confirmation dialog ---------- */
+.modal {
+  width: calc(100% - var(--space-4, 32px));
+  max-width: 480px;
+  padding: var(--space-3);
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--color-white);
+  color: var(--color-text);
+}
+.modal::backdrop { background: rgba(27, 42, 65, 0.6); }
+.modal__title { margin-top: 0; }
+.modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+ 
+/* ---------- Summary list (label and value pairs) ---------- */
+.summary-list { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-1) var(--space-3); margin: 0; }
+.summary-list dt { font-weight: 600; }
+.summary-list dd { margin: 0; }
+ 
+@media (max-width: 639px) {
+  .summary-list { grid-template-columns: 1fr; gap: 0; }
+  .summary-list dd { margin-bottom: var(--space-1); }
 }
 
 /* ---------- Page header ---------- */
@@ -337,4 +534,31 @@
   font-size: 0.875rem; 
   color: var(--color-muted); 
   margin-bottom: var(--space-2); 
+}
+.breadcrumb ol { display: flex; flex-wrap: wrap; gap: var(--space-1); list-style: none; margin: 0; padding: 0; }
+.breadcrumb li + li::before { content: ">"; margin-right: var(--space-1); }
+.breadcrumb a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-primary);
+}
+.breadcrumb [aria-current="page"] { 
+  color: var(--color-text); 
+  font-weight: 600; 
+}
+
+/* ---------- Visible keyboard focus ---------- */
+.btn:focus-visible,
+.tabs__tab:focus-visible,
+.calendar__day:focus-visible,
+.pagination__link:focus-visible,
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible,
+.choice:focus-within,
+.dropzone:focus-within,
+.breadcrumb a:focus-visible {
+  outline: 3px solid var(--color-text);
+  outline-offset: 2px;
 }
