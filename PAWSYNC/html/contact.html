@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact Us | PawSync</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout-public.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html#main"><span class="brand__logo" aria-hidden="true"></span>PawSync</a>
+      <nav aria-label="Main">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html#main">Home</a></li>
+          <li><a class="nav__link" href="index.html#about">About</a></li>
+          <li><a class="nav__link" href="index.html#services">Services</a></li>
+          <li><a class="nav__link" href="index.html#emergency-care">Emergency Care</a></li>
+          <li><a class="nav__link is-active" href="index.html#contact">Contact</a></li>
+          <li><a class="btn btn--secondary btn--small" href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container section">
+      <div class="breadcrumb">Home / Contact</div>
+      <h1 class="page-title text-center">Contact PawSync</h1>
+      <p class="text-center" style="max-width: 60ch; margin-inline: auto; margin-bottom: var(--space-4);">
+        We are here to answer your questions and assist with your pet's health care needs. Reach out to us or visit our clinic.
+      </p>
+
+      <div class="grid grid--2">
+        <!-- Clinic Details & Hours -->
+        <div class="stack">
+          <div class="card">
+            <h2 class="card__title">Clinic Details</h2>
+            <p><strong>Address:</strong> 123 Pet Care Lane, Suite A, Metropolis, NY 10001</p>
+            <p><strong>Phone Number:</strong> <a href="tel:5551234567">(555) 123-4567</a></p>
+            <p><strong>Emergency Line:</strong> <a href="tel:5559117387" style="color: var(--color-error); font-weight: 700;">(555) 911-PETS</a></p>
+            <p><strong>Email:</strong> <a href="mailto:info@pawsync.com">info@pawsync.com</a></p>
+          </div>
+
+          <div class="card">
+            <h2 class="card__title">Clinic Hours</h2>
+            <ul>
+              <li><strong>Monday – Friday:</strong> 8:00 AM – 6:00 PM</li>
+              <li><strong>Saturday:</strong> 9:00 AM – 3:00 PM</li>
+              <li><strong>Sunday:</strong> Closed (Emergency Triage Line Active)</li>
+            </ul>
+          </div>
+
+          <!-- Social Media & Review Links -->
+          <div class="card card--surface">
+            <h2 class="card__title">Connect &amp; Review Us</h2>
+            <p>Stay connected or share your experience with our veterinary team:</p>
+            <ul style="list-style: none; padding: 0;">
+              <li style="margin-bottom: 8px;">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="btn btn--outline btn--small" style="width: 100%; justify-content: flex-start;">
+                  👍 Visit our Facebook Page
+                </a>
+              </li>
+              <li style="margin-bottom: 8px;">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="btn btn--outline btn--small" style="width: 100%; justify-content: flex-start;">
+                  📷 Follow us on Instagram
+                </a>
+              </li>
+              <li>
+                <a href="https://google.com" target="_blank" rel="noopener noreferrer" class="btn btn--secondary btn--small" style="width: 100%; justify-content: flex-start;">
+                  ⭐ Leave a Google Review
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Contact Form & Map Container -->
+        <div class="stack">
+          <div class="card">
+            <h2 class="card__title">Send Us a Message</h2>
+            <form class="form">
+              <div class="form-group">
+                <label class="form-group__label" for="name">Your Name <span class="form-group__required">*</span></label>
+                <input class="form-input" type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-group__label" for="email">Email Address <span class="form-group__required">*</span></label>
+                <input class="form-input" type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label class="form-group__label" for="message">Message <span class="form-group__required">*</span></label>
+                <textarea class="form-textarea" id="message" name="message" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary" style="width: 100%;">Send Message</button>
+            </form>
+          </div>
+
+          <!-- Map Location Container -->
+          <div class="card">
+            <h2 class="card__title">Find Our Clinic</h2>
+            <div style="width: 100%; height: 220px; border-radius: var(--radius); overflow: hidden; border: var(--border);">
+              <iframe 
+                title="PawSync Clinic Location Map"
+                src="https://maps.google.com/maps?q=123+Pet+Care+Lane+Metropolis+NY&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div>
+        <h2 class="site-footer__title">PawSync Veterinary Clinic</h2>
+        <p>123 Pet Care Lane, Suite A<br>Metropolis, NY 10001</p>
+      </div>
+      <nav aria-label="Quick links">
+        <h2 class="site-footer__title">Quick links</h2>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#emergency-care">Emergency Care</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="site-footer__title">Follow us</h2>
+        <ul>
+          <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://google.com" target="_blank" rel="noopener noreferrer">Google reviews</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
