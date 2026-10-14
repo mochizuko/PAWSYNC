@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in or create an account | PawSync</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout-public.css">
+
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html"><span class="brand__logo" aria-hidden="true"></span>PawSync</a>
+      <nav aria-label="Main">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="about.html">About</a></li>
+          <li><a class="nav__link" href="services.html">Services</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+          <li><a class="nav__link" href="emergency-care.html">Emergency Care</a></li>
+          <li><a class="btn btn--secondary btn--small is-active" href="login.html" aria-current="page">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="container section">
+      <div class="auth">
+        <h1 class="page-title">Welcome to PawSync</h1>
+        <p>Log in to book visits and manage your pet's records, or create an account if you are a new pet owner. Clinic staff also log in here.</p>
+
+        <div class="tabs" role="tablist" aria-label="Account options">
+          <button type="button" role="tab" id="tab-login" class="tabs__tab is-active"
+                  aria-selected="true" aria-controls="panel-login">Log in</button>
+          <button type="button" role="tab" id="tab-register" class="tabs__tab"
+                  aria-selected="false" aria-controls="panel-register" tabindex="-1">Create account</button>
+        </div>
+
+        <div role="tabpanel" id="panel-login" aria-labelledby="tab-login">
+          <form class="form" id="login-form" action="#" method="post" novalidate>
+            <div class="form-group">
+              <label class="form-group__label" for="login-id">Email or mobile number <span class="form-group__required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="text" id="login-id" name="login-id" autocomplete="username"
+                     required aria-describedby="login-id-error">
+              <p class="form-group__error" id="login-id-error" hidden></p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-group__label" for="login-password">Password <span class="form-group__required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="password" id="login-password" name="login-password" autocomplete="current-password"
+                     required aria-describedby="login-password-error">
+              <p class="form-group__error" id="login-password-error" hidden></p>
+            </div>
+
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" id="login-show-password" data-toggle-password="login-password">
+                <label for="login-show-password">Show password</label>
+              </div>
+            </div>
+
+            <p><a href="#">Forgot password?</a></p>
+
+            <button type="submit" class="btn btn--primary">Log in</button>
+          </form>
+        </div>
+
+        <div role="tabpanel" id="panel-register" aria-labelledby="tab-register" hidden>
+          <p>This is for pet owners only. Staff accounts are given by the clinic.</p>
+
+          <form class="form" id="register-form" action="#" method="post" novalidate>
+            <div class="form-group">
+              <label class="form-group__label" for="reg-name">Full name <span class="form-group__required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="text" id="reg-name" name="reg-name" autocomplete="name"
+                     required aria-describedby="reg-name-error">
+              <p class="form-group__error" id="reg-name-error" hidden></p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-group__label" for="reg-email">Email <span class="form-group__required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="email" id="reg-email" name="reg-email" autocomplete="email"
+                     required aria-describedby="reg-email-error">
+              <p class="form-group__error" id="reg-email-error" hidden></p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-group__label" for="reg-mobile">Mobile number <span class="form-group__required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="tel" id="reg-mobile" name="reg-mobile" autocomplete="tel"
+                     inputmode="numeric" maxlength="11" placeholder="09XXXXXXXXX"
+                     required aria-describedby="reg-mobile-error">
+              <p class="form-group__error" id="reg-mobile-error" hidden></p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-group__label" for="reg-password">Password <span class="form-group__required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="password" id="reg-password" name="reg-password" autocomplete="new-password"
+                     required aria-describedby="reg-password-help reg-password-error">
+              <p class="form-group__help" id="reg-password-help">Use at least 8 characters.</p>
+              <p class="form-group__error" id="reg-password-error" hidden></p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-group__label" for="reg-confirm">Confirm password <span class="form-group__required" aria-hidden="true">*</span></label>
+              <input class="form-input" type="password" id="reg-confirm" name="reg-confirm" autocomplete="new-password"
+                     required aria-describedby="reg-confirm-error">
+              <p class="form-group__error" id="reg-confirm-error" hidden></p>
+            </div>
+
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" id="reg-show-password" data-toggle-password="reg-password reg-confirm">
+                <label for="reg-show-password">Show passwords</label>
+              </div>
+            </div>
+
+            <div class="alert alert--info form-group">
+              <p class="alert__title">Data privacy notice</p>
+              <p>PawSync collects your name, contact details, and your pets' information only to manage your appointments and records. Your data is handled according to the Data Privacy Act of 2012 (RA 10173).</p>
+            </div>
+
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" id="reg-consent" name="reg-consent"
+                       required aria-describedby="reg-consent-error">
+                <label for="reg-consent">I have read the data privacy notice and I agree to the collection and use of my information. <span class="form-group__required" aria-hidden="true">*</span></label>
+              </div>
+              <p class="form-group__error" id="reg-consent-error" hidden></p>
+            </div>
+
+            <button type="submit" class="btn btn--primary">Create account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div><h2 class="site-footer__title">[Clinic Name]</h2><p>[Clinic Address]</p></div>
+      <nav aria-label="Quick links"><h2 class="site-footer__title">Quick links</h2>
+        <ul><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li></ul>
+      </nav>
+      <div><h2 class="site-footer__title">Follow us</h2>
+        <ul><li><a href="#">Facebook</a></li><li><a href="#">Instagram</a></li><li><a href="#">Google reviews</a></li></ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- pede imove sa javascript -->
+  <script>
+    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+
+    function selectTab(selected) {
+      tabs.forEach(function (tab) {
+        const active = tab === selected;
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        tab.tabIndex = active ? 0 : -1;
+        tab.classList.toggle('is-active', active);
+        document.getElementById(tab.getAttribute('aria-controls')).hidden = !active;
+      });
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { selectTab(tab); });
+      tab.addEventListener('keydown', function (e) {
+        let next = null;
+        if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+        if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (next) { e.preventDefault(); selectTab(next); next.focus(); }
+      });
+    });
+
+    document.querySelectorAll('[data-toggle-password]').forEach(function (box) {
+      box.addEventListener('change', function () {
+        box.dataset.togglePassword.split(' ').forEach(function (id) {
+          document.getElementById(id).type = box.checked ? 'text' : 'password';
+        });
+      });
+    });
+
+    function setError(input, message) {
+      const error = document.getElementById(input.id + '-error');
+      error.textContent = message;
+      error.hidden = false;
+      input.setAttribute('aria-invalid', 'true');
+      if (input.type !== 'checkbox') input.classList.add('form-input--error');
+    }
+
+    function clearError(input) {
+      const error = document.getElementById(input.id + '-error');
+      error.textContent = '';
+      error.hidden = true;
+      input.removeAttribute('aria-invalid');
+      input.classList.remove('form-input--error');
+    }
+
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const id = document.getElementById('login-id');
+      const pw = document.getElementById('login-password');
+      let valid = true;
+
+      clearError(id); clearError(pw);
+
+      if (id.value.trim() === '') {
+        setError(id, 'Enter your email or mobile number.'); valid = false;
+      }
+      if (pw.value === '') {
+        setError(pw, 'Enter your password.'); valid = false;
+      }
+      if (!valid) return;
+
+    });
+
+    document.getElementById('register-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('reg-name');
+      const email = document.getElementById('reg-email');
+      const mobile = document.getElementById('reg-mobile');
+      const pw = document.getElementById('reg-password');
+      const confirm = document.getElementById('reg-confirm');
+      const consent = document.getElementById('reg-consent');
+      let valid = true;
+
+      [name, email, mobile, pw, confirm, consent].forEach(clearError);
+
+      if (name.value.trim() === '') {
+        setError(name, 'Enter your full name.'); valid = false;
+      }
+      if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) {
+        setError(email, 'Enter a valid email, like name@example.com.'); valid = false;
+      }
+      if (!/^\d{11}$/.test(mobile.value.trim())) {
+        setError(mobile, 'Enter a mobile number with 11 digits.'); valid = false;
+      }
+      if (pw.value.length < 8) {
+        setError(pw, 'Use at least 8 characters.'); valid = false;
+      }
+      if (confirm.value !== pw.value || confirm.value === '') {
+        setError(confirm, 'Passwords do not match.'); valid = false;
+      }
+      if (!consent.checked) {
+        setError(consent, 'You must agree to the data privacy notice to create an account.'); valid = false;
+      }
+      if (!valid) return;
+
+    });
+  </script>
+</body>
+</html>
