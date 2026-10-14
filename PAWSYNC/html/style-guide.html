@@ -3,71 +3,268 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
   <title>Style Guide | PawSync</title>
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="../css/layout-public.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
-<main id="main" class="container" style="padding-block: 2rem;">
+<main id="main" class="container style-guide">
   <h1>PawSync style guide</h1>
   <p class="text-muted">Every component in one place. Build and check components here before using them on real pages.</p>
 
-  <section class="stack"><h2>Buttons</h2>
-    <p><a class="btn btn--primary" href="#">Book a Visit</a>
-       <a class="btn btn--secondary" href="#">Register Your Pet</a>
-       <a class="btn btn--outline" href="#">View All Appointments</a>
-       <a class="btn btn--link" href="#">Cancel</a></p>
-  </section>
+  <nav aria-label="On this page">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#sec-colors">Color palette</a></li>
+      <li><a href="#sec-type">Typography</a></li>
+      <li><a href="#sec-spacing">Spacing and radius</a></li>
+      <li><a href="#sec-buttons">Buttons</a></li>
+      <li><a href="#sec-badges">Status badges</a></li>
+      <li><a href="#sec-alerts">Alerts</a></li>
+      <li><a href="#sec-panels">Panels</a></li>
+      <li><a href="#sec-cards">Cards</a></li>
+      <li><a href="#sec-forms">Forms</a></li>
+      <li><a href="#sec-tables">Tables</a></li>
+      <li><a href="#sec-tabs">Tabs, steps and breadcrumb</a></li>
+      <li><a href="#sec-calendar">Calendar</a></li>
+      <li><a href="#sec-nav">Navigation and footer</a></li>
+      <li><a href="#sec-pagination">Pagination</a></li>
+      <li><a href="#sec-a11y">Accessibility checklist</a></li>
+      <li><a href="#sec-dodont">Do and don't</a></li>
+    </ol>
+  </nav>
 
-  <section><h2>Status badges</h2>
-    <p><span class="badge badge--emergency">EMERGENCY</span>
-       <span class="badge badge--priority">PRIORITY</span>
-       <span class="badge badge--reserved">Reserved</span>
-       <span class="badge badge--done">Done</span>
-       <span class="badge badge--cancelled">Cancelled</span></p>
-  </section>
+  aria-labelledby="colors-title">
+    <h2 id="colors-title">Color palette</h2>
+    <p>Nine colors. Every swatch has a name and a hex code, so color is never the only way to tell them apart.</p>
+    <div class="table-wrap">
+      <table class="table">
+        <caption class="sr-only">Color palette with names, hex codes and where each color is used</caption>
+        <thead><tr><th scope="col">Swatch</th><th scope="col">Name</th><th scope="col">Hex</th><th scope="col">Where it is used</th></tr></thead>
+        <tbody>
+          <tr><td><span class="swatch swatch--primary" aria-hidden="true"></span></td><th scope="row">Primary</th><td>#17697A</td><td>Header, links, secondary buttons, active tabs, table headers.</td></tr>
+          <tr><td><span class="swatch swatch--text" aria-hidden="true"></span></td><th scope="row">Text/Dark</th><td>#1B2A41</td><td>Body text, headings, staff sidebar.</td></tr>
+          <tr><td><span class="swatch swatch--accent" aria-hidden="true"></span></td><th scope="row">Accent</th><td>#E8735A</td><td>One main call-to-action per screen (e.g., "Book a Visit", "Record Vital Signs", "+ Add Vital Signs").</td></tr>
+          <tr><td><span class="swatch swatch--surface" aria-hidden="true"></span></td><th scope="row">Surface Light</th><td>#D6ECF0</td><td>Highlighted panels, summaries, table header rows in the app.</td></tr>
+          <tr><td><span class="swatch swatch--bg" aria-hidden="true"></span></td><th scope="row">Background</th><td>#EEF2F4</td><td>Page background, cards, input areas.</td></tr>
+          <tr><td><span class="swatch swatch--muted" aria-hidden="true"></span></td><th scope="row">Muted Text Slate</th><td>#5B6673</td><td>Captions, helper text, placeholders.</td></tr>
+          <tr><td><span class="swatch swatch--success" aria-hidden="true"></span></td><th scope="row">Success Green</th><td>#2E7D4F</td><td>Informational panels, such as the clinic-hours panel on the Home page.</td></tr>
+          <tr><td><span class="swatch swatch--warning" aria-hidden="true"></span></td><th scope="row">Warning Amber</th><td>#8A5A00</td><td>Priority cases, such as the PRIORITY row in the Staff Dashboard queue.</td></tr>
+          <tr><td><span class="swatch swatch--error" aria-hidden="true"></span></td><th scope="row">Error Red</th><td>#B3261E</td><td>Errors, emergencies and cancellations, such as the EMERGENCY row and the "Emergency? Call Now!" panel.</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-  <section><h2>Alerts</h2>
-    <div class="stack">
-      <div class="alert alert--info"><p class="alert__title">Info</p><p>Clinic hours to be confirmed.</p></div>
-      <div class="alert alert--success"><p class="alert__title">Saved</p><p>Appointment booked.</p></div>
-      <div class="alert alert--warning"><p class="alert__title">Priority</p><p>Priority cases are served first.</p></div>
-      <div class="alert alert--error"><p class="alert__title">Emergency? Call Now!</p><p>Call the clinic before you come in.</p></div>
+    <h3>Contrast ratios</h3>
+    <p>Text needs at least 4.5:1 against its background.</p>
+    <div class="table-wrap">
+      <table class="table">
+        <caption class="sr-only">Contrast ratio for each text and background pair</caption>
+        <thead><tr><th scope="col">Text on background</th><th scope="col" class="table__num">Ratio</th><th scope="col">Result</th></tr></thead>
+        <tbody>
+          <tr><td>Navy on page background</td><td class="table__num">12.82:1</td><td>Pass</td></tr>
+          <tr><td>Navy on white</td><td class="table__num">14.44:1</td><td>Pass</td></tr>
+          <tr><td>Navy on light teal</td><td class="table__num">11.77:1</td><td>Pass</td></tr>
+          <tr><td>Navy on coral (primary button)</td><td class="table__num">4.84:1</td><td>Pass</td></tr>
+          <tr><td>Navy on dark coral (primary button on hover, #D35F46)</td><td class="table__num">3.78:1</td><td>Fail</td></tr>
+          <tr><td>White on teal (secondary button)</td><td class="table__num">6.29:1</td><td>Pass</td></tr>
+          <tr><td>White on dark teal (secondary button on hover)</td><td class="table__num">9.14:1</td><td>Pass</td></tr>
+          <tr><td>Teal links on white</td><td class="table__num">6.29:1</td><td>Pass</td></tr>
+          <tr><td>Teal links on page background</td><td class="table__num">5.58:1</td><td>Pass</td></tr>
+          <tr><td>Muted gray (#5B6673) on white</td><td class="table__num">5.84:1</td><td>Pass</td></tr>
+          <tr><td>Muted gray on page background</td><td class="table__num">5.19:1</td><td>Pass</td></tr>
+          <tr><td>White on navy (footer, sidebar)</td><td class="table__num">14.44:1</td><td>Pass</td></tr>
+          <tr><td>Green on light green (Done badge)</td><td class="table__num">4.20:1</td><td>Fail</td></tr>
+          <tr><td>Amber on light amber (Priority badge)</td><td class="table__num">4.96:1</td><td>Pass</td></tr>
+          <tr><td>Red on light red (Emergency badge)</td><td class="table__num">5.12:1</td><td>Pass</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
-  <section><h2>Cards</h2>
+  <section class="stack" id="sec-type" aria-labelledby="type-title">
+    <h2 id="type-title">Typography</h2>
+    <p>Poppins for headings, Open Sans for body text. Sizes are in rem so text can scale up to 200%.</p>
+    <p class="type-h1">Heading 1: Poppins semi-bold, 36 px</p>
+    <p class="type-h2">Heading 2: Poppins semi-bold, 28 px</p>
+    <p class="type-h3">Heading 3: Poppins semi-bold, 22 px</p>
+    <p>Body text: Open Sans regular, 16 px, line height 1.5. Fast registration, easy appointment scheduling, and complete health tracking all in one place.</p>
+    <p><small>Caption: Open Sans, 14 px. Used for help text and notes.</small></p>
+    <p><span class="btn btn--outline" aria-hidden="true">Button text: Open Sans semi-bold, 16 px</span></p>
+    <div class="table-wrap">
+      <table class="table">
+        <caption class="sr-only">Table text sample</caption>
+        <thead><tr><th scope="col">Table header: semi-bold</th><th scope="col">Table cell: 15 px</th></tr></thead>
+        <tbody><tr><td>Dagul</td><td>Vaccination</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="stack" id="sec-spacing" aria-labelledby="spacing-title">
+    <h2 id="spacing-title">Spacing and radius</h2>
+    <p>Spacing is always a multiple of 8 px.</p>
+    <ul class="stack">
+      <li><span class="space-block space-block--8" aria-hidden="true"></span> 8 px (--space-1)</li>
+      <li><span class="space-block space-block--16" aria-hidden="true"></span> 16 px (--space-2)</li>
+      <li><span class="space-block space-block--24" aria-hidden="true"></span> 24 px (--space-3)</li>
+      <li><span class="space-block space-block--32" aria-hidden="true"></span> 32 px (--space-4)</li>
+      <li><span class="space-block space-block--48" aria-hidden="true"></span> 48 px (--space-6)</li>
+      <li><span class="space-block space-block--64" aria-hidden="true"></span> 64 px (--space-8)</li>
+    </ul>
+    <div class="radius-sample">8 px radius and a 1 px light border</div>
+  </section>
+
+  <section class="stack" id="sec-buttons" aria-labelledby="buttons-title">
+    <h2 id="buttons-title">Buttons</h2>
+    <p>
+      <a class="btn btn--primary" href="#">Book a visit</a>
+      <a class="btn btn--secondary" href="#">Register your pet</a>
+      <a class="btn btn--outline" href="#">View all appointments</a>
+      <a class="btn btn--link" href="#">Cancel</a>
+    </p>
+    <h3>Disabled and focus states</h3>
+    <p>
+      <button type="button" class="btn btn--primary" disabled>Disabled primary</button>
+      <button type="button" class="btn btn--secondary" disabled>Disabled secondary</button>
+      <button type="button" class="btn btn--outline">Press Tab to see the focus outline</button>
+    </p>
+    <p class="text-small text-muted">Use one coral primary button per screen. Every button is at least 44 × 44 px. Button text is in sentence case.</p>
+  </section>
+
+  <section class="stack" id="sec-badges" aria-labelledby="badges-title">
+    <h2 id="badges-title">Status badges</h2>
+    <p>Every badge has a text label. Color is never the only signal.</p>
+    <p>
+      <span class="badge badge--emergency">EMERGENCY</span>
+      <span class="badge badge--priority">PRIORITY</span>
+      <span class="badge badge--reserved">Reserved</span>
+      <span class="badge badge--done">Done</span>
+      <span class="badge badge--cancelled">Cancelled</span>
+      <span class="badge badge--low-stock">Low stock</span>
+      <span class="badge badge--expiring">Expiring</span>
+    </p>
+  </section>
+
+  <section class="stack" id="sec-alerts" aria-labelledby="alerts-title">
+    <h2 id="alerts-title">Alerts</h2>
+    <div class="alert alert--info"><p class="alert__title">Info</p><p>Clinic hours to be confirmed.</p></div>
+    <div class="alert alert--success"><p class="alert__title">Saved</p><p>Appointment booked.</p></div>
+    <div class="alert alert--warning"><p class="alert__title">Warning</p><p>This pet may already be registered.</p></div>
+    <div class="alert alert--error"><p class="alert__title">Error</p><p>Enter a mobile number with 11 digits.</p></div>
+    <h3>Clinic closure notice</h3>
+    <div class="notice-banner" role="status">
+      Notice: Clinic closed on Oct 1 for maintenance. <a href="#">Click to view modified schedule.</a>
+    </div>
+  </section>
+
+  <section class="stack" id="sec-panels" aria-labelledby="panels-title">
+    <h2 id="panels-title">Panels</h2>
+    <div class="card card--surface"><h3 class="card__title">Surface panel</h3><p>A highlighted area for grouped content.</p></div>
+    <div class="alert alert--success"><p class="alert__title">Clinic hours</p><p>Daily hours to be confirmed.</p></div>
+    <div class="alert alert--error"><p class="alert__title">Emergency? Call now!</p><p>Call the clinic before you come in.</p></div>
+  </section>
+
+  <section class="stack" id="sec-cards" aria-labelledby="cards-title">
+    <h2 id="cards-title">Cards</h2>
     <div class="grid grid--3">
-      <div class="card card--center"><h3 class="card__title">Consultation</h3><p>Card text.</p></div>
-      <div class="card card--surface"><h3 class="card__title">Surface card</h3><p>Highlighted panel.</p></div>
-      <div class="card card--stat"><p class="card__number">9/15</p><p class="card__label">Appointments Today</p></div>
+      <div class="card card--center"><h3 class="card__title">Consultation</h3><p>Service card.</p></div>
+      <div class="card card--surface"><h3 class="card__title">Surface card</h3><p>Highlighted card.</p></div>
+      <div class="card card--stat"><p class="card__number">9/15</p><p class="card__label">Appointments today</p></div>
     </div>
   </section>
 
-  <section><h2>Form</h2>
-    <form class="form" action="#" method="post">
+  <section class="stack" id="sec-forms" aria-labelledby="forms-title">
+    <h2 id="forms-title">Forms</h2>
+    <p>One column, labels above fields. Required fields are marked with an asterisk and every error is written in plain language.</p>
+    <form class="form" action="#" method="post" novalidate>
       <div class="form-group">
         <label class="form-group__label" for="pet">Pet name <span class="form-group__required" aria-hidden="true">*</span></label>
         <input class="form-input" id="pet" type="text" required>
       </div>
+
       <div class="form-group">
-        <label class="form-group__label" for="mobile">Mobile number</label>
-        <input class="form-input form-input--error" id="mobile" type="tel" aria-describedby="mobile-err">
+        <label class="form-group__label" for="mobile">Mobile number <span class="form-group__required" aria-hidden="true">*</span></label>
+        <input class="form-input form-input--error" id="mobile" type="tel" aria-invalid="true" aria-describedby="mobile-err" required>
         <p class="form-group__error" id="mobile-err">Enter a mobile number with 11 digits.</p>
       </div>
+
       <div class="form-group">
         <label class="form-group__label" for="species">Species</label>
         <select class="form-select" id="species"><option>Dog</option><option>Cat</option></select>
       </div>
-      <button class="btn btn--primary" type="button">Register pet</button>
+
+      <div class="form-group">
+        <label class="form-group__label" for="notes">Notes</label>
+        <textarea class="form-textarea" id="notes"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-group__label" for="appt-date">Appointment date</label>
+        <input class="form-input" id="appt-date" type="date">
+      </div>
+
+      <div class="form-group">
+        <label class="form-group__label" for="appt-time">Time slot</label>
+        <input class="form-input" id="appt-time" type="time">
+      </div>
+
+      <fieldset>
+        <legend class="form-group__label">Gender</legend>
+        <div class="form-check"><input type="radio" id="gender-male" name="gender" value="male"><label for="gender-male">Male</label></div>
+        <div class="form-check"><input type="radio" id="gender-female" name="gender" value="female"><label for="gender-female">Female</label></div>
+      </fieldset>
+
+      <div class="form-group">
+        <div class="form-check"><input type="checkbox" id="reminders" name="reminders"><label for="reminders">Send me appointment reminders</label></div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-check">
+          <input type="checkbox" id="consent" name="consent" required>
+          <label for="consent">I agree to the collection and use of my information under the Data Privacy Act of 2012 (RA 10173). <span class="form-group__required" aria-hidden="true">*</span></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-group__label" for="upload">Upload documents</label>
+        <div class="dropzone">
+          <p>Drag files here or choose files (lab results, X-ray, signed consent forms).</p>
+          <input type="file" id="upload" name="upload" multiple aria-describedby="upload-status">
+        </div>
+        <progress class="progress" max="100" value="60" aria-label="Upload progress for blood-test.pdf">60%</progress>
+        <p class="form-group__help" id="upload-status">blood-test.pdf: 60% uploaded</p>
+      </div>
+
+      <div class="form-actions">
+        <a class="btn btn--link" href="#">Cancel</a>
+        <button class="btn btn--primary" type="button">Register pet</button>
+      </div>
     </form>
+
+    <h3>Choose an option</h3>
+    <div class="choice-list">
+      <label class="choice"><input type="radio" name="service-sample" value="vaccination" checked><span><span class="choice__title">Vaccination</span><span class="choice__meta">Core and booster shots</span></span></label>
+      <label class="choice"><input type="radio" name="service-sample" value="consultation"><span><span class="choice__title">Consultation</span><span class="choice__meta">Check-up and advice</span></span></label>
+    </div>
+
+    <h3>Summary list</h3>
+    <dl class="summary-list">
+      <dt>Pet</dt><dd>Dagul</dd>
+      <dt>Service</dt><dd>Vaccination</dd>
+      <dt>Date</dt><dd>October 9, 2026</dd>
+      <dt>Time</dt><dd>9:00 AM</dd>
+    </dl>
   </section>
 
-  <section><h2>Table</h2>
+  <section class="stack" id="sec-tables" aria-labelledby="tables-title">
+    <h2 id="tables-title">Tables</h2>
+    <p>Wide tables scroll inside their own wrapper, not the whole page.</p>
+
     <div class="table-wrap">
       <table class="table">
+        <caption class="sr-only">Today's queue</caption>
         <thead><tr><th scope="col">Time</th><th scope="col">Pet/Owner</th><th scope="col">Service</th><th scope="col">Status</th></tr></thead>
         <tbody>
           <tr class="table__row--emergency"><td>Walk-in</td><td>Tabby/R. Dela Cruz</td><td>Consultation</td><td><span class="badge badge--emergency">EMERGENCY</span></td></tr>
@@ -76,24 +273,243 @@
         </tbody>
       </table>
     </div>
+
+    <h3>Inventory table</h3>
+    <div class="table-wrap">
+      <table class="table">
+        <caption class="sr-only">Inventory with stock counts</caption>
+        <thead><tr><th scope="col">Item</th><th scope="col">Batch</th><th scope="col" class="table__num">In stock</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Vaccine A</th><td>2107</td><td class="table__num">12</td><td><span class="badge badge--low-stock">Low stock</span></td></tr>
+          <tr><th scope="row">Antibiotic B</th><td>3310</td><td class="table__num">40</td><td><span class="badge badge--expiring">Expiring</span></td></tr>
+          <tr><th scope="row">Syringes 3 mL</th><td>1188</td><td class="table__num">150</td><td><span class="badge badge--done">In stock</span></td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
-  <section><h2>Tabs and steps</h2>
-    <div class="tabs"><a class="tabs__tab" href="#">Overview</a><a class="tabs__tab" href="#">Medical History</a><a class="tabs__tab is-active" href="#" aria-current="page">Vital Sign</a><a class="tabs__tab" href="#">Documents</a><a class="tabs__tab" href="#">Bills</a></div>
-    <ol class="steps"><li class="steps__item">1 Pet</li><li class="steps__item">2 Service</li><li class="steps__item is-current" aria-current="step">3 Date</li><li class="steps__item">4 Confirm</li></ol>
+  <section class="stack" id="sec-tabs" aria-labelledby="tabs-title">
+    <h2 id="tabs-title">Tabs, steps and breadcrumb</h2>
+
+    <h3>Link tabs</h3>
+    <nav class="tabs" aria-label="Patient record sections (sample)">
+      <a class="tabs__tab" href="#">Overview</a>
+      <a class="tabs__tab" href="#">Medical history</a>
+      <a class="tabs__tab" href="#" aria-current="page">Vital signs</a>
+      <a class="tabs__tab" href="#">Documents</a>
+      <a class="tabs__tab" href="#">Bills</a>
+    </nav>
+
+    <h3>ARIA tabs (Login page)</h3>
+    <div class="tabs" role="tablist" aria-label="Account options (sample)">
+      <button type="button" role="tab" id="sample-tab-login" class="tabs__tab is-active" aria-selected="true" aria-controls="sample-panel-login">Log in</button>
+      <button type="button" role="tab" id="sample-tab-register" class="tabs__tab" aria-selected="false" aria-controls="sample-panel-register" tabindex="-1">Create account</button>
+    </div>
+    <div role="tabpanel" id="sample-panel-login" aria-labelledby="sample-tab-login"><p>The log in form goes here.</p></div>
+    <div role="tabpanel" id="sample-panel-register" aria-labelledby="sample-tab-register" hidden><p>The create account form goes here.</p></div>
+
+    <h3>Booking steps</h3>
+    <ol class="steps" aria-label="Booking progress">
+      <li class="steps__item is-done">1 Pet</li>
+      <li class="steps__item is-done">2 Service</li>
+      <li class="steps__item" aria-current="step">3 Date</li>
+      <li class="steps__item">4 Confirm</li>
+    </ol>
+    <p class="steps__mobile">Step 3 of 4</p>
+    <p class="text-small text-muted">On phones, the four steps shrink to the "Step 3 of 4" label.</p>
+
+    <h3>Breadcrumb</h3>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="#">Patient Record</a></li>
+        <li><span aria-current="page">Dagul</span></li>
+      </ol>
+    </nav>
   </section>
 
-  <section><h2>Calendar</h2>
+  <section class="stack" id="sec-calendar" aria-labelledby="calendar-title">
+    <h2 id="calendar-title">Calendar</h2>
     <div class="calendar">
       <h3 class="calendar__title">October 2026</h3>
       <div class="calendar__grid">
-        <span class="calendar__dow">S</span><span class="calendar__dow">M</span><span class="calendar__dow">T</span><span class="calendar__dow">W</span><span class="calendar__dow">T</span><span class="calendar__dow">F</span><span class="calendar__dow">S</span>
-        <a class="calendar__day" href="#">1</a><a class="calendar__day" href="#">2</a><a class="calendar__day" href="#">3</a><a class="calendar__day" href="#">4</a>
-        <span class="calendar__day is-full" aria-label="5, full">5</span>
-        <a class="calendar__day is-selected" href="#" aria-current="date">9</a>
-        <a class="calendar__day" href="#">10</a>
+        <span class="calendar__dow"><span aria-hidden="true">S</span><span class="sr-only">Sunday</span></span>
+        <span class="calendar__dow"><span aria-hidden="true">M</span><span class="sr-only">Monday</span></span>
+        <span class="calendar__dow"><span aria-hidden="true">T</span><span class="sr-only">Tuesday</span></span>
+        <span class="calendar__dow"><span aria-hidden="true">W</span><span class="sr-only">Wednesday</span></span>
+        <span class="calendar__dow"><span aria-hidden="true">T</span><span class="sr-only">Thursday</span></span>
+        <span class="calendar__dow"><span aria-hidden="true">F</span><span class="sr-only">Friday</span></span>
+        <span class="calendar__dow"><span aria-hidden="true">S</span><span class="sr-only">Saturday</span></span>
+
+        <span></span><span></span><span></span><span></span>
+        <button type="button" class="calendar__day"><span class="calendar__num">1</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">2</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">3</span></button>
+
+        <button type="button" class="calendar__day"><span class="calendar__num">4</span></button>
+        <button type="button" class="calendar__day is-full" aria-disabled="true"><span class="calendar__num">5</span><span class="calendar__flag">Full</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">6</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">7</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">8</span></button>
+        <button type="button" class="calendar__day is-selected" aria-pressed="true"><span class="calendar__num">9</span><span class="sr-only">Selected</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">10</span></button>
+
+        <button type="button" class="calendar__day"><span class="calendar__num">11</span></button>
+        <button type="button" class="calendar__day is-full" aria-disabled="true"><span class="calendar__num">12</span><span class="calendar__flag">Full</span></button>
+        <button type="button" class="calendar__day is-full" aria-disabled="true"><span class="calendar__num">13</span><span class="calendar__flag">Full</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">14</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">15</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">16</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">17</span></button>
+
+        <button type="button" class="calendar__day"><span class="calendar__num">18</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">19</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">20</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">21</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">22</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">23</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">24</span></button>
+
+        <button type="button" class="calendar__day"><span class="calendar__num">25</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">26</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">27</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">28</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">29</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">30</span></button>
+        <button type="button" class="calendar__day"><span class="calendar__num">31</span></button>
       </div>
-      <p class="text-small text-muted">Full days (15-patient limit) are crossed out and disabled. Emergency? Please call the clinic.</p>
+
+      <ul class="calendar__legend">
+        <li><span class="calendar__swatch" aria-hidden="true"></span> Available</li>
+        <li><span class="calendar__swatch calendar__swatch--selected" aria-hidden="true"></span> Selected</li>
+        <li><span class="calendar__swatch calendar__swatch--full" aria-hidden="true"></span> Full</li>
+      </ul>
+      <p class="calendar__caption">Full days (15-patient limit) are crossed out and disabled. Emergency? Please call the clinic.</p>
+    </div>
+  </section>
+
+  <section class="stack" id="sec-nav" aria-labelledby="nav-title">
+    <h2 id="nav-title">Navigation and footer</h2>
+
+    <h3>Public navigation</h3>
+    <div class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="index.html"><span class="brand__logo" aria-hidden="true"></span>PawSync</a>
+        <nav aria-label="Main (sample)">
+          <ul class="nav__list">
+            <li><a class="nav__link is-active" href="index.html" aria-current="page">Home</a></li>
+            <li><a class="nav__link" href="about.html">About</a></li>
+            <li><a class="nav__link" href="services.html">Services</a></li>
+            <li><a class="nav__link" href="contact.html">Contact</a></li>
+            <li><a class="nav__link" href="emergency-care.html">Emergency Care</a></li>
+            <li><a class="btn btn--secondary btn--small" href="login.html">Login</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <h3>Portal navigation with greeting</h3>
+    <div class="portal-header">
+      <div class="container portal-header__inner">
+        <a class="brand" href="portal-dashboard.html"><span class="brand__logo" aria-hidden="true"></span>PawSync</a>
+        <nav aria-label="Client portal (sample)">
+          <ul class="portal-nav__list">
+            <li><a class="nav__link" href="portal-dashboard.html">Dashboard</a></li>
+            <li><a class="nav__link" href="portal-my-pets.html">My Pets</a></li>
+            <li><a class="nav__link is-active" href="portal-book-appointment.html" aria-current="page">Book</a></li>
+            <li><a class="nav__link" href="portal-my-appointments.html">Appointments</a></li>
+          </ul>
+        </nav>
+        <p class="portal-header__greeting">Hi, Trishia!</p>
+      </div>
+    </div>
+
+    <h3>Staff sidebar</h3>
+    <div class="sidebar">
+      <a class="sidebar__brand" href="staff.html">PawSync</a>
+      <nav aria-label="Staff (sample)">
+        <ul class="sidebar__list">
+          <li><a class="sidebar__link is-active" href="staff.html" aria-current="page">Dashboard</a></li>
+          <li><a class="sidebar__link" href="staff-patient-records.html">Patient Records</a></li>
+          <li><a class="sidebar__link" href="staff-clients.html">Clients</a></li>
+          <li><a class="sidebar__link" href="staff-appointments.html">Appointments</a></li>
+          <li><a class="sidebar__link" href="staff-confined-pets.html">Confined pets</a></li>
+          <li><a class="sidebar__link" href="staff-inventory.html">Inventory</a></li>
+          <li><a class="sidebar__link" href="staff-billing.html">Billing &amp; Sales</a></li>
+          <li><a class="sidebar__link" href="staff-reports.html">Reports</a></li>
+          <li><a class="sidebar__link" href="staff-users.html">Users &amp; Staff</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <h3>Dark footer</h3>
+    <div class="site-footer">
+      <div class="container site-footer__inner">
+        <div><h4 class="site-footer__title">[Clinic Name]</h4><p>[Clinic Address]</p></div>
+        <nav aria-label="Quick links (sample)"><h4 class="site-footer__title">Quick links</h4>
+          <ul><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li></ul>
+        </nav>
+        <div><h4 class="site-footer__title">Follow us</h4>
+          <ul><li><a href="#">Facebook</a></li><li><a href="#">Instagram</a></li><li><a href="#">Google reviews</a></li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack" id="sec-pagination" aria-labelledby="pagination-title">
+    <h2 id="pagination-title">Pagination</h2>
+    <nav class="pagination" aria-label="Inventory pages (sample)">
+      <ul class="pagination__list">
+        <li><a class="pagination__link" href="#">Previous</a></li>
+        <li><a class="pagination__link" href="#">1</a></li>
+        <li><a class="pagination__link is-current" href="#" aria-current="page">2</a></li>
+        <li><a class="pagination__link" href="#">3</a></li>
+        <li><a class="pagination__link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </section>
+
+  <section class="stack" id="sec-a11y" aria-labelledby="a11y-title">
+    <h2 id="a11y-title">Accessibility checklist</h2>
+    <p>Check every page against this list before it is pushed.</p>
+    <ul>
+      <li><strong>Focus outline:</strong> Every link, button and field shows a visible outline when you press Tab.</li>
+      <li><strong>Skip link:</strong> A "Skip to main content" link is the first thing on the page.</li>
+      <li><strong>Labels:</strong> Every field has a visible label, not just a placeholder.</li>
+      <li><strong>Tap targets:</strong> Buttons and links are at least 44 × 44 px.</li>
+      <li><strong>Alt text:</strong> Every meaningful image has alt text. Decorative images have an empty alt.</li>
+      <li><strong>One H1:</strong> Each page has exactly one &lt;h1&gt;.</li>
+      <li><strong>No color-only status:</strong> Every status has a text label, such as EMERGENCY or Full.</li>
+      <li><strong>Contrast:</strong> Text has at least 4.5:1 contrast.</li>
+    </ul>
+  </section>
+
+  <section class="stack" id="sec-dodont" aria-labelledby="dodont-title">
+    <h2 id="dodont-title">Do and don't</h2>
+    <div class="grid grid--2">
+      <div class="card">
+        <h3 class="card__title"><span class="badge badge--done">Do</span> Keep it simple</h3>
+        <p>
+          <button type="button" class="btn btn--primary">Register pet</button>
+          <button type="button" class="btn btn--link">Cancel</button>
+        </p>
+        <ul>
+          <li>Use one coral button per screen.</li>
+          <li>Use spacing in multiples of 8 px.</li>
+          <li>Write button text in sentence case.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="card__title"><span class="badge badge--emergency">Don't</span> Crowd the screen</h3>
+        <p>
+          <button type="button" class="btn btn--primary">Register Pet</button>
+          <button type="button" class="btn btn--primary">Book Now</button>
+        </p>
+        <ul>
+          <li>Don't use two coral buttons on one screen.</li>
+          <li>Don't use odd spacing, such as 5 px or 13 px.</li>
+          <li>Don't write button text in Title Case or ALL CAPS.</li>
+        </ul>
+      </div>
     </div>
   </section>
 </main>
