@@ -98,6 +98,10 @@
   color: var(--color-muted); 
   margin: 0; 
 }
+.service-card__icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-2);
+}
 
 /* ---------- Forms ---------- */
 .form { 
