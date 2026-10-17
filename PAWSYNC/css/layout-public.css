@@ -71,7 +71,7 @@
   margin-top: var(--space-3); 
 }
 .hero__photo { 
-  background: #C9D3D9; 
+  background: var(--color-border); 
   border-radius: var(--radius); 
   min-height: 220px; display: flex; 
   align-items: center; justify-content: center; 
