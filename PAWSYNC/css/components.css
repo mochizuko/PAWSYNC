@@ -651,3 +651,38 @@ a,
 .table tbody tr:hover:not(.table__row--emergency):not(.table__row--priority) {
   background: var(--color-bg);
 }
+/* ---------- Helpers used by the public pages ---------- */
+.text-narrow { 
+  max-width: 60ch; 
+  margin-inline: auto; 
+}
+.mb-4 { 
+  margin-bottom: var(--space-4); 
+}
+.list-plain { 
+  list-style: none; padding: 0; 
+}
+.list-plain > li + li { 
+  margin-top: var(--space-1); 
+}
+.link-emergency { 
+  color: var(--color-error); 
+  font-weight: 700; 
+}
+.link-emergency:hover { 
+  color: var(--color-error); 
+}
+.btn--block { 
+  width: 100%; 
+}
+.btn--start { 
+  justify-content: flex-start; 
+}
+.map-frame {
+  width: 100%;
+  height: 220px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: var(--border);
+}
+.map-frame iframe { border: 0; }
