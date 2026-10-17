@@ -17,6 +17,9 @@
   --color-error-bg: #F8DEDB;
   --color-warning-bg: #FBE9C6;
   --color-success-bg: #DCEFE3;
+  --color-neutral-bg: #E4E7EA;
+  --color-border-strong: #7C8A96;
+  --color-surface-border: #A9D2DA;
 
   /* Spacing: multiples of 8px */
   --space-1: 0.5rem;
@@ -134,7 +137,7 @@ small, .text-small {
 
 /* Screen-reader-only text */
 .sr-only, 
-visually-hidden {
+.visually-hidden {
   position: absolute; 
   width: 1px; 
   height: 1px; 
