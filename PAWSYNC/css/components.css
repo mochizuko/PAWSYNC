@@ -248,7 +248,7 @@ fieldset {
   background: var(--color-surface); 
   font-weight: 600; 
 }
-.table__num { 
+.table .table__num { 
   text-align: right; 
 }
 .table__row--emergency { 
@@ -257,7 +257,31 @@ fieldset {
 .table__row--priority { 
   background: var(--color-warning-bg); 
 }
-
+/* ---------- Pagination ---------- */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+}
+.pagination__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--space-1);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.pagination__link:hover { background: var(--color-surface); }
+.pagination__link[aria-current="page"] {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
 /* ---------- Badges (always include the word, never color alone) ---------- */
 .badge {
   display: inline-block; 
