@@ -36,3 +36,25 @@
         grid-template-columns: 1fr 1fr; 
         align-items: start; } 
 }
+/* Booking form */
+.booking-form {
+  max-width: 56rem;
+}
+.step-panel {
+  margin-bottom: var(--space-3);
+}
+.booking-date {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+.booking-date__fields,
+.booking-date__calendar {
+  min-width: 0;
+}
+@media (max-width: 760px) {
+  .booking-date {
+    grid-template-columns: 1fr;
+  }
+}
