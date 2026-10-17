@@ -21,7 +21,9 @@
     <p><a class="btn btn--primary" href="#">Book a Visit</a>
        <a class="btn btn--secondary" href="#">Register Your Pet</a>
        <a class="btn btn--outline" href="#">View All Appointments</a>
-       <a class="btn btn--link" href="#">Cancel</a></p>
+       <a class="btn btn--link" href="#">Cancel</a> 
+       <a class="btn btn--outline btn--small" href="#">Small</a> 
+       <span class="btn btn--primary btn--disabled" aria-disabled="true">Disabled</span></p>
   </section>
 
   <section><h2>Status badges</h2>
@@ -43,7 +45,7 @@
 
   <section><h2>Cards</h2>
     <div class="grid grid--3">
-      <div class="card card--center"><h3 class="card__title">Consultation</h3><p>Card text.</p></div>
+      <div class="card card--center card--hover"><h3 class="card__title">Consultation</h3><p>Hover to see the lift effect.</p></div>
       <div class="card card--surface"><h3 class="card__title">Surface card</h3><p>Highlighted panel.</p></div>
       <div class="card card--stat"><p class="card__number">9/15</p><p class="card__label">Appointments Today</p></div>
     </div>
@@ -71,11 +73,11 @@
   <section><h2>Table</h2>
     <div class="table-wrap">
       <table class="table">
-        <thead><tr><th scope="col">Time</th><th scope="col">Pet/Owner</th><th scope="col">Service</th><th scope="col">Status</th></tr></thead>
+        <thead><tr><th scope="col">Time</th><th scope="col">Pet/Owner</th><th scope="col">Service</th><th scope="col" class="table__num">Fee (PHP)</th><th scope="col">Status</th></tr></thead>
         <tbody>
-          <tr class="table__row--emergency"><td>Walk-in</td><td>Tabby/R. Dela Cruz</td><td>Consultation</td><td><span class="badge badge--emergency">EMERGENCY</span></td></tr>
-          <tr class="table__row--priority"><td>9:00</td><td>Dagul/T. Pido</td><td>Vaccination</td><td><span class="badge badge--priority">PRIORITY</span></td></tr>
-          <tr><td>9:30</td><td>Luna/J. Santos</td><td>Wellness</td><td><span class="badge badge--reserved">Reserved</span></td></tr>
+          <tr class="table__row--emergency"><td>Walk-in</td><td>Tabby/R. Dela Cruz</td><td>Consultation</td><td class="table__num">450.00</td><td><span class="badge badge--emergency">EMERGENCY</span></td></tr>
+          <tr class="table__row--priority"><td>9:00</td><td>Dagul/T. Pido</td><td>Vaccination</td><td class="table__num">850.00</td><td><span class="badge badge--priority">PRIORITY</span></td></tr>
+          <tr><td>9:30</td><td>Luna/J. Santos</td><td>Wellness</td><td class="table__num">1,250.00</td><td><span class="badge badge--reserved">Reserved</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -99,6 +101,43 @@
       <p class="text-small text-muted">Full days (15-patient limit) are crossed out and disabled. Emergency? Please call the clinic.</p>
     </div>
   </section>
+
+    <section><h2>Notice banner</h2>
+    <div class="notice-banner" role="status">Example notice: the clinic will be closed on a date to be confirmed. <a href="#">See details</a></div>
+  </section>
+
+  <section><h2>Choice list</h2>
+    <fieldset>
+      <legend class="form-group__label">What does your pet need?</legend>
+      <div class="choice-list">
+        <label class="choice">
+          <input type="radio" name="demo-service" value="Vaccination">
+          <span><span class="choice__title">Vaccination</span><span class="choice__meta">Core and booster shots</span></span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="demo-service" value="Consultation">
+          <span><span class="choice__title">Consultation</span><span class="choice__meta">Check-up and medical advice</span></span>
+        </label>
+      </div>
+    </fieldset>
+  </section>
+
+  <section><h2>Modal</h2>
+    <p><button class="btn btn--secondary" type="button" id="open-modal">Open example modal</button></p>
+    <dialog class="modal" id="demo-modal" aria-labelledby="demo-modal-title">
+      <h3 class="modal__title" id="demo-modal-title">Cancel this appointment?</h3>
+      <p>This frees the time slot for other owners.</p>
+      <form method="dialog" class="modal__actions">
+        <button class="btn btn--outline" value="keep">Keep appointment</button>
+        <button class="btn btn--primary" value="cancel">Cancel appointment</button>
+      </form>
+    </dialog>
+  </section>
 </main>
+  <script>
+    document.getElementById('open-modal').addEventListener('click', function () {
+      document.getElementById('demo-modal').showModal();
+    });
+</script>
 </body>
 </html>
