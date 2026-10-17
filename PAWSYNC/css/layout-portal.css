@@ -27,15 +27,6 @@
 .portal-main { 
     padding-block: var(--space-4); 
 }
-.portal-layout { 
-    display: grid; 
-    gap: var(--space-4); 
-}
-@media (min-width: 1024px) { 
-    .portal-layout--split { 
-        grid-template-columns: 1fr 1fr; 
-        align-items: start; } 
-}
 /* Booking form */
 .booking-form {
   max-width: 56rem;

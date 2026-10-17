@@ -10,7 +10,7 @@
   padding: var(--space-1) var(--space-3);
   font-family: var(--font-body); font-size: 1rem; font-weight: 600;
   border: 2px solid transparent; border-radius: var(--radius);
-  text-decoration: none; cursor: pointer; transition: background 0.15s;
+  text-decoration: none; cursor: pointer;
 }
 /* ONE primary (coral) per screen. Navy text keeps 4.5:1 contrast. */
 .btn--primary { 
@@ -248,7 +248,7 @@ fieldset {
   background: var(--color-surface); 
   font-weight: 600; 
 }
-.table__num { 
+.table .table__num { 
   text-align: right; 
 }
 .table__row--emergency { 
@@ -257,7 +257,31 @@ fieldset {
 .table__row--priority { 
   background: var(--color-warning-bg); 
 }
-
+/* ---------- Pagination ---------- */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+}
+.pagination__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--space-1);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.pagination__link:hover { background: var(--color-surface); }
+.pagination__link[aria-current="page"] {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
 /* ---------- Badges (always include the word, never color alone) ---------- */
 .badge {
   display: inline-block; 
@@ -565,4 +589,65 @@ fieldset {
 .breadcrumb a:focus-visible {
   outline: 3px solid var(--color-text);
   outline-offset: 2px;
+}
+/* ---------- Hover and transition effects ---------- */
+
+/* Smooth color changes on links, nav, tabs, choices and calendar days */
+a,
+.nav__link,
+.sidebar__link,
+.tabs__tab,
+.choice,
+.calendar__day {
+  transition: color 0.2s ease, background-color 0.2s ease,
+              border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Buttons */
+.btn {
+  transition: background-color 0.2s ease, color 0.2s ease,
+              border-color 0.2s ease, box-shadow 0.2s ease,
+              transform 0.2s ease;
+}
+
+/* Cards that opt in with .card--hover */
+.card--hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* Lift effects only on devices with a real hover (not touch screens) */
+@media (hover: hover) {
+  .btn:hover:not([disabled]):not(.btn--disabled):not(.btn--link) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+  .card--hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+  }
+}
+.btn:active:not([disabled]):not(.btn--disabled):not(.btn--link) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Form fields */
+.form-input,
+.form-select,
+.form-textarea {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-input:hover:not(.form-input--error),
+.form-select:hover,
+.form-textarea:hover {
+  border-color: var(--color-primary);
+}
+
+/* Table rows (emergency and priority rows keep their colors) */
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+.table tbody tr:hover:not(.table__row--emergency):not(.table__row--priority) {
+  background: var(--color-bg);
 }
