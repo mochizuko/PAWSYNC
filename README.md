@@ -9,4 +9,3 @@
 ### MARALIT, TRISHIA ANNE
 ### DELA CRUZ, GRACE
 
-Yallah
