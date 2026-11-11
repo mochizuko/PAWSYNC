@@ -8,11 +8,9 @@
   padding: var(--space-2); 
 }
 .sidebar__brand { 
-  display: block; 
-  color: var(--color-white); 
-  font-family: var(--font-heading); 
-  font-weight: 600; 
-  font-size: 1.25rem; 
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
   text-decoration: none; 
   margin-bottom: var(--space-2); 
 }
