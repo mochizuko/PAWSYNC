@@ -36,6 +36,53 @@
         <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Billing &amp; Sales</p>
         <h1 class="page-title">Billing &amp; Sales</h1>
         <p class="text-muted">Track invoices and payment status. Amounts are shown in Philippine pesos (PHP). Entries are saved locally in this browser.</p>
+        <section class="card" id="bill-builder">
+          <h2 class="card__title">Create a bill</h2>
+          <p>Choose a client, service, and optional inventory item. Saving a bill records the selected demo payment method and deducts the item quantity from stock.</p>
+          <form class="form" id="bill-builder-form">
+            <div class="grid grid--2">
+              <div class="form-group">
+                <label class="form-group__label" for="bill-client">Client account</label>
+                <select class="form-select" id="bill-client" required><option value="">Select a client</option></select>
+              </div>
+              <div class="form-group">
+                <label class="form-group__label" for="bill-pet">Pet name</label>
+                <input class="form-input" id="bill-pet" required>
+              </div>
+              <div class="form-group">
+                <label class="form-group__label" for="bill-service">Service</label>
+                <select class="form-select" id="bill-service" required>
+                  <option value="Consultation" data-price="500">Consultation - PHP 500.00</option>
+                  <option value="Pet wellness" data-price="700">Pet wellness - PHP 700.00</option>
+                  <option value="Vaccination" data-price="850">Vaccination - PHP 850.00</option>
+                  <option value="Surgery" data-price="3500">Surgery - PHP 3,500.00</option>
+                  <option value="Confinement care" data-price="1200">Confinement care - PHP 1,200.00</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-group__label" for="bill-item">Inventory item (optional)</label>
+                <select class="form-select" id="bill-item"><option value="">No inventory item</option></select>
+              </div>
+              <div class="form-group">
+                <label class="form-group__label" for="bill-quantity">Item quantity</label>
+                <input class="form-input" id="bill-quantity" type="number" min="1" step="1" value="1" required>
+              </div>
+              <div class="form-group">
+                <label class="form-group__label" for="bill-payment">Demo payment method</label>
+                <select class="form-select" id="bill-payment" required>
+                  <option value="">Select a method</option>
+                  <option>Cash</option><option>Bank transfer</option><option>E-wallet</option><option>Card</option>
+                </select>
+              </div>
+            </div>
+            <p id="bill-stock-note" class="form-group__help">Select an item to see its current stock and price.</p>
+            <p class="card__title" id="bill-total" aria-live="polite">Total: PHP 500.00</p>
+            <div class="form-actions">
+              <button type="submit" class="btn btn--primary">Save bill</button>
+              <button type="reset" class="btn btn--outline">Clear bill</button>
+            </div>
+          </form>
+        </section>
         <details class="card">
           <summary><strong>Record an invoice</strong></summary>
           <fieldset class="form stack staff-entry">

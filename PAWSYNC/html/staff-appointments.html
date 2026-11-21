@@ -46,6 +46,8 @@
             <div class="form-group"><label class="form-group__label" for="appointment-client">Client</label><input class="form-input" id="appointment-client" name="Client" required></div>
             <div class="form-group"><label class="form-group__label" for="appointment-service">Service</label><input class="form-input" id="appointment-service" name="Service" required></div>
             <div class="form-group"><label class="form-group__label" for="appointment-status">Status</label><select class="form-select" id="appointment-status" name="Status" required><option>Confirmed</option><option>Waiting</option><option>Completed</option><option>Cancelled</option></select></div>
+            <div class="form-group"><label class="form-group__label" for="appointment-priority">Case priority</label><select class="form-select" id="appointment-priority" data-meta-only><option>Normal</option><option>Priority</option><option>Emergency</option></select></div>
+            <div class="form-group"><label class="form-group__label" for="appointment-source">Booking type</label><select class="form-select" id="appointment-source" data-meta-only><option>Scheduled</option><option>Walk-in</option></select></div>
             <p class="form-group__help">Saved locally in this browser.</p>
           </fieldset>
         </details>
@@ -53,7 +55,7 @@
           <h2 id="schedule-heading">Appointment schedule</h2>
           <div class="table-wrap">
             <table class="table">
-              <thead><tr><th scope="col">Appointment ID</th><th scope="col">Date &amp; time</th><th scope="col">Patient</th><th scope="col">Client</th><th scope="col">Service</th><th scope="col">Status</th></tr></thead>
+              <thead><tr><th scope="col">Appointment ID</th><th scope="col">Date &amp; time</th><th scope="col">Patient</th><th scope="col">Client</th><th scope="col">Service</th><th scope="col">Status</th><th scope="col">Priority</th><th scope="col">Booking type</th></tr></thead>
               <tbody id="appointment-list">
                 <tr><td>A-5082</td><td>2026-10-13 09:00</td><td>Milo</td><td>Alex Santos</td><td>Wellness exam</td><td>Confirmed</td></tr>
                 <tr><td>A-5083</td><td>2026-10-13 10:30</td><td>Luna</td><td>Jamie Reyes</td><td>Vaccination</td><td>Waiting</td></tr>
@@ -61,6 +63,25 @@
               </tbody>
             </table>
           </div>
+        </section>
+        <section class="card ps-section" aria-labelledby="closure-heading">
+          <h2 id="closure-heading">Clinic closure notice</h2>
+          <p class="text-muted">Saved locally and displayed on the public homepage and client dashboard. Bookings for that date will be disabled.</p>
+          <form class="form" id="closure-form">
+            <div class="form-group">
+              <label class="form-group__label" for="closure-date">Closure date</label>
+              <input class="form-input" id="closure-date" type="date" required>
+            </div>
+            <div class="form-group">
+              <label class="form-group__label" for="closure-message">Notice</label>
+              <input class="form-input" id="closure-message" maxlength="160" required placeholder="For example, the clinic will be closed for a public holiday.">
+            </div>
+            <p id="closure-current" role="status"></p>
+            <div class="form-actions">
+              <button type="submit" class="btn btn--primary">Post closure notice</button>
+              <button type="button" class="btn btn--outline" id="clear-closure">Remove notice</button>
+            </div>
+          </form>
         </section>
       </main>
     </div>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Bills &amp; Files | PawSync</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout-portal.css">
+  <script src="../JS/pawsync.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="portal-header">
+    <div class="container portal-header__inner">
+      <a class="brand" href="portal-dashboard.html" aria-label="PawSync home"><img class="brand__mark" src="../Assets/pawsync-mark.png" alt=""><img class="brand__wordmark" src="../Assets/pawsync-text.png" alt=""></a>
+      <nav aria-label="Client portal">
+        <ul class="portal-nav__list">
+          <li><a class="nav__link" href="portal-dashboard.html">Dashboard</a></li>
+          <li><a class="nav__link" href="portal-my-pets.html">My Pets</a></li>
+          <li><a class="nav__link" href="portal-book-appointment.html">Book</a></li>
+          <li><a class="nav__link" href="portal-my-appointments.html">Appointments</a></li>
+          <li><a class="nav__link is-active" href="portal-my-bills.html" aria-current="page">My Bills &amp; Files</a></li>
+        </ul>
+      </nav>
+      <p class="portal-header__greeting">Hi, Pet Owner!</p>
+    </div>
+  </header>
+  <main id="main" class="container portal-main">
+    <h1 class="page-title">My Bills &amp; Files</h1>
+    <p>Your bills and sample clinic documents are shown here. This prototype keeps bill data in this browser only.</p>
+    <section id="owner-bills" class="stack" aria-labelledby="bills-heading">
+      <h2 id="bills-heading">Bills</h2>
+    </section>
+    <section id="owner-files" class="stack" aria-labelledby="files-heading">
+      <h2 id="files-heading">Shared files</h2>
+      <div class="grid grid--2">
+        <article class="card">
+          <h3 class="card__title">Vaccination consent form</h3>
+          <p>Example shared document for Dagul.</p>
+          <button type="button" class="btn btn--outline" data-sample-file="Vaccination consent form" data-pet="Dagul">Preview sample</button>
+        </article>
+        <article class="card">
+          <h3 class="card__title">Laboratory result</h3>
+          <p>Example shared document for Dagul.</p>
+          <button type="button" class="btn btn--outline" data-sample-file="Laboratory result" data-pet="Dagul">Preview sample</button>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

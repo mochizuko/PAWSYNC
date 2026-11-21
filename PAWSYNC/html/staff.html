@@ -39,25 +39,42 @@
 
         <section class="grid grid--3" aria-label="Clinic overview">
           <article class="card card--stat">
-            <p class="card__number">8</p>
+            <p class="card__number" id="metric-appointments">0</p>
             <p class="card__label">Appointments today</p>
           </article>
           <article class="card card--stat">
-            <p class="card__number">3</p>
+            <p class="card__number" id="metric-confined">0</p>
             <p class="card__label">Pets in care</p>
           </article>
           <article class="card card--stat">
-            <p class="card__number">5</p>
+            <p class="card__number" id="metric-low-stock">0</p>
             <p class="card__label">Items to reorder</p>
+          </article>
+          <article class="card card--stat">
+            <p class="card__number" id="metric-urgent">0</p>
+            <p class="card__label">Emergency / priority cases</p>
+          </article>
+          <article class="card card--stat">
+            <p class="card__number" id="metric-vitals">0</p>
+            <p class="card__label">Vitals due today</p>
+          </article>
+          <article class="card card--stat">
+            <p class="card__number" id="metric-sales">PHP 0.00</p>
+            <p class="card__label">Paid sales today</p>
+          </article>
+          <article class="card card--stat">
+            <p class="card__number" id="metric-expiring">0</p>
+            <p class="card__label">Items expiring in 30 days</p>
           </article>
         </section>
 
+        <section id="dashboard-notices" class="stack" aria-label="Clinic alerts"></section>
         <section class="stack" aria-labelledby="appointments-heading">
           <h2 id="appointments-heading">Today's appointments</h2>
           <div class="table-wrap">
             <table class="table">
               <thead>
-                <tr><th scope="col">Time</th><th scope="col">Patient</th><th scope="col">Client</th><th scope="col">Service</th><th scope="col">Status</th></tr>
+                <tr><th scope="col">Time</th><th scope="col">Patient</th><th scope="col">Client</th><th scope="col">Service</th><th scope="col">Status</th><th scope="col">Case</th><th scope="col">Booking type</th></tr>
               </thead>
               <tbody id="today-appointments">
                 <tr><td>9:00 AM</td><td>Milo</td><td>Alex Santos</td><td>Wellness exam</td><td><span class="badge badge--reserved">Confirmed</span></td></tr>
