@@ -889,3 +889,47 @@ details.card[open] > :not(summary) { animation: ps-rise 0.4s var(--ease) both; }
 /* Scroll reveal (added by pawsync.js for boxes below the fold) */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
 .reveal.is-in { opacity: 1; transform: none; }
+/* ---------- Expandable patient rows (Patient Records & Vital Signs) ---------- */
+.row-expandable { cursor: pointer; }
+.row-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.row-toggle:hover { color: var(--color-primary-dark); }
+.row-toggle:focus-visible { outline: 3px solid var(--color-text); outline-offset: 2px; border-radius: var(--radius-sm); }
+.row-toggle__chevron {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  transition: transform 0.2s var(--ease);
+}
+.row-expandable.is-open .row-toggle__chevron { transform: rotate(90deg); }
+.row-expandable.is-open > td { border-bottom-color: transparent; }
+.table tbody tr.row-detail,
+.table tbody tr.row-detail:hover { background: var(--color-surface); }
+.row-detail > td { padding: var(--space-2) var(--space-3) var(--space-3); }
+.vitals-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-1);
+}
+.vitals-panel__title { margin: 0; font-size: 1.0625rem; }
+.vitals-table { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-sm); }
+.vitals-table.table tbody tr,
+.vitals-table.table tbody tr:hover { background: var(--color-white); }
+.vitals-table .form-input { min-width: 96px; }
+.vitals-edit-msg td { padding-top: 0; }
+.vitals-table .table__num { text-align: left; }
+.vitals-table td:first-child { white-space: nowrap; }

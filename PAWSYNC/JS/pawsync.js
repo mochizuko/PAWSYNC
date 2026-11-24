@@ -144,7 +144,10 @@
           color: 'White',
           people: [{ name: 'Trishia Maralit', rel: 'Owner', contact: '09123456789' }]
         }
-      }
+      },
+      { c: ['P-1050', 'Max', 'Taylor Lim', 'Dog', rel(-1)], m: {} },
+      { c: ['P-1051', 'Oreo', 'Casey Tan', 'Cat', TODAY], m: {} },
+      { c: ['P-1052', 'Ginger', 'Robin Lee', 'Dog', TODAY], m: {} }
     ],
     'client-list': [
       {
@@ -1334,6 +1337,87 @@
     );
   }
 
+  function seedVitals() {
+    if (load('vitals', null) !== null) return;
+    function at(date, time, t, rr, hr) {
+      return {
+        wardId: 'W-014',
+        pet: 'Max',
+        date: date,
+        recordedAt: new Date(date + 'T' + time + ':00').toISOString(),
+        temperature: t,
+        respiratoryRate: rr,
+        heartRate: hr
+      };
+    }
+    save('vitals', [
+      at(rel(-1), '08:00', 38.6, 24, 110),
+      at(rel(-1), '14:00', 38.8, 26, 112),
+      at(rel(-1), '20:00', 38.5, 22, 104)
+    ]);
+  }
+  // Wards (confined stays) that belong to a patient: same pet name and same client.
+  function wardsForPatient(p) {
+    var name = String(p.c[1]).toLowerCase(),
+      client = String(p.c[2]).toLowerCase();
+    return rows('confined-pet-list').filter(function (w) {
+      return String(w.c[1]).toLowerCase() === name && String(w.c[2]).toLowerCase() === client;
+    });
+  }
+  function vitalsForPatient(p) {
+    var ids = wardsForPatient(p).map(function (w) { return w.c[0]; });
+    return vitalReadings()
+      .filter(function (v) { return ids.indexOf(v.wardId) !== -1; })
+      .sort(function (a, b) { return b.recordedAt.localeCompare(a.recordedAt); });
+  }
+  function vitalStamp(iso) {
+    var d = new Date(iso);
+    return (
+      shortDate(d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate())) +
+      ', ' + to12(pad(d.getHours()) + ':' + pad(d.getMinutes()))
+    );
+  }
+  function vitalsPanel(p, editKey) {
+    var wards = wardsForPatient(p),
+      list = vitalsForPatient(p),
+      html = '<div class="vitals-panel"><div class="vitals-panel__head"><h3 class="vitals-panel__title">Vital signs: ' +
+        esc(p.c[1]) + '</h3>';
+    if (wards.length) {
+      html += '<button type="button" class="btn btn--secondary btn--small" data-v-add="' + esc(p.c[0]) + '">+ Add vital signs</button>';
+    }
+    html += '</div>';
+    if (!list.length) {
+      html += '<p class="text-muted">' + (wards.length
+        ? 'No vital signs recorded yet for this stay.'
+        : 'This pet is not currently confined. Vital signs are recorded for confined pets only (see Confined Pets).') + '</p></div>';
+      return html;
+    }
+    html += '<table class="table vitals-table"><thead><tr>' +
+      '<th scope="col">Date / Time</th><th scope="col">Temperature (&deg;C)</th>' +
+      '<th scope="col">Resp. rate (breaths/min)</th><th scope="col">Heart rate (beats/min)</th>' +
+      '<th scope="col">Actions</th></tr></thead><tbody>';
+    list.forEach(function (v) {
+      var key = v.wardId + '|' + v.recordedAt,
+        label = esc(p.c[1]) + ' ' + esc(vitalStamp(v.recordedAt));
+      if (key === editKey) {
+        html += '<tr class="vitals-edit" data-vkey="' + esc(key) + '"><td>' + esc(vitalStamp(v.recordedAt)) + '</td>' +
+          '<td><label class="sr-only" for="ve-t">Temperature for ' + label + '</label><input class="form-input" id="ve-t" type="number" min="0.1" step="0.1" value="' + esc(v.temperature) + '"></td>' +
+          '<td><label class="sr-only" for="ve-r">Respiratory rate for ' + label + '</label><input class="form-input" id="ve-r" type="number" min="1" step="1" value="' + esc(v.respiratoryRate) + '"></td>' +
+          '<td><label class="sr-only" for="ve-h">Heart rate for ' + label + '</label><input class="form-input" id="ve-h" type="number" min="1" step="1" value="' + esc(v.heartRate) + '"></td>' +
+          '<td class="ps-actions"><button type="button" class="btn btn--primary btn--small" data-v-save="' + esc(key) + '">Save</button> ' +
+          '<button type="button" class="btn btn--link btn--small" data-v-cancel>Cancel</button></td></tr>' +
+          '<tr class="vitals-edit-msg"><td colspan="5"><p class="form-group__error" id="ve-error" role="alert" hidden></p></td></tr>';
+      } else {
+        html += '<tr><td>' + esc(vitalStamp(v.recordedAt)) + (v.updatedAt ? ' <span class="text-muted">(edited)</span>' : '') + '</td>' +
+          '<td class="table__num">' + esc(v.temperature) + '</td><td class="table__num">' + esc(v.respiratoryRate) +
+          '</td><td class="table__num">' + esc(v.heartRate) + '</td>' +
+          '<td class="ps-actions"><button type="button" class="btn btn--link btn--small" data-v-edit="' + esc(key) +
+          '" aria-label="Edit vital signs for ' + label + '">Edit</button></td></tr>';
+      }
+    });
+    return html + '</tbody></table></div>';
+  }
+
   function staffDashboard() {
     var tb = $('#today-appointments');
     if (!tb) return;
@@ -1426,7 +1510,9 @@
       ths = $$('th', head),
       fields = $$('input,select', fs).filter(function (f) { return !f.hasAttribute('data-meta-only'); }),
       metaFields = $$('[data-meta-only]', fs),
-      editing = -1;
+      editing = -1,
+      openPatients = {},
+      editVitalKey = null;
     var idCol = /id|invoice/i.test(ths[0].textContent);
     if (id === 'confined-pet-list') {
       head.insertAdjacentHTML('beforeend', '<th scope="col">Latest vital signs</th><th scope="col">Vitals due</th>');
@@ -1518,8 +1604,10 @@
                 vitalsDue(r) ? 'Due today' : 'Recorded today'
               );
             }
+            var isPatient = id === 'patient-record-list',
+              open = isPatient && openPatients[r.c[0]];
             return (
-              '<tr>' +
+              '<tr' + (isPatient ? ' class="row-expandable' + (open ? ' is-open' : '') + '" data-patient="' + esc(r.c[0]) + '"' : '') + '>' +
               cells
                 .map(function (v, j) {
                   var th = ths[j],
@@ -1527,6 +1615,12 @@
                   if (id === 'inventory-list' && j === 3 && isLow(r))
                     cell += ' ' + badge('Low stock');
                   if (id === 'confined-pet-list' && j === 6 && vitalsDue(r)) cell = badge('Due today');
+                  if (isPatient && j === 0)
+                    cell = '<button type="button" class="row-toggle" data-toggle="' + esc(r.c[0]) +
+                      '" aria-expanded="' + (open ? 'true' : 'false') + '" aria-controls="vitals-' + esc(r.c[0]) +
+                      '" aria-label="' + (open ? 'Hide' : 'Show') + ' vital signs for ' + esc(r.c[1]) + '">' +
+                      '<svg class="icon row-toggle__chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg>' +
+                      '<span>' + cell + '</span></button>';
                   return (
                     '<td' +
                     (th && th.classList.contains('table__num') ? ' class="table__num"' : '') +
@@ -1544,7 +1638,10 @@
               i +
               '">Edit</button> <button type="button" class="btn btn--link btn--small" data-del="' +
               i +
-              '">Delete</button></td></tr>'
+              '">Delete</button></td></tr>' +
+              (open
+                ? '<tr class="row-detail" id="vitals-' + esc(r.c[0]) + '"><td colspan="' + (ths.length + 1) + '">' + vitalsPanel(r, editVitalKey) + '</td></tr>'
+                : '')
             );
           })
           .join('') ||
@@ -1635,6 +1732,78 @@
     };
     $('[data-clear]', fs).onclick = clearForm;
     search.addEventListener('input', draw);
+    if (id === 'patient-record-list') {
+      // Click a patient row (or its arrow) to show or hide that pet's vital signs.
+      tb.addEventListener('click', function (e) {
+        var toggle = e.target.closest('[data-toggle]'),
+          row = e.target.closest('tr.row-expandable'),
+          vEdit = e.target.closest('[data-v-edit]'),
+          vSave = e.target.closest('[data-v-save]'),
+          vCancel = e.target.closest('[data-v-cancel]'),
+          vAdd = e.target.closest('[data-v-add]');
+        if (vEdit) {
+          editVitalKey = vEdit.dataset.vEdit;
+          draw();
+          var first = $('#ve-t', tb);
+          if (first) first.focus();
+          return;
+        }
+        if (vCancel) {
+          editVitalKey = null;
+          draw();
+          return;
+        }
+        if (vSave) {
+          var key = vSave.dataset.vSave,
+            t = Number($('#ve-t', tb).value),
+            rr = Number($('#ve-r', tb).value),
+            hr = Number($('#ve-h', tb).value),
+            msg = $('#ve-error', tb);
+          if (![t, rr, hr].every(function (n) { return Number.isFinite(n) && n > 0; })) {
+            msg.textContent = 'Enter a positive value for temperature, respiratory rate, and heart rate.';
+            msg.hidden = false;
+            return;
+          }
+          var all = vitalReadings(),
+            hit = all.filter(function (v) { return v.wardId + '|' + v.recordedAt === key; })[0];
+          if (!hit) {
+            msg.textContent = 'This reading could not be found. Close and reopen the row to try again.';
+            msg.hidden = false;
+            return;
+          }
+          hit.temperature = t;
+          hit.respiratoryRate = rr;
+          hit.heartRate = hr;
+          hit.updatedAt = new Date().toISOString();
+          if (!save('vitals', all)) return;
+          editVitalKey = null;
+          toast('Vital signs updated.');
+          draw();
+          document.dispatchEvent(new Event('pawsync:refresh-dashboard'));
+          return;
+        }
+        if (vAdd) {
+          var pat = rows(id).filter(function (r) { return r.c[0] === vAdd.dataset.vAdd; })[0],
+            wards = pat ? wardsForPatient(pat) : [];
+          if (wards.length) recordVitals(wards[wards.length - 1]);
+          return;
+        }
+        // Ignore clicks on other buttons, links and fields inside the row or panel
+        if (e.target.closest('.row-detail')) return;
+        if (!toggle && e.target.closest('button, a, input, select, label')) return;
+        if (!row) return;
+        var pid = row.dataset.patient;
+        if (openPatients[pid]) {
+          delete openPatients[pid];
+          editVitalKey = null;
+        } else {
+          openPatients[pid] = true;
+        }
+        draw();
+        var again = $('[data-toggle="' + pid + '"]', tb);
+        if (again && toggle) again.focus();
+      });
+    }
     document.addEventListener('pawsync:refresh-table', draw);
     tb.addEventListener('click', function (e) {
       var vitalButton = e.target.closest('[data-vitals]'),
@@ -2188,6 +2357,7 @@
     }
     if (s && /^staff/.test(page)) {
       staffCommon();
+      seedVitals();
       staffDashboard();
       staffTablePage();
       billBuilderPage();
