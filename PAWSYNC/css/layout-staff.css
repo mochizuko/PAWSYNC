@@ -36,9 +36,13 @@
   margin: 0;
   padding: 0 0 4px;
   overflow-x: auto;
-  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  /* keep a thin visible scrollbar so the strip can be scrolled back to the left with a mouse */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.45) transparent;
 }
-.sidebar__list::-webkit-scrollbar { display: none; }
+.sidebar__list::-webkit-scrollbar { height: 6px; }
+.sidebar__list::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.45); border-radius: 3px; }
 .sidebar__link {
   display: flex;
   align-items: center;

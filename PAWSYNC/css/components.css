@@ -933,3 +933,22 @@ details.card[open] > :not(summary) { animation: ps-rise 0.4s var(--ease) both; }
 .vitals-edit-msg td { padding-top: 0; }
 .vitals-table .table__num { text-align: left; }
 .vitals-table td:first-child { white-space: nowrap; }
+
+.patient-link { color: var(--color-primary); text-decoration: none; white-space: nowrap; }
+.patient-link:hover { text-decoration: underline; }
+.patient-link:focus-visible { outline: 3px solid var(--color-text); outline-offset: 2px; border-radius: 4px; }
+@keyframes row-flash { from { background-color: var(--color-warning-bg); } to { background-color: transparent; } }
+.row-flash { animation: row-flash 1.6s ease-out 1; }
+/* Keep the vital-signs panel pinned inside the visible part of wide, side-scrolling tables */
+.vitals-panel {
+  position: sticky;
+  left: var(--space-3);
+  width: min(100%, 52rem, calc(100vw - 4rem));
+}
+@media (min-width: 1024px) {
+  .vitals-panel { width: min(100%, 52rem, calc(100vw - var(--sidebar-width) - 10rem)); }
+}
+.vitals-panel { overflow-x: auto; }
+.vitals-table { width: 100%; }
+.vitals-table th, .vitals-table td { padding: 0.75rem 1rem; }
+.vitals-table th { white-space: normal; }

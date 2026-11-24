@@ -19,7 +19,7 @@
   'use strict';
 
   /* ---------- Settings you can change ---------- */
-  var KEY = 'pawsync:v2:'; // change the number to wipe old demo data
+  var KEY = 'pawsync:v3:'; // change the number to wipe old demo data (owner accounts are kept)
   var NOW = new Date();
   var YEAR = NOW.getFullYear(); // the calendar always follows the device's current year
   var TODAY = YEAR + '-' + pad(NOW.getMonth() + 1) + '-' + pad(NOW.getDate());
@@ -64,44 +64,22 @@
 
   /* ---------- Sample data (dates are relative to today) ---------- */
   var SEED = {
-    'appointment-list': [
-      ['A-5082', TODAY + ' 09:00', 'Milo', 'Alex Santos', 'Wellness exam', 'Confirmed'],
-      ['A-5083', TODAY + ' 10:30', 'Luna', 'Jamie Reyes', 'Vaccination', 'Waiting'],
-      ['A-5084', TODAY + ' 13:00', 'Buddy', 'Sam Cruz', 'Dental check', 'Confirmed']
-    ],
+    'appointment-list': [],
     'invoice-list': [
       ['INV-8041', 'Alex Santos / Milo', TODAY, '1,250.00', 'Paid'],
       ['INV-8040', 'Jamie Reyes / Luna', TODAY, '850.00', 'Unpaid'],
       ['INV-8039', 'Sam Cruz / Buddy', rel(-1), '2,100.00', 'Partially paid'],
       ['INV-8038', 'Alex Santos / Milo', rel(-8), '1,600.00', 'Paid'],
-      ['INV-8037', 'Jamie Reyes / Pepper', rel(-35), '3,400.00', 'Paid']
+      ['INV-8037', 'Robin Lee / Coco', rel(-35), '3,400.00', 'Paid']
     ],
-    'client-list': [
-      ['C-2031', 'Alex Santos', '0917 555 0131', 'alex.santos@example.com', 'Milo'],
-      [
-        'C-2026',
-        'Jamie Reyes',
-        '0918 555 0142',
-        'jamie.reyes@example.com',
-        'Luna, Pepper'
-      ],
-      ['C-2014', 'Sam Cruz', '0920 555 0164', 'sam.cruz@example.com', 'Buddy']
-    ],
-    'confined-pet-list': [
-      ['W-014', 'Max', 'Taylor Lim', rel(-1), 'Under observation'],
-      ['W-011', 'Oreo', 'Casey Tan', TODAY, 'Stable'],
-      ['W-009', 'Ginger', 'Robin Lee', TODAY, 'Needs attention']
-    ],
+    'client-list': [],
+    'confined-pet-list': [],
     'inventory-list': [
       ['I-302', 'Examination gloves', 'Medical supplies', '24', '20', '30.00', rel(240)],
       ['I-211', 'Canine vaccine', 'Vaccines', '8', '10', '450.00', rel(14)],
       ['I-148', 'Pet bandage roll', 'First aid', '6', '12', '120.00', rel(120)]
     ],
-    'patient-record-list': [
-      ['P-1042', 'Milo', 'Alex Santos', 'Dog', rel(-1)],
-      ['P-1038', 'Luna', 'Jamie Reyes', 'Cat', rel(-2)],
-      ['P-1019', 'Buddy', 'Sam Cruz', 'Dog', rel(-5)]
-    ],
+    'patient-record-list': [],
     'report-list': [
       ['Appointment summary', monthLabel(0), 'Dr. Maralit', rel(-1), 'Ready'],
       ['Inventory reorder list', monthLabel(0), 'K. Nieves', rel(-2), 'Ready'],
@@ -121,7 +99,8 @@
   };
   var CLIENT_EMAIL = 'trishia@example.com';
   var EXTRA = {
-    // rows that belong to the demo pet-owner account
+    // Demo data: 5 clients, 5 patients, 5 appointments and 3 confined pets that all relate to each other.
+    // Dagul / Trishia Maralit belongs to the demo pet-owner account.
     'patient-record-list': [
       {
         c: ['P-0042', 'Dagul', 'Trishia Maralit', 'Dog', rel(-3)],
@@ -135,46 +114,82 @@
         }
       },
       {
-        c: ['P-0043', 'Luna', 'Trishia Maralit', 'Cat', rel(-23)],
+        c: ['P-0043', 'Milo', 'Alex Santos', 'Dog', rel(-20)],
         m: {
-          owner: CLIENT_EMAIL,
+          breed: 'Shih Tzu',
+          gender: 'Male',
+          birthday: '2019-08-21',
+          color: 'White/Gold',
+          people: [{ name: 'Alex Santos', rel: 'Owner', contact: '0917 555 0131' }]
+        }
+      },
+      {
+        c: ['P-0044', 'Luna', 'Jamie Reyes', 'Cat', TODAY],
+        m: {
           breed: 'Domestic shorthair',
           gender: 'Female',
           birthday: '2022-06-01',
           color: 'White',
-          people: [{ name: 'Trishia Maralit', rel: 'Owner', contact: '09123456789' }]
+          people: [{ name: 'Jamie Reyes', rel: 'Owner', contact: '0918 555 0142' }]
         }
       },
-      { c: ['P-1050', 'Max', 'Taylor Lim', 'Dog', rel(-1)], m: {} },
-      { c: ['P-1051', 'Oreo', 'Casey Tan', 'Cat', TODAY], m: {} },
-      { c: ['P-1052', 'Ginger', 'Robin Lee', 'Dog', TODAY], m: {} }
+      {
+        c: ['P-0045', 'Buddy', 'Sam Cruz', 'Dog', rel(-1)],
+        m: {
+          breed: 'Golden Retriever',
+          gender: 'Male',
+          birthday: '2018-11-05',
+          color: 'Golden',
+          people: [
+            { name: 'Sam Cruz', rel: 'Owner', contact: '0920 555 0164' },
+            { name: 'Mia Cruz', rel: 'Caretaker', contact: '0920 555 0165' }
+          ]
+        }
+      },
+      {
+        c: ['P-0046', 'Coco', 'Robin Lee', 'Dog', TODAY],
+        m: {
+          breed: 'Poodle',
+          gender: 'Female',
+          birthday: '2021-02-14',
+          color: 'Brown',
+          people: [{ name: 'Robin Lee', rel: 'Owner', contact: '0921 555 0177' }]
+        }
+      }
     ],
     'client-list': [
-      {
-        c: ['C-2040', 'Trishia Maralit', '09123456789', CLIENT_EMAIL, 'Dagul, Luna'],
-        m: {}
-      }
+      { c: ['C-2040', 'Trishia Maralit', '09123456789', CLIENT_EMAIL, 'Dagul'], m: {} },
+      { c: ['C-2041', 'Alex Santos', '0917 555 0131', 'alex.santos@example.com', 'Milo'], m: {} },
+      { c: ['C-2042', 'Jamie Reyes', '0918 555 0142', 'jamie.reyes@example.com', 'Luna'], m: {} },
+      { c: ['C-2043', 'Sam Cruz', '0920 555 0164', 'sam.cruz@example.com', 'Buddy'], m: {} },
+      { c: ['C-2044', 'Robin Lee', '0921 555 0177', 'robin.lee@example.com', 'Coco'], m: {} }
     ],
     'appointment-list': [
       {
-        c: [
-          'A-5090',
-          rel(7) + ' 10:00',
-          'Dagul',
-          'Trishia Maralit',
-          'Vaccination',
-          'Reserved'
-        ],
-        m: { owner: CLIENT_EMAIL }
+        c: ['A-5090', rel(7) + ' 10:00', 'Dagul', 'Trishia Maralit', 'Vaccination', 'Reserved'],
+        m: { owner: CLIENT_EMAIL, priority: 'Normal', bookingType: 'Scheduled' }
       },
       {
-        c: ['A-5091', TODAY + ' 08:30', 'Ginger', 'Robin Lee', 'Urgent consultation', 'Waiting'],
+        c: ['A-5101', TODAY + ' 09:00', 'Coco', 'Robin Lee', 'Urgent consultation', 'Confirmed'],
         m: { priority: 'Emergency', bookingType: 'Walk-in' }
       },
       {
-        c: ['A-5092', TODAY + ' 11:00', 'Max', 'Taylor Lim', 'Consultation', 'Confirmed'],
+        c: ['A-5102', TODAY + ' 10:00', 'Milo', 'Alex Santos', 'Wellness exam', 'Confirmed'],
+        m: { priority: 'Normal', bookingType: 'Scheduled' }
+      },
+      {
+        c: ['A-5103', TODAY + ' 11:00', 'Luna', 'Jamie Reyes', 'Confinement care', 'Confirmed'],
+        m: { priority: 'Priority', bookingType: 'Scheduled' }
+      },
+      {
+        c: ['A-5104', TODAY + ' 13:00', 'Buddy', 'Sam Cruz', 'Post-surgery check', 'Reserved'],
         m: { priority: 'Priority', bookingType: 'Scheduled' }
       }
+    ],
+    'confined-pet-list': [
+      { c: ['W-019', 'Luna', 'Jamie Reyes', TODAY, 'Stable'], m: {} },
+      { c: ['W-020', 'Buddy', 'Sam Cruz', rel(-1), 'Under observation'], m: {} },
+      { c: ['W-021', 'Coco', 'Robin Lee', TODAY, 'Needs attention'], m: {} }
     ],
     'invoice-list': [
       {
@@ -1283,6 +1298,21 @@
       $('.sidebar__logout', box).onclick = logout;
       side.appendChild(box);
     }
+    var strip = $('.sidebar__list');
+    if (strip) {
+      var active = $('.is-active', strip);
+      if (active && strip.scrollWidth > strip.clientWidth)
+        strip.scrollLeft = Math.max(0, active.offsetLeft - 16);
+      strip.addEventListener(
+        'wheel',
+        function (e) {
+          if (strip.scrollWidth <= strip.clientWidth || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+          e.preventDefault();
+          strip.scrollLeft += e.deltaY;
+        },
+        { passive: false }
+      );
+    }
     addResetLink();
   }
   function isLow(r) {
@@ -1339,10 +1369,10 @@
 
   function seedVitals() {
     if (load('vitals', null) !== null) return;
-    function at(date, time, t, rr, hr) {
+    function at(wardId, pet, date, time, t, rr, hr) {
       return {
-        wardId: 'W-014',
-        pet: 'Max',
+        wardId: wardId,
+        pet: pet,
         date: date,
         recordedAt: new Date(date + 'T' + time + ':00').toISOString(),
         temperature: t,
@@ -1350,10 +1380,13 @@
         heartRate: hr
       };
     }
+    // Buddy is up to date today, Coco has her intake reading, Luna's first reading is still due.
     save('vitals', [
-      at(rel(-1), '08:00', 38.6, 24, 110),
-      at(rel(-1), '14:00', 38.8, 26, 112),
-      at(rel(-1), '20:00', 38.5, 22, 104)
+      at('W-020', 'Buddy', rel(-1), '08:00', 38.7, 24, 108),
+      at('W-020', 'Buddy', rel(-1), '14:00', 38.9, 26, 112),
+      at('W-020', 'Buddy', rel(-1), '20:00', 38.6, 22, 104),
+      at('W-020', 'Buddy', TODAY, '08:00', 38.5, 22, 100),
+      at('W-021', 'Coco', TODAY, '09:00', 39.6, 36, 148)
     ]);
   }
   // Wards (confined stays) that belong to a patient: same pet name and same client.
@@ -1369,6 +1402,21 @@
     return vitalReadings()
       .filter(function (v) { return ids.indexOf(v.wardId) !== -1; })
       .sort(function (a, b) { return b.recordedAt.localeCompare(a.recordedAt); });
+  }
+  // Patients that belong to a client (matched by client name).
+  function patientsForClient(client) {
+    var name = String(client.c[1]).toLowerCase();
+    return rows('patient-record-list').filter(function (pt) {
+      return String(pt.c[2]).toLowerCase() === name;
+    });
+  }
+  function clientPatientLinks(client) {
+    var list = patientsForClient(client);
+    if (!list.length) return esc(client.c[4]);
+    return list.map(function (pt) {
+      return '<a class="patient-link" href="staff-patient-records.html#' + encodeURIComponent(pt.c[0]) +
+        '" title="Open the record of ' + esc(pt.c[1]) + '"><strong>' + esc(pt.c[0]) + '</strong> ' + esc(pt.c[1]) + '</a>';
+    }).join('<br>');
   }
   function vitalStamp(iso) {
     var d = new Date(iso);
@@ -1512,7 +1560,8 @@
       metaFields = $$('[data-meta-only]', fs),
       editing = -1,
       openPatients = {},
-      editVitalKey = null;
+      editVitalKey = null,
+      expandable = id === 'patient-record-list' || id === 'confined-pet-list';
     var idCol = /id|invoice/i.test(ths[0].textContent);
     if (id === 'confined-pet-list') {
       head.insertAdjacentHTML('beforeend', '<th scope="col">Latest vital signs</th><th scope="col">Vitals due</th>');
@@ -1568,6 +1617,10 @@
               vitalsDue(r) ? 'Due today' : 'Recorded today'
             );
           }
+          if (id === 'client-list') {
+            var owned = patientsForClient(r).map(function (pt) { return pt.c[0] + ' ' + pt.c[1]; });
+            return r.c.slice(0, 4).concat(owned.length ? owned.join('; ') : r.c[4]);
+          }
           return r.c;
         });
       if (id === 'confined-pet-list') headers = headers.concat('Latest vital signs', 'Vitals due');
@@ -1604,7 +1657,7 @@
                 vitalsDue(r) ? 'Due today' : 'Recorded today'
               );
             }
-            var isPatient = id === 'patient-record-list',
+            var isPatient = expandable,
               open = isPatient && openPatients[r.c[0]];
             return (
               '<tr' + (isPatient ? ' class="row-expandable' + (open ? ' is-open' : '') + '" data-patient="' + esc(r.c[0]) + '"' : '') + '>' +
@@ -1615,6 +1668,7 @@
                   if (id === 'inventory-list' && j === 3 && isLow(r))
                     cell += ' ' + badge('Low stock');
                   if (id === 'confined-pet-list' && j === 6 && vitalsDue(r)) cell = badge('Due today');
+                  if (id === 'client-list' && j === 4) cell = clientPatientLinks(r);
                   if (isPatient && j === 0)
                     cell = '<button type="button" class="row-toggle" data-toggle="' + esc(r.c[0]) +
                       '" aria-expanded="' + (open ? 'true' : 'false') + '" aria-controls="vitals-' + esc(r.c[0]) +
@@ -1640,7 +1694,7 @@
               i +
               '">Delete</button></td></tr>' +
               (open
-                ? '<tr class="row-detail" id="vitals-' + esc(r.c[0]) + '"><td colspan="' + (ths.length + 1) + '">' + vitalsPanel(r, editVitalKey) + '</td></tr>'
+                ? '<tr class="row-detail" id="vitals-' + esc(r.c[0]) + '"><td colspan="' + (ths.length + 1 + (id === 'confined-pet-list' ? 2 : 0)) + '">' + vitalsPanel(r, editVitalKey) + '</td></tr>'
                 : '')
             );
           })
@@ -1732,7 +1786,7 @@
     };
     $('[data-clear]', fs).onclick = clearForm;
     search.addEventListener('input', draw);
-    if (id === 'patient-record-list') {
+    if (expandable) {
       // Click a patient row (or its arrow) to show or hide that pet's vital signs.
       tb.addEventListener('click', function (e) {
         var toggle = e.target.closest('[data-toggle]'),
@@ -1865,7 +1919,18 @@
       }
     });
     clearForm();
+    if (id === 'patient-record-list' && location.hash) {
+      var want = decodeURIComponent(location.hash.slice(1));
+      if (rows(id).some(function (r) { return r.c[0] === want; })) openPatients[want] = true;
+    }
     draw();
+    if (id === 'patient-record-list' && location.hash) {
+      var target = $('tr[data-patient="' + decodeURIComponent(location.hash.slice(1)) + '"]', tb);
+      if (target) {
+        target.scrollIntoView({ block: 'center' });
+        target.classList.add('row-flash');
+      }
+    }
   }
 
   function billBuilderPage() {
