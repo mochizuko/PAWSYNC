@@ -19,7 +19,7 @@
   'use strict';
 
   /* ---------- Settings you can change ---------- */
-  var KEY = 'pawsync:v2:'; // change the number to wipe old demo data
+  var KEY = 'pawsync:v3:'; // change the number to wipe old demo data (owner accounts are kept)
   var NOW = new Date();
   var YEAR = NOW.getFullYear(); // the calendar always follows the device's current year
   var TODAY = YEAR + '-' + pad(NOW.getMonth() + 1) + '-' + pad(NOW.getDate());
@@ -64,44 +64,22 @@
 
   /* ---------- Sample data (dates are relative to today) ---------- */
   var SEED = {
-    'appointment-list': [
-      ['A-5082', TODAY + ' 09:00', 'Milo', 'Alex Santos', 'Wellness exam', 'Confirmed'],
-      ['A-5083', TODAY + ' 10:30', 'Luna', 'Jamie Reyes', 'Vaccination', 'Waiting'],
-      ['A-5084', TODAY + ' 13:00', 'Buddy', 'Sam Cruz', 'Dental check', 'Confirmed']
-    ],
+    'appointment-list': [],
     'invoice-list': [
       ['INV-8041', 'Alex Santos / Milo', TODAY, '1,250.00', 'Paid'],
       ['INV-8040', 'Jamie Reyes / Luna', TODAY, '850.00', 'Unpaid'],
       ['INV-8039', 'Sam Cruz / Buddy', rel(-1), '2,100.00', 'Partially paid'],
       ['INV-8038', 'Alex Santos / Milo', rel(-8), '1,600.00', 'Paid'],
-      ['INV-8037', 'Jamie Reyes / Pepper', rel(-35), '3,400.00', 'Paid']
+      ['INV-8037', 'Robin Lee / Coco', rel(-35), '3,400.00', 'Paid']
     ],
-    'client-list': [
-      ['C-2031', 'Alex Santos', '0917 555 0131', 'alex.santos@example.com', 'Milo'],
-      [
-        'C-2026',
-        'Jamie Reyes',
-        '0918 555 0142',
-        'jamie.reyes@example.com',
-        'Luna, Pepper'
-      ],
-      ['C-2014', 'Sam Cruz', '0920 555 0164', 'sam.cruz@example.com', 'Buddy']
-    ],
-    'confined-pet-list': [
-      ['W-014', 'Max', 'Taylor Lim', rel(-1), 'Under observation'],
-      ['W-011', 'Oreo', 'Casey Tan', TODAY, 'Stable'],
-      ['W-009', 'Ginger', 'Robin Lee', TODAY, 'Needs attention']
-    ],
+    'client-list': [],
+    'confined-pet-list': [],
     'inventory-list': [
       ['I-302', 'Examination gloves', 'Medical supplies', '24', '20', '30.00', rel(240)],
       ['I-211', 'Canine vaccine', 'Vaccines', '8', '10', '450.00', rel(14)],
       ['I-148', 'Pet bandage roll', 'First aid', '6', '12', '120.00', rel(120)]
     ],
-    'patient-record-list': [
-      ['P-1042', 'Milo', 'Alex Santos', 'Dog', rel(-1)],
-      ['P-1038', 'Luna', 'Jamie Reyes', 'Cat', rel(-2)],
-      ['P-1019', 'Buddy', 'Sam Cruz', 'Dog', rel(-5)]
-    ],
+    'patient-record-list': [],
     'report-list': [
       ['Appointment summary', monthLabel(0), 'Dr. Maralit', rel(-1), 'Ready'],
       ['Inventory reorder list', monthLabel(0), 'K. Nieves', rel(-2), 'Ready'],
@@ -121,7 +99,8 @@
   };
   var CLIENT_EMAIL = 'trishia@example.com';
   var EXTRA = {
-    // rows that belong to the demo pet-owner account
+    // Demo data: 5 clients, 5 patients, 5 appointments and 3 confined pets that all relate to each other.
+    // Dagul / Trishia Maralit belongs to the demo pet-owner account.
     'patient-record-list': [
       {
         c: ['P-0042', 'Dagul', 'Trishia Maralit', 'Dog', rel(-3)],
@@ -135,43 +114,82 @@
         }
       },
       {
-        c: ['P-0043', 'Luna', 'Trishia Maralit', 'Cat', rel(-23)],
+        c: ['P-0043', 'Milo', 'Alex Santos', 'Dog', rel(-20)],
         m: {
-          owner: CLIENT_EMAIL,
+          breed: 'Shih Tzu',
+          gender: 'Male',
+          birthday: '2019-08-21',
+          color: 'White/Gold',
+          people: [{ name: 'Alex Santos', rel: 'Owner', contact: '0917 555 0131' }]
+        }
+      },
+      {
+        c: ['P-0044', 'Luna', 'Jamie Reyes', 'Cat', TODAY],
+        m: {
           breed: 'Domestic shorthair',
           gender: 'Female',
           birthday: '2022-06-01',
           color: 'White',
-          people: [{ name: 'Trishia Maralit', rel: 'Owner', contact: '09123456789' }]
+          people: [{ name: 'Jamie Reyes', rel: 'Owner', contact: '0918 555 0142' }]
+        }
+      },
+      {
+        c: ['P-0045', 'Buddy', 'Sam Cruz', 'Dog', rel(-1)],
+        m: {
+          breed: 'Golden Retriever',
+          gender: 'Male',
+          birthday: '2018-11-05',
+          color: 'Golden',
+          people: [
+            { name: 'Sam Cruz', rel: 'Owner', contact: '0920 555 0164' },
+            { name: 'Mia Cruz', rel: 'Caretaker', contact: '0920 555 0165' }
+          ]
+        }
+      },
+      {
+        c: ['P-0046', 'Coco', 'Robin Lee', 'Dog', TODAY],
+        m: {
+          breed: 'Poodle',
+          gender: 'Female',
+          birthday: '2021-02-14',
+          color: 'Brown',
+          people: [{ name: 'Robin Lee', rel: 'Owner', contact: '0921 555 0177' }]
         }
       }
     ],
     'client-list': [
-      {
-        c: ['C-2040', 'Trishia Maralit', '09123456789', CLIENT_EMAIL, 'Dagul, Luna'],
-        m: {}
-      }
+      { c: ['C-2040', 'Trishia Maralit', '09123456789', CLIENT_EMAIL, 'Dagul'], m: {} },
+      { c: ['C-2041', 'Alex Santos', '0917 555 0131', 'alex.santos@example.com', 'Milo'], m: {} },
+      { c: ['C-2042', 'Jamie Reyes', '0918 555 0142', 'jamie.reyes@example.com', 'Luna'], m: {} },
+      { c: ['C-2043', 'Sam Cruz', '0920 555 0164', 'sam.cruz@example.com', 'Buddy'], m: {} },
+      { c: ['C-2044', 'Robin Lee', '0921 555 0177', 'robin.lee@example.com', 'Coco'], m: {} }
     ],
     'appointment-list': [
       {
-        c: [
-          'A-5090',
-          rel(7) + ' 10:00',
-          'Dagul',
-          'Trishia Maralit',
-          'Vaccination',
-          'Reserved'
-        ],
-        m: { owner: CLIENT_EMAIL }
+        c: ['A-5090', rel(7) + ' 10:00', 'Dagul', 'Trishia Maralit', 'Vaccination', 'Reserved'],
+        m: { owner: CLIENT_EMAIL, priority: 'Normal', bookingType: 'Scheduled' }
       },
       {
-        c: ['A-5091', TODAY + ' 08:30', 'Ginger', 'Robin Lee', 'Urgent consultation', 'Waiting'],
+        c: ['A-5101', TODAY + ' 09:00', 'Coco', 'Robin Lee', 'Urgent consultation', 'Confirmed'],
         m: { priority: 'Emergency', bookingType: 'Walk-in' }
       },
       {
-        c: ['A-5092', TODAY + ' 11:00', 'Max', 'Taylor Lim', 'Consultation', 'Confirmed'],
+        c: ['A-5102', TODAY + ' 10:00', 'Milo', 'Alex Santos', 'Wellness exam', 'Confirmed'],
+        m: { priority: 'Normal', bookingType: 'Scheduled' }
+      },
+      {
+        c: ['A-5103', TODAY + ' 11:00', 'Luna', 'Jamie Reyes', 'Confinement care', 'Confirmed'],
+        m: { priority: 'Priority', bookingType: 'Scheduled' }
+      },
+      {
+        c: ['A-5104', TODAY + ' 13:00', 'Buddy', 'Sam Cruz', 'Post-surgery check', 'Reserved'],
         m: { priority: 'Priority', bookingType: 'Scheduled' }
       }
+    ],
+    'confined-pet-list': [
+      { c: ['W-019', 'Luna', 'Jamie Reyes', TODAY, 'Stable'], m: {} },
+      { c: ['W-020', 'Buddy', 'Sam Cruz', rel(-1), 'Under observation'], m: {} },
+      { c: ['W-021', 'Coco', 'Robin Lee', TODAY, 'Needs attention'], m: {} }
     ],
     'invoice-list': [
       {
@@ -425,6 +443,14 @@
         }
         if (item.c[6] == null) {
           item.c[6] = defaults[1];
+          changed = true;
+        }
+        if (!item.m) item.m = {};
+        if (!Array.isArray(item.m.batches)) {
+          // older saved items have no batches: turn their stock and expiry into one starting batch
+          item.m.batches = (Number(item.c[3]) > 0 || item.c[6])
+            ? [{ no: 'INITIAL', qty: Number(item.c[3]) || 0, exp: item.c[6] || '' }]
+            : [];
           changed = true;
         }
       });
@@ -1280,10 +1306,111 @@
       $('.sidebar__logout', box).onclick = logout;
       side.appendChild(box);
     }
+    var strip = $('.sidebar__list');
+    if (strip) {
+      var active = $('.is-active', strip);
+      if (active && strip.scrollWidth > strip.clientWidth)
+        strip.scrollLeft = Math.max(0, active.offsetLeft - 16);
+      strip.addEventListener(
+        'wheel',
+        function (e) {
+          if (strip.scrollWidth <= strip.clientWidth || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+          e.preventDefault();
+          strip.scrollLeft += e.deltaY;
+        },
+        { passive: false }
+      );
+    }
     addResetLink();
   }
   function isLow(r) {
     return +r.c[3] <= +r.c[4];
+  }
+
+  /* ---------- Inventory batches ----------
+     Each inventory row is one item. Its batches live in r.m.batches as
+     { no: 'LOT-01', qty: 10, exp: '2027-03-01' }. r.c[3] (on hand) and
+     r.c[6] (next expiry) are always recalculated from the batches by syncItem(),
+     so the dashboard, reports and billing keep working with the same columns. */
+  function batchList(r) {
+    return (r.m && r.m.batches) || [];
+  }
+  function isExpired(b) {
+    return !!b.exp && b.exp < TODAY;
+  }
+  function sortBatches(list) {
+    return list.slice().sort(function (a, b) {
+      if (a.exp && b.exp && a.exp !== b.exp) return a.exp < b.exp ? -1 : 1;
+      if (!!a.exp !== !!b.exp) return a.exp ? -1 : 1; // no expiry goes last
+      return String(a.no).localeCompare(String(b.no));
+    });
+  }
+  function syncItem(r) {
+    if (!r.m) r.m = {};
+    r.m.batches = sortBatches(batchList(r));
+    r.c[3] = String(r.m.batches.reduce(function (sum, b) { return sum + (Number(b.qty) || 0); }, 0));
+    var dated = r.m.batches.filter(function (b) { return Number(b.qty) > 0 && b.exp; });
+    r.c[6] = dated.length ? dated[0].exp : '';
+  }
+  function usableStock(r) {
+    return batchList(r).reduce(function (sum, b) {
+      return sum + (isExpired(b) ? 0 : Number(b.qty) || 0);
+    }, 0);
+  }
+  function allocateStock(r, count) {
+    // first-expiring, first-out; expired batches are never used
+    var left = count,
+      used = [];
+    sortBatches(batchList(r)).forEach(function (b) {
+      if (left <= 0 || !(Number(b.qty) > 0) || isExpired(b)) return;
+      var take = Math.min(Number(b.qty), left);
+      b.qty = Number(b.qty) - take;
+      left -= take;
+      used.push({ batch: b.no, quantity: take, exp: b.exp || '' });
+    });
+    syncItem(r);
+    return left === 0 ? used : null;
+  }
+  function restoreStock(r, line) {
+    var qty = Number(line.quantity) || 0,
+      list = batchList(r);
+    if (!r.m) r.m = {};
+    r.m.batches = list;
+    (line.allocations && line.allocations.length
+      ? line.allocations
+      : [{ batch: list.length ? list[0].no : 'RESTORED', quantity: qty, exp: '' }]
+    ).forEach(function (a) {
+      var hit = list.filter(function (b) { return b.no === a.batch; })[0];
+      if (hit) hit.qty = (Number(hit.qty) || 0) + Number(a.quantity || 0);
+      else list.push({ no: a.batch, qty: Number(a.quantity) || 0, exp: a.exp || '' });
+    });
+    syncItem(r);
+  }
+  function daysUntil(iso) {
+    return Math.round((new Date(iso + 'T00:00:00Z') - new Date(TODAY + 'T00:00:00Z')) / 86400000);
+  }
+  function batchesWhere(test) {
+    var out = [];
+    rows('inventory-list').forEach(function (r) {
+      sortBatches(batchList(r)).forEach(function (b) {
+        if (Number(b.qty) > 0 && b.exp && test(b)) out.push({ item: r, batch: b });
+      });
+    });
+    return out;
+  }
+
+  /* ---------- Paid sales (shared by the dashboard and the billing page) ---------- */
+  function paidSales(test) {
+    var list = rows('invoice-list').filter(function (r) {
+      return /^paid$/i.test(r.c[4]) && test(String(r.c[2]));
+    });
+    return {
+      count: list.length,
+      total: list.reduce(function (sum, r) { return sum + money(r.c[3]); }, 0)
+    };
+  }
+  function paidSalesToday() {
+    return paidSales(function (d) { return d === TODAY; });
   }
 
   function vitalReadings() {
@@ -1334,6 +1461,105 @@
     );
   }
 
+  function seedVitals() {
+    if (load('vitals', null) !== null) return;
+    function at(wardId, pet, date, time, t, rr, hr) {
+      return {
+        wardId: wardId,
+        pet: pet,
+        date: date,
+        recordedAt: new Date(date + 'T' + time + ':00').toISOString(),
+        temperature: t,
+        respiratoryRate: rr,
+        heartRate: hr
+      };
+    }
+    // Buddy is up to date today, Coco has her intake reading, Luna's first reading is still due.
+    save('vitals', [
+      at('W-020', 'Buddy', rel(-1), '08:00', 38.7, 24, 108),
+      at('W-020', 'Buddy', rel(-1), '14:00', 38.9, 26, 112),
+      at('W-020', 'Buddy', rel(-1), '20:00', 38.6, 22, 104),
+      at('W-020', 'Buddy', TODAY, '08:00', 38.5, 22, 100),
+      at('W-021', 'Coco', TODAY, '09:00', 39.6, 36, 148)
+    ]);
+  }
+  // Wards (confined stays) that belong to a patient: same pet name and same client.
+  function wardsForPatient(p) {
+    var name = String(p.c[1]).toLowerCase(),
+      client = String(p.c[2]).toLowerCase();
+    return rows('confined-pet-list').filter(function (w) {
+      return String(w.c[1]).toLowerCase() === name && String(w.c[2]).toLowerCase() === client;
+    });
+  }
+  function vitalsForPatient(p) {
+    var ids = wardsForPatient(p).map(function (w) { return w.c[0]; });
+    return vitalReadings()
+      .filter(function (v) { return ids.indexOf(v.wardId) !== -1; })
+      .sort(function (a, b) { return b.recordedAt.localeCompare(a.recordedAt); });
+  }
+  // Patients that belong to a client (matched by client name).
+  function patientsForClient(client) {
+    var name = String(client.c[1]).toLowerCase();
+    return rows('patient-record-list').filter(function (pt) {
+      return String(pt.c[2]).toLowerCase() === name;
+    });
+  }
+  function clientPatientLinks(client) {
+    var list = patientsForClient(client);
+    if (!list.length) return esc(client.c[4]);
+    return list.map(function (pt) {
+      return '<a class="patient-link" href="staff-patient-records.html#' + encodeURIComponent(pt.c[0]) +
+        '" title="Open the record of ' + esc(pt.c[1]) + '"><strong>' + esc(pt.c[0]) + '</strong> ' + esc(pt.c[1]) + '</a>';
+    }).join('<br>');
+  }
+  function vitalStamp(iso) {
+    var d = new Date(iso);
+    return (
+      shortDate(d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate())) +
+      ', ' + to12(pad(d.getHours()) + ':' + pad(d.getMinutes()))
+    );
+  }
+  function vitalsPanel(p, editKey) {
+    var wards = wardsForPatient(p),
+      list = vitalsForPatient(p),
+      html = '<div class="vitals-panel"><div class="vitals-panel__head"><h3 class="vitals-panel__title">Vital signs: ' +
+        esc(p.c[1]) + '</h3>';
+    if (wards.length) {
+      html += '<button type="button" class="btn btn--secondary btn--small" data-v-add="' + esc(p.c[0]) + '">+ Add vital signs</button>';
+    }
+    html += '</div>';
+    if (!list.length) {
+      html += '<p class="text-muted">' + (wards.length
+        ? 'No vital signs recorded yet for this stay.'
+        : 'This pet is not currently confined. Vital signs are recorded for confined pets only (see Confined Pets).') + '</p></div>';
+      return html;
+    }
+    html += '<table class="table vitals-table"><thead><tr>' +
+      '<th scope="col">Date / Time</th><th scope="col">Temperature (&deg;C)</th>' +
+      '<th scope="col">Resp. rate (breaths/min)</th><th scope="col">Heart rate (beats/min)</th>' +
+      '<th scope="col">Actions</th></tr></thead><tbody>';
+    list.forEach(function (v) {
+      var key = v.wardId + '|' + v.recordedAt,
+        label = esc(p.c[1]) + ' ' + esc(vitalStamp(v.recordedAt));
+      if (key === editKey) {
+        html += '<tr class="vitals-edit" data-vkey="' + esc(key) + '"><td>' + esc(vitalStamp(v.recordedAt)) + '</td>' +
+          '<td><label class="sr-only" for="ve-t">Temperature for ' + label + '</label><input class="form-input" id="ve-t" type="number" min="0.1" step="0.1" value="' + esc(v.temperature) + '"></td>' +
+          '<td><label class="sr-only" for="ve-r">Respiratory rate for ' + label + '</label><input class="form-input" id="ve-r" type="number" min="1" step="1" value="' + esc(v.respiratoryRate) + '"></td>' +
+          '<td><label class="sr-only" for="ve-h">Heart rate for ' + label + '</label><input class="form-input" id="ve-h" type="number" min="1" step="1" value="' + esc(v.heartRate) + '"></td>' +
+          '<td class="ps-actions"><button type="button" class="btn btn--primary btn--small" data-v-save="' + esc(key) + '">Save</button> ' +
+          '<button type="button" class="btn btn--link btn--small" data-v-cancel>Cancel</button></td></tr>' +
+          '<tr class="vitals-edit-msg"><td colspan="5"><p class="form-group__error" id="ve-error" role="alert" hidden></p></td></tr>';
+      } else {
+        html += '<tr><td>' + esc(vitalStamp(v.recordedAt)) + (v.updatedAt ? ' <span class="text-muted">(edited)</span>' : '') + '</td>' +
+          '<td class="table__num">' + esc(v.temperature) + '</td><td class="table__num">' + esc(v.respiratoryRate) +
+          '</td><td class="table__num">' + esc(v.heartRate) + '</td>' +
+          '<td class="ps-actions"><button type="button" class="btn btn--link btn--small" data-v-edit="' + esc(key) +
+          '" aria-label="Edit vital signs for ' + label + '">Edit</button></td></tr>';
+      }
+    });
+    return html + '</tbody></table></div>';
+  }
+
   function staffDashboard() {
     var tb = $('#today-appointments');
     if (!tb) return;
@@ -1374,14 +1600,10 @@
     var confined = rows('confined-pet-list'),
       due = confined.filter(vitalsDue),
       low = rows('inventory-list').filter(isLow),
-      expiring = rows('inventory-list').filter(function (r) {
-        var d = r.c[6];
-        return /^\d{4}-\d{2}-\d{2}$/.test(d) && d >= TODAY && d <= addDays(TODAY, 30);
-      }),
+      expiring = batchesWhere(function (b) { return b.exp >= TODAY && b.exp <= addDays(TODAY, 30); }),
+      expired = batchesWhere(function (b) { return b.exp < TODAY; }),
       urgent = today.filter(function (r) { return /^(Emergency|Priority)$/i.test(r.m.priority || ''); }),
-      sales = rows('invoice-list').filter(function (r) {
-        return r.c[2] === TODAY && /^paid$/i.test(r.c[4]);
-      }).reduce(function (sum, r) { return sum + money(r.c[3]); }, 0);
+      sales = paidSalesToday().total;
 
     $('#metric-appointments').textContent = today.length;
     $('#metric-confined').textContent = confined.length;
@@ -1403,10 +1625,16 @@
         due.map(function (r) { return esc(r.c[1]); }).join(', ') +
         '</p><a href="staff-confined-pets.html">Record confined-pet vitals</a></div>'
       : '<div class="alert alert--info"><p class="alert__title">Vitals up to date</p><p>All confined pets have a reading for today.</p></div>';
+    if (expired.length) {
+      html += '<div class="alert alert--warning"><p class="alert__title">Expired stock still on hand</p><ul>' +
+        expired.map(function (x) {
+          return '<li>' + esc(x.item.c[1]) + ' - batch ' + esc(x.batch.no) + ' (' + esc(x.batch.qty) + ' pcs) expired ' + longDate(x.batch.exp) + '</li>';
+        }).join('') + '</ul></div>';
+    }
     if (expiring.length) {
-      html += '<div class="alert alert--warning"><p class="alert__title">Items expiring in the next 30 days</p><ul>' +
-        expiring.map(function (r) {
-          return '<li>' + esc(r.c[1]) + ' - ' + longDate(r.c[6]) + '</li>';
+      html += '<div class="alert alert--warning"><p class="alert__title">Batches expiring in the next 30 days</p><ul>' +
+        expiring.map(function (x) {
+          return '<li>' + esc(x.item.c[1]) + ' - batch ' + esc(x.batch.no) + ' (' + esc(x.batch.qty) + ' pcs) - ' + longDate(x.batch.exp) + '</li>';
         }).join('') + '</ul></div>';
     }
     if (low.length) {
@@ -1419,14 +1647,17 @@
   function staffTablePage() {
     var tb = $('main tbody[id]'),
       fs = $('.staff-entry');
-    if (!tb || !fs || tb.id === 'today-appointments') return;
+    if (!tb || !fs || tb.id === 'today-appointments' || tb.id === 'inventory-list') return;
     var id = tb.id,
       table = tb.closest('table'),
       head = $('thead tr', table),
       ths = $$('th', head),
       fields = $$('input,select', fs).filter(function (f) { return !f.hasAttribute('data-meta-only'); }),
       metaFields = $$('[data-meta-only]', fs),
-      editing = -1;
+      editing = -1,
+      openPatients = {},
+      editVitalKey = null,
+      expandable = id === 'patient-record-list' || id === 'confined-pet-list';
     var idCol = /id|invoice/i.test(ths[0].textContent);
     if (id === 'confined-pet-list') {
       head.insertAdjacentHTML('beforeend', '<th scope="col">Latest vital signs</th><th scope="col">Vitals due</th>');
@@ -1482,6 +1713,10 @@
               vitalsDue(r) ? 'Due today' : 'Recorded today'
             );
           }
+          if (id === 'client-list') {
+            var owned = patientsForClient(r).map(function (pt) { return pt.c[0] + ' ' + pt.c[1]; });
+            return r.c.slice(0, 4).concat(owned.length ? owned.join('; ') : r.c[4]);
+          }
           return r.c;
         });
       if (id === 'confined-pet-list') headers = headers.concat('Latest vital signs', 'Vitals due');
@@ -1518,8 +1753,10 @@
                 vitalsDue(r) ? 'Due today' : 'Recorded today'
               );
             }
+            var isPatient = expandable,
+              open = isPatient && openPatients[r.c[0]];
             return (
-              '<tr>' +
+              '<tr' + (isPatient ? ' class="row-expandable' + (open ? ' is-open' : '') + '" data-patient="' + esc(r.c[0]) + '"' : '') + '>' +
               cells
                 .map(function (v, j) {
                   var th = ths[j],
@@ -1527,6 +1764,13 @@
                   if (id === 'inventory-list' && j === 3 && isLow(r))
                     cell += ' ' + badge('Low stock');
                   if (id === 'confined-pet-list' && j === 6 && vitalsDue(r)) cell = badge('Due today');
+                  if (id === 'client-list' && j === 4) cell = clientPatientLinks(r);
+                  if (isPatient && j === 0)
+                    cell = '<button type="button" class="row-toggle" data-toggle="' + esc(r.c[0]) +
+                      '" aria-expanded="' + (open ? 'true' : 'false') + '" aria-controls="vitals-' + esc(r.c[0]) +
+                      '" aria-label="' + (open ? 'Hide' : 'Show') + ' vital signs for ' + esc(r.c[1]) + '">' +
+                      '<svg class="icon row-toggle__chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg>' +
+                      '<span>' + cell + '</span></button>';
                   return (
                     '<td' +
                     (th && th.classList.contains('table__num') ? ' class="table__num"' : '') +
@@ -1544,7 +1788,10 @@
               i +
               '">Edit</button> <button type="button" class="btn btn--link btn--small" data-del="' +
               i +
-              '">Delete</button></td></tr>'
+              '">Delete</button></td></tr>' +
+              (open
+                ? '<tr class="row-detail" id="vitals-' + esc(r.c[0]) + '"><td colspan="' + (ths.length + 1 + (id === 'confined-pet-list' ? 2 : 0)) + '">' + vitalsPanel(r, editVitalKey) + '</td></tr>'
+                : '')
             );
           })
           .join('') ||
@@ -1635,6 +1882,78 @@
     };
     $('[data-clear]', fs).onclick = clearForm;
     search.addEventListener('input', draw);
+    if (expandable) {
+      // Click a patient row (or its arrow) to show or hide that pet's vital signs.
+      tb.addEventListener('click', function (e) {
+        var toggle = e.target.closest('[data-toggle]'),
+          row = e.target.closest('tr.row-expandable'),
+          vEdit = e.target.closest('[data-v-edit]'),
+          vSave = e.target.closest('[data-v-save]'),
+          vCancel = e.target.closest('[data-v-cancel]'),
+          vAdd = e.target.closest('[data-v-add]');
+        if (vEdit) {
+          editVitalKey = vEdit.dataset.vEdit;
+          draw();
+          var first = $('#ve-t', tb);
+          if (first) first.focus();
+          return;
+        }
+        if (vCancel) {
+          editVitalKey = null;
+          draw();
+          return;
+        }
+        if (vSave) {
+          var key = vSave.dataset.vSave,
+            t = Number($('#ve-t', tb).value),
+            rr = Number($('#ve-r', tb).value),
+            hr = Number($('#ve-h', tb).value),
+            msg = $('#ve-error', tb);
+          if (![t, rr, hr].every(function (n) { return Number.isFinite(n) && n > 0; })) {
+            msg.textContent = 'Enter a positive value for temperature, respiratory rate, and heart rate.';
+            msg.hidden = false;
+            return;
+          }
+          var all = vitalReadings(),
+            hit = all.filter(function (v) { return v.wardId + '|' + v.recordedAt === key; })[0];
+          if (!hit) {
+            msg.textContent = 'This reading could not be found. Close and reopen the row to try again.';
+            msg.hidden = false;
+            return;
+          }
+          hit.temperature = t;
+          hit.respiratoryRate = rr;
+          hit.heartRate = hr;
+          hit.updatedAt = new Date().toISOString();
+          if (!save('vitals', all)) return;
+          editVitalKey = null;
+          toast('Vital signs updated.');
+          draw();
+          document.dispatchEvent(new Event('pawsync:refresh-dashboard'));
+          return;
+        }
+        if (vAdd) {
+          var pat = rows(id).filter(function (r) { return r.c[0] === vAdd.dataset.vAdd; })[0],
+            wards = pat ? wardsForPatient(pat) : [];
+          if (wards.length) recordVitals(wards[wards.length - 1]);
+          return;
+        }
+        // Ignore clicks on other buttons, links and fields inside the row or panel
+        if (e.target.closest('.row-detail')) return;
+        if (!toggle && e.target.closest('button, a, input, select, label')) return;
+        if (!row) return;
+        var pid = row.dataset.patient;
+        if (openPatients[pid]) {
+          delete openPatients[pid];
+          editVitalKey = null;
+        } else {
+          openPatients[pid] = true;
+        }
+        draw();
+        var again = $('[data-toggle="' + pid + '"]', tb);
+        if (again && toggle) again.focus();
+      });
+    }
     document.addEventListener('pawsync:refresh-table', draw);
     tb.addEventListener('click', function (e) {
       var vitalButton = e.target.closest('[data-vitals]'),
@@ -1681,7 +2000,7 @@
           inventoryBeforeDelete = JSON.parse(JSON.stringify(inventoryAfterDelete));
           deleted.m.items.forEach(function (item) {
             var stock = inventoryAfterDelete.filter(function (r) { return r.c[0] === item.id; })[0];
-            if (stock) stock.c[3] = String((Number(stock.c[3]) || 0) + Number(item.quantity || 0));
+            if (stock) restoreStock(stock, item);
           });
           if (!saveRows('inventory-list', inventoryAfterDelete)) return;
         }
@@ -1696,7 +2015,18 @@
       }
     });
     clearForm();
+    if (id === 'patient-record-list' && location.hash) {
+      var want = decodeURIComponent(location.hash.slice(1));
+      if (rows(id).some(function (r) { return r.c[0] === want; })) openPatients[want] = true;
+    }
     draw();
+    if (id === 'patient-record-list' && location.hash) {
+      var target = $('tr[data-patient="' + decodeURIComponent(location.hash.slice(1)) + '"]', tb);
+      if (target) {
+        target.scrollIntoView({ block: 'center' });
+        target.classList.add('row-flash');
+      }
+    }
   }
 
   function billBuilderPage() {
@@ -1727,9 +2057,9 @@
         var option = document.createElement('option');
         option.value = r.c[0];
         option.dataset.price = String(money(r.c[5]));
-        option.dataset.stock = String(Number(r.c[3]) || 0);
+        option.dataset.stock = String(usableStock(r));
         option.textContent = r.c[1] + ' - PHP ' + peso(money(r.c[5])) +
-          ' (' + (Number(r.c[3]) || 0) + ' available)';
+          ' (' + usableStock(r) + ' available)';
         option.disabled = money(r.c[5]) <= 0;
         itemSel.appendChild(option);
       });
@@ -1750,9 +2080,9 @@
       note.textContent = !hasItem
         ? 'Select an item to see its current stock and price.'
         : stock === 0
-          ? 'This item is out of stock.'
+          ? 'This item has no usable stock (empty or expired).'
           : validStock
-            ? stock + ' available at PHP ' + peso(price) + ' each.'
+            ? stock + ' available at PHP ' + peso(price) + ' each. Stock is taken from the earliest-expiring batch first.'
             : 'Only ' + stock + ' item(s) are available. Reduce the quantity to continue.';
       totalLabel.textContent = validStock
         ? 'Total: PHP ' + peso(servicePrice + (hasItem ? price * count : 0))
@@ -1784,7 +2114,7 @@
         toast('Complete the client, pet, service, and payment method fields.', 'err');
         return;
       }
-      if (item && (!Number.isInteger(count) || count < 1 || count > Number(item.c[3]))) {
+      if (item && (!Number.isInteger(count) || count < 1 || count > usableStock(item))) {
         toast('The selected item does not have enough stock.', 'err');
         updateTotal();
         return;
@@ -1792,13 +2122,17 @@
       var oldInventory = JSON.parse(JSON.stringify(inventory)),
         invoices = rows('invoice-list'),
         total = servicePrice + (item ? money(item.c[5]) * count : 0),
-        items = item ? [{ id: item.c[0], name: item.c[1], quantity: count, unitPrice: money(item.c[5]) }] : [],
+        used = item ? allocateStock(item, count) : [],
+        items = item ? [{ id: item.c[0], name: item.c[1], quantity: count, unitPrice: money(item.c[5]), allocations: used }] : [],
         invoice = {
           c: [nextId('invoice-list'), account.name + ' / ' + petInput.value.trim(), TODAY, peso(total), 'Paid'],
           m: { owner: email, pet: petInput.value.trim(), service: service, items: items, paymentMethod: paymentMethod }
         };
       if (item) {
-        item.c[3] = String(Number(item.c[3]) - count);
+        if (!used) {
+          toast('The selected item does not have enough usable stock.', 'err');
+          return;
+        }
         if (!saveRows('inventory-list', inventory)) return;
       }
       invoices.unshift(invoice);
@@ -1813,6 +2147,332 @@
       document.dispatchEvent(new Event('pawsync:refresh-table'));
       document.dispatchEvent(new Event('pawsync:refresh-dashboard'));
     });
+  }
+
+  /* ---------- Inventory page: items with batches ---------- */
+  function inventoryPage() {
+    var tb = $('#inventory-list');
+    if (!tb || page !== 'staff-inventory.html') return;
+    var fs = $('.staff-entry'),
+      F = {
+        id: $('#item-id'), name: $('#item-name'), category: $('#item-category'),
+        batch: $('#item-batch'), count: $('#item-count'), exp: $('#item-expiration'),
+        reorder: $('#item-reorder'), price: $('#item-price')
+      },
+      note = $('#item-mode-note'),
+      saveBtn = $('#item-save'),
+      itemFields = [F.name, F.category, F.reorder, F.price],
+      open = {};
+    Object.keys(F).forEach(function (k) {
+      F[k].insertAdjacentHTML('afterend', '<p class="form-group__error" hidden></p>');
+    });
+    $('.table-wrap', tb.closest('section')).insertAdjacentHTML(
+      'beforebegin',
+      '<div class="list-toolbar"><div class="search-field">' +
+        '<svg class="search-field__icon icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>' +
+        '<label class="sr-only" for="ps-search">Search this list</label>' +
+        '<input class="form-input" type="search" id="ps-search" placeholder="Search items or batch numbers" autocomplete="off"></div>' +
+        '<button type="button" class="btn btn--outline btn--small" id="ps-export">' +
+        '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14"/></svg>Export CSV</button></div>'
+    );
+    var search = $('#ps-search');
+
+    function err(f, msg) {
+      var e = f.nextElementSibling;
+      e.textContent = msg || '';
+      e.hidden = !msg;
+      if (msg) f.setAttribute('aria-invalid', 'true');
+      else f.removeAttribute('aria-invalid');
+    }
+    function findItem(all, id) {
+      for (var i = 0; i < all.length; i++) if (all[i].c[0].toLowerCase() === id.toLowerCase()) return all[i];
+      return null;
+    }
+    function lockItemFields(existing) {
+      itemFields.forEach(function (f) { f.readOnly = !!existing; });
+      note.textContent = existing
+        ? 'Item ' + existing.c[0] + ' already exists. This will add a batch to it; name, category, reorder level and price come from the item.'
+        : 'Enter a new Item ID to create an item, or use an existing Item ID to add another batch of that item.';
+    }
+    function onIdChange() {
+      var existing = findItem(rows('inventory-list'), F.id.value.trim());
+      if (existing) {
+        F.name.value = existing.c[1];
+        F.category.value = existing.c[2];
+        F.reorder.value = existing.c[4];
+        F.price.value = String(money(existing.c[5]));
+      }
+      lockItemFields(existing);
+    }
+    function clearForm() {
+      Object.keys(F).forEach(function (k) { F[k].value = ''; err(F[k]); });
+      lockItemFields(null);
+    }
+    F.id.addEventListener('input', onIdChange);
+    $('#item-clear').onclick = clearForm;
+
+    function expiryCell(r) {
+      var d = r.c[6];
+      if (!d) return '';
+      var left = daysUntil(d);
+      return esc(d) + (left < 0 ? ' ' + '<span class="badge badge--cancelled">Expired</span>'
+        : left <= 30 ? ' ' + '<span class="badge badge--priority">In ' + left + ' day' + (left === 1 ? '' : 's') + '</span>' : '');
+    }
+    function batchStatus(b) {
+      if (!(Number(b.qty) > 0)) return '<span class="badge badge--reserved">Empty</span>';
+      if (!b.exp) return '<span class="badge badge--done">No expiry</span>';
+      var left = daysUntil(b.exp);
+      if (left < 0) return '<span class="badge badge--cancelled">Expired</span>';
+      if (left <= 30) return '<span class="badge badge--priority">Expires in ' + left + ' day' + (left === 1 ? '' : 's') + '</span>';
+      return '<span class="badge badge--done">OK</span>';
+    }
+    function batchPanel(r, i) {
+      var list = sortBatches(batchList(r));
+      return '<div class="table-wrap"><table class="table"><caption class="sr-only">Batches of ' + esc(r.c[1]) + '</caption>' +
+        '<thead><tr><th scope="col">Batch number</th><th scope="col" class="table__num">Quantity</th><th scope="col">Expiration date</th><th scope="col">Status</th><th scope="col">Actions</th></tr></thead><tbody>' +
+        (list.map(function (b) {
+          return '<tr><td>' + esc(b.no) + '</td><td class="table__num">' + esc(b.qty) + '</td><td>' + esc(b.exp || '—') + '</td><td>' + batchStatus(b) +
+            '</td><td class="ps-actions"><button type="button" class="btn btn--link btn--small" data-edit-batch="' + i + '" data-batch="' + esc(b.no) + '">Edit</button> ' +
+            '<button type="button" class="btn btn--link btn--small" data-del-batch="' + i + '" data-batch="' + esc(b.no) + '">Delete</button></td></tr>';
+        }).join('') || '<tr><td colspan="5">No batches yet.</td></tr>') +
+        '</tbody></table></div><p><button type="button" class="btn btn--secondary btn--small" data-add-batch="' + i + '">Add a batch to this item</button></p>';
+    }
+    function draw() {
+      var q = search.value.toLowerCase();
+      tb.innerHTML = rows('inventory-list').map(function (r, i) {
+        var hay = (r.c.join(' ') + ' ' + batchList(r).map(function (b) { return b.no; }).join(' ')).toLowerCase();
+        if (q && hay.indexOf(q) < 0) return '';
+        var isOpen = !!open[r.c[0]];
+        return '<tr class="row-expandable' + (isOpen ? ' is-open' : '') + '" data-item="' + esc(r.c[0]) + '">' +
+          '<td><button type="button" class="row-toggle" data-toggle="' + esc(r.c[0]) + '" aria-expanded="' + isOpen + '" aria-controls="batches-' + esc(r.c[0]) +
+          '" aria-label="' + (isOpen ? 'Hide' : 'Show') + ' batches for ' + esc(r.c[1]) + '"><svg class="icon row-toggle__chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg><span>' + esc(r.c[0]) + '</span></button></td>' +
+          '<td>' + esc(r.c[1]) + '</td><td>' + esc(r.c[2]) + '</td>' +
+          '<td class="table__num">' + esc(r.c[3]) + (isLow(r) ? ' ' + badge('Low stock') : '') + '</td>' +
+          '<td class="table__num">' + esc(r.c[4]) + '</td><td class="table__num">' + esc(r.c[5]) + '</td>' +
+          '<td>' + expiryCell(r) + '</td><td class="table__num">' + batchList(r).length + '</td>' +
+          '<td class="ps-actions"><button type="button" class="btn btn--link btn--small" data-edit-item="' + i + '">Edit item</button> ' +
+          '<button type="button" class="btn btn--link btn--small" data-del-item="' + i + '">Delete</button></td></tr>' +
+          (isOpen ? '<tr class="row-detail" id="batches-' + esc(r.c[0]) + '"><td colspan="9">' + batchPanel(r, i) + '</td></tr>' : '');
+      }).join('') || '<tr><td colspan="9">No entries found.</td></tr>';
+    }
+    function changed() {
+      draw();
+      document.dispatchEvent(new Event('pawsync:refresh-dashboard'));
+    }
+
+    saveBtn.onclick = function () {
+      var all = rows('inventory-list'),
+        id = F.id.value.trim(),
+        existing = id ? findItem(all, id) : null,
+        ok = true,
+        v = {};
+      Object.keys(F).forEach(function (k) {
+        var f = F[k],
+          val = f.value.trim(),
+          msg = '';
+        if (!val && !f.hasAttribute('data-optional')) msg = 'This field is required.';
+        else if (f.type === 'number' && (isNaN(+val) || +val < 0)) msg = 'Enter a number that is 0 or higher.';
+        else if (k === 'count' && !Number.isInteger(+val)) msg = 'Enter a whole number.';
+        else if (k === 'reorder' && !Number.isInteger(+val)) msg = 'Enter a whole number.';
+        else if (k === 'exp' && val && val < TODAY) msg = 'This expiration date has already passed.';
+        err(f, msg);
+        if (msg) ok = false;
+        v[k] = val;
+      });
+      if (!ok) {
+        var bad = $('[aria-invalid="true"]', fs);
+        if (bad) bad.focus();
+        return;
+      }
+      var item = existing;
+      if (!item) {
+        item = { c: [id, v.name, v.category, '0', v.reorder, (+v.price).toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), ''], m: { batches: [] } };
+        all.push(item);
+      }
+      var list = batchList(item),
+        same = list.filter(function (b) { return b.no.toLowerCase() === v.batch.toLowerCase(); })[0];
+      if (same) {
+        if (v.exp && same.exp && v.exp !== same.exp) {
+          err(F.exp, 'Batch ' + same.no + ' already has the expiry ' + same.exp + '. Use a different batch number or edit that batch.');
+          F.exp.focus();
+          return;
+        }
+        same.qty = (Number(same.qty) || 0) + Number(v.count);
+        if (!same.exp && v.exp) same.exp = v.exp;
+      } else {
+        list.push({ no: v.batch, qty: Number(v.count), exp: v.exp });
+      }
+      item.m.batches = list;
+      syncItem(item);
+      if (!saveRows('inventory-list', all)) return;
+      open[item.c[0]] = true;
+      toast(same ? 'Added stock to batch ' + same.no + '.' : existing ? 'New batch added to ' + item.c[1] + '.' : 'Item and batch saved.');
+      clearForm();
+      changed();
+    };
+
+    function field(idv, label, type, value, extra) {
+      return '<div class="form-group"><label class="form-group__label" for="' + idv + '">' + label + '</label>' +
+        '<input class="form-input" id="' + idv + '" type="' + type + '" value="' + esc(value) + '" ' + (extra || '') + '>' +
+        '<p class="form-group__error" id="' + idv + '-error" hidden></p></div>';
+    }
+    function dlgErr(d, idv, msg) {
+      var e = $('#' + idv + '-error', d);
+      e.textContent = msg;
+      e.hidden = false;
+      return false;
+    }
+    function editBatch(all, i, no) {
+      var item = all[i],
+        b = batchList(item).filter(function (x) { return x.no === no; })[0];
+      if (!b) return;
+      dialog('Edit batch - ' + item.c[1],
+        field('eb-no', 'Batch number', 'text', b.no, 'required') +
+        field('eb-qty', 'Quantity', 'number', b.qty, 'min="0" step="1" required') +
+        field('eb-exp', 'Expiration date', 'date', b.exp || ''),
+        'Save changes',
+        function (d) {
+          var nn = $('#eb-no', d).value.trim(),
+            qty = $('#eb-qty', d).value.trim(),
+            exp = $('#eb-exp', d).value.trim();
+          if (!nn) return dlgErr(d, 'eb-no', 'This field is required.');
+          if (batchList(item).some(function (x) { return x !== b && x.no.toLowerCase() === nn.toLowerCase(); }))
+            return dlgErr(d, 'eb-no', 'Another batch of this item already uses that number.');
+          if (qty === '' || !Number.isInteger(+qty) || +qty < 0) return dlgErr(d, 'eb-qty', 'Enter a whole number that is 0 or higher.');
+          b.no = nn;
+          b.qty = +qty;
+          b.exp = exp;
+          syncItem(item);
+          if (!saveRows('inventory-list', all)) return false;
+          toast('Batch updated.');
+          changed();
+        });
+    }
+    function editItem(all, i) {
+      var item = all[i];
+      dialog('Edit item - ' + item.c[0],
+        field('ei-name', 'Item name', 'text', item.c[1], 'required') +
+        field('ei-cat', 'Category', 'text', item.c[2], 'required') +
+        field('ei-reorder', 'Reorder at (total on hand)', 'number', item.c[4], 'min="0" step="1" required') +
+        field('ei-price', 'Unit price (PHP)', 'number', money(item.c[5]), 'min="0" step="0.01" required'),
+        'Save changes',
+        function (d) {
+          var name = $('#ei-name', d).value.trim(),
+            cat = $('#ei-cat', d).value.trim(),
+            reorder = $('#ei-reorder', d).value.trim(),
+            price = $('#ei-price', d).value.trim();
+          if (!name) return dlgErr(d, 'ei-name', 'This field is required.');
+          if (!cat) return dlgErr(d, 'ei-cat', 'This field is required.');
+          if (reorder === '' || !Number.isInteger(+reorder) || +reorder < 0) return dlgErr(d, 'ei-reorder', 'Enter a whole number that is 0 or higher.');
+          if (price === '' || isNaN(+price) || +price < 0) return dlgErr(d, 'ei-price', 'Enter a number that is 0 or higher.');
+          item.c[1] = name;
+          item.c[2] = cat;
+          item.c[4] = reorder;
+          item.c[5] = (+price).toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          if (!saveRows('inventory-list', all)) return false;
+          toast('Item updated.');
+          changed();
+        });
+    }
+
+    search.addEventListener('input', draw);
+    document.addEventListener('pawsync:refresh-table', draw);
+    tb.addEventListener('click', function (e) {
+      var all = rows('inventory-list'),
+        eb = e.target.closest('[data-edit-batch]'),
+        db = e.target.closest('[data-del-batch]'),
+        ab = e.target.closest('[data-add-batch]'),
+        ei = e.target.closest('[data-edit-item]'),
+        di = e.target.closest('[data-del-item]'),
+        toggle = e.target.closest('[data-toggle]'),
+        row = e.target.closest('tr.row-expandable');
+      if (eb) return editBatch(all, +eb.dataset.editBatch, eb.dataset.batch);
+      if (ei) return editItem(all, +ei.dataset.editItem);
+      if (db && confirm('Delete batch ' + db.dataset.batch + '? Its stock will be removed from the item.')) {
+        var it = all[+db.dataset.delBatch];
+        it.m.batches = batchList(it).filter(function (b) { return b.no !== db.dataset.batch; });
+        syncItem(it);
+        if (!saveRows('inventory-list', all)) return;
+        toast('Batch deleted.');
+        changed();
+        return;
+      }
+      if (di && confirm('Delete this item and all of its batches?')) {
+        all.splice(+di.dataset.delItem, 1);
+        if (!saveRows('inventory-list', all)) return;
+        toast('Entry deleted.');
+        changed();
+        return;
+      }
+      if (ab) {
+        var target = all[+ab.dataset.addBatch];
+        fs.closest('details').open = true;
+        F.id.value = target.c[0];
+        onIdChange();
+        F.batch.value = '';
+        F.count.value = '';
+        F.exp.value = '';
+        F.batch.focus();
+        fs.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      if (e.target.closest('.row-detail') || db || di) return;
+      if (!toggle && e.target.closest('button, a, input, select, label')) return;
+      if (!row) return;
+      var key = row.dataset.item;
+      if (open[key]) delete open[key];
+      else open[key] = true;
+      draw();
+      var again = $('[data-toggle="' + key + '"]', tb);
+      if (again && toggle) again.focus();
+    });
+
+    $('#ps-export').onclick = function () {
+      var data = [];
+      rows('inventory-list').forEach(function (r) {
+        var list = sortBatches(batchList(r));
+        if (!list.length) data.push([r.c[0], r.c[1], r.c[2], '', 0, r.c[4], r.c[5], '']);
+        list.forEach(function (b) { data.push([r.c[0], r.c[1], r.c[2], b.no, b.qty, r.c[4], r.c[5], b.exp || '']); });
+      });
+      downloadCSV('pawsync-inventory-' + TODAY + '.csv',
+        ['Item ID', 'Item', 'Category', 'Batch number', 'Quantity', 'Reorder at', 'Unit price (PHP)', 'Expiration date'], data);
+    };
+
+    clearForm();
+    draw();
+  }
+
+  /* ---------- Billing page: paid sales that match the dashboard ---------- */
+  function billingSummaryPage() {
+    var host = $('#bill-builder');
+    if (!host || page !== 'staff-billing.html') return;
+    host.insertAdjacentHTML('beforebegin',
+      '<section class="grid grid--3" aria-label="Sales summary" id="billing-summary">' +
+      '<article class="card card--stat"><p class="card__number" id="bill-metric-today">PHP 0.00</p><p class="card__label">Paid sales today</p><p class="form-group__help" id="bill-metric-today-note"></p></article>' +
+      '<article class="card card--stat"><p class="card__number" id="bill-metric-month">PHP 0.00</p><p class="card__label">Paid sales this month</p></article>' +
+      '<article class="card card--stat"><p class="card__number" id="bill-metric-open">PHP 0.00</p><p class="card__label">Unpaid or partially paid</p></article></section>');
+    function update() {
+      var month = TODAY.slice(0, 7),
+        today = paidSalesToday(),
+        m = paidSales(function (d) { return d.indexOf(month) === 0; }),
+        open = rows('invoice-list').filter(function (r) { return /^(unpaid|partially paid)$/i.test(r.c[4]); })
+          .reduce(function (sum, r) { return sum + money(r.c[3]); }, 0);
+      $('#bill-metric-today').textContent = 'PHP ' + peso(today.total);
+      $('#bill-metric-today-note').textContent = today.count + ' paid invoice' + (today.count === 1 ? '' : 's') + ' dated today. Same figure as the dashboard.';
+      $('#bill-metric-month').textContent = 'PHP ' + peso(m.total);
+      $('#bill-metric-open').textContent = 'PHP ' + peso(open);
+      // mark the invoices that are counted in today's paid sales
+      $$('#invoice-list tr').forEach(function (tr) {
+        var cells = tr.children,
+          counted = cells.length >= 5 && cells[2].textContent.trim() === TODAY && /^paid$/i.test(cells[4].textContent.trim());
+        tr.classList.toggle('is-counted-today', counted);
+        tr.title = counted ? 'Counted in today\'s paid sales' : '';
+      });
+    }
+    update();
+    document.addEventListener('pawsync:refresh-dashboard', update);
+    document.addEventListener('pawsync:refresh-table', function () { window.setTimeout(update, 0); });
+    new MutationObserver(update).observe($('#invoice-list'), { childList: true });
   }
 
   function closureNoticePage() {
@@ -2188,9 +2848,12 @@
     }
     if (s && /^staff/.test(page)) {
       staffCommon();
+      seedVitals();
       staffDashboard();
       staffTablePage();
       billBuilderPage();
+      inventoryPage();
+      billingSummaryPage();
       closureNoticePage();
       reportExportPage();
     }
