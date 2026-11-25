@@ -26,6 +26,9 @@ python -m http.server 8000
 ```
 
 Then visit `http://localhost:8000/html/index.html`.
+OR
+Visit `https://mochizuko.github.io/PAWSYNC/PAWSYNC/html/index.html`
+
 
 ## Demo Accounts
 
