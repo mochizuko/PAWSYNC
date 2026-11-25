@@ -35,30 +35,31 @@
       <main id="main">
         <p class="breadcrumb"><a href="staff.html">Staff Dashboard</a> / Inventory</p>
         <h1 class="page-title">Inventory</h1>
-        <p class="text-muted">Monitor clinic supplies and identify items that need restocking. Entries are saved locally in this browser.</p>
+        <p class="text-muted">Monitor clinic supplies, track each batch and its expiry date, and identify items that need restocking. Entries are saved locally in this browser.</p>
         <details class="card">
-          <summary><strong>Add an inventory item</strong></summary>
+          <summary><strong>Add stock / a new batch</strong></summary>
           <fieldset class="form stack staff-entry">
             <legend class="form-group__label">Entry details</legend>
+            <p class="form-group__help" id="item-mode-note">Enter a new Item ID to create an item, or use an existing Item ID to add another batch of that item.</p>
             <div class="form-group"><label class="form-group__label" for="item-id">Item ID</label><input class="form-input" id="item-id" name="Item ID" required></div>
             <div class="form-group"><label class="form-group__label" for="item-name">Item name</label><input class="form-input" id="item-name" name="Item" required></div>
             <div class="form-group"><label class="form-group__label" for="item-category">Category</label><input class="form-input" id="item-category" name="Category" required></div>
-            <div class="form-group"><label class="form-group__label" for="item-count">On hand</label><input class="form-input" id="item-count" name="On hand" type="number" min="0" step="1" required></div>
-            <div class="form-group"><label class="form-group__label" for="item-reorder">Reorder at</label><input class="form-input" id="item-reorder" name="Reorder at" type="number" min="0" step="1" required></div>
-            <div class="form-group"><label class="form-group__label" for="item-price">Unit price (PHP)</label><input class="form-input" id="item-price" name="Unit price (PHP)" type="number" min="0" step="0.01" required></div>
+            <div class="form-group"><label class="form-group__label" for="item-batch">Batch number</label><input class="form-input" id="item-batch" name="Batch number" required></div>
+            <div class="form-group"><label class="form-group__label" for="item-count">Quantity in this batch</label><input class="form-input" id="item-count" name="Quantity" type="number" min="0" step="1" required></div>
             <div class="form-group"><label class="form-group__label" for="item-expiration">Expiration date</label><input class="form-input" id="item-expiration" name="Expiration date" type="date" data-optional></div>
-            <p class="form-group__help">Saved locally in this browser.</p>
+            <div class="form-group"><label class="form-group__label" for="item-reorder">Reorder at (total on hand)</label><input class="form-input" id="item-reorder" name="Reorder at" type="number" min="0" step="1" required></div>
+            <div class="form-group"><label class="form-group__label" for="item-price">Unit price (PHP)</label><input class="form-input" id="item-price" name="Unit price (PHP)" type="number" min="0" step="0.01" required></div>
+            <p class="form-group__help">Saved locally in this browser. Entering an existing batch number for the same item adds to that batch.</p>
+            <div class="form-actions"><button type="button" class="btn btn--primary" id="item-save">Save batch</button><button type="button" class="btn btn--outline" id="item-clear">Clear</button></div>
           </fieldset>
         </details>
         <section class="stack" aria-labelledby="stock-heading">
           <h2 id="stock-heading">Stock on hand</h2>
+          <p class="text-muted">Select an item row to see its batches. Billing uses the earliest-expiring batch first and skips expired batches.</p>
           <div class="table-wrap">
             <table class="table">
-             <thead><tr><th scope="col">Item ID</th><th scope="col">Item</th><th scope="col">Category</th><th scope="col" class="table__num">On hand</th><th scope="col" class="table__num">Reorder at</th><th scope="col" class="table__num">Unit price (PHP)</th><th scope="col">Expiration date</th></tr></thead>
+             <thead><tr><th scope="col">Item ID</th><th scope="col">Item</th><th scope="col">Category</th><th scope="col" class="table__num">On hand</th><th scope="col" class="table__num">Reorder at</th><th scope="col" class="table__num">Unit price (PHP)</th><th scope="col">Next expiry</th><th scope="col" class="table__num">Batches</th><th scope="col">Actions</th></tr></thead>
               <tbody id="inventory-list">
-                <tr><td>I-302</td><td>Examination gloves</td><td>Medical supplies</td><td class="table__num">24</td><td class="table__num">20</td><td class="table__num">30.00</td><td></td></tr>
-                <tr><td>I-211</td><td>Canine vaccine</td><td>Vaccines</td><td class="table__num">8</td><td class="table__num">10</td><td class="table__num">450.00</td><td></td></tr>
-                <tr><td>I-148</td><td>Pet bandage roll</td><td>First aid</td><td class="table__num">6</td><td class="table__num">12</td><td class="table__num">120.00</td><td></td></tr>
               </tbody>
             </table>
           </div>

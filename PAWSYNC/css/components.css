@@ -952,3 +952,6 @@ details.card[open] > :not(summary) { animation: ps-rise 0.4s var(--ease) both; }
 .vitals-table { width: 100%; }
 .vitals-table th, .vitals-table td { padding: 0.75rem 1rem; }
 .vitals-table th { white-space: normal; }
+
+/* Billing: invoices counted in "Paid sales today" */
+.table tbody tr.is-counted-today > td:first-child { box-shadow: inset 3px 0 0 var(--color-primary); }
