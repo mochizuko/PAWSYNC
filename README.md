@@ -51,7 +51,7 @@ PAWSYNC/
 ## Team
 
 - **Lance Amwel Tumanan** — Team Leader
-- **Kaye Andrea Nieves**
+- **Andrea Kaye Nieves**
 - **Lysa Joy Pido**
 - **Trishia Anne Maralit**
 - **Grace Dela Cruz**
